@@ -13,10 +13,11 @@ return [
     |
     */
 
-    'reset' => 'Your password has been reset.',
-    'sent' => 'We have emailed your password reset link.',
-    'throttled' => 'Please wait before retrying.',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that email address.",
+    'password' => 'يجب أن لا يقل طول كلمة المرور عن ستة أحرف، كما يجب أن تتطابق مع حقل التأكيد',
+    'reset'    => 'تمت إعادة تعيين كلمة المرور',
+    'sent'     => 'تم إرسال تفاصيل استعادة كلمة المرور الخاصة بك إلى بريدك الإلكتروني',
+    'token'    => '.رمز استعادة كلمة المرور الذي أدخلته غير صحيح',
+    'user'     => 'لم يتم العثور على أيّ حسابٍ بهذا العنوان الإلكتروني',
+    'email_is_not_regiterd' => ' هذا البريد غير مسجل',
 
 ];
