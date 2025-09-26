@@ -16,8 +16,8 @@ Route::group(
     ],
     function () {
 
-        Route::get('/test', function () {
-            return view('dashboard.home');
+        Route::get('/login-1', function () {
+            return view('dashboard.auth.login');
         });
     }
 );
