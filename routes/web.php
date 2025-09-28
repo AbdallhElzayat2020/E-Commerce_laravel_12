@@ -19,6 +19,10 @@ Route::group(
         Route::get('/login-1', function () {
             return view('dashboard.auth.login');
         });
+
+        Route::get('/', function () {
+            return view('welcome');
+        });
     }
 );
 
@@ -34,4 +38,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-require __DIR__ . '/dashboard.php';
+//require __DIR__ . '/dashboard.php';

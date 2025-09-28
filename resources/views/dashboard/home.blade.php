@@ -1,6 +1,9 @@
 @extends('dashboard.layouts.master')
 @section('title', 'Home')
 @section('content')
+    <!-- Flash Messages -->
+    @include('dashboard.includes.alerts')
+
     <!-- eCommerce statistic -->
     <div class="row">
         <div class="col-xl-3 col-lg-6 col-12">
@@ -111,7 +114,8 @@
                         <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#scoreLineToDay">Day</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek">Week</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth">Month</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth">Month</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="widget-content tab-content bg-white p-20">
@@ -873,4 +877,5 @@
         </div>
     </div>
     <!--/ Basic Horizontal Timeline -->
+
 @endsection

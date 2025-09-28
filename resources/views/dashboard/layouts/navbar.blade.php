@@ -135,7 +135,8 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionWrap"
                                                 href="#accordionThree" aria-expanded="false"
                                                 aria-controls="accordionThree">Accordion
-                                                Item #3</a></div>
+                                                Item #3</a>
+                                        </div>
                                         <div class="card-collapse collapse" id="accordionThree" role="tabpanel"
                                             aria-labelledby="headingThree" aria-expanded="false">
                                             <div class="card-content">
@@ -222,12 +223,17 @@
                             <a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
                             <div class="dropdown-divider"></div>
 
-                            <a class="dropdown-item d-flex align-items-center justify-content-center" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <a class="dropdown-item d-flex align-items-center justify-content-center" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {{ __('auth.logout') }}
                             </a>
                         </div>
                     </li>
+                    <form id="logout-form" action="{{ route('dashboard.logout') }}" method="POST"
+                        style="display: none;">
+                        @csrf
+                    </form>
 
                     <li class="nav-item dropdown dropdown-language">
                         <a class="nav-link dropdown-toggle" id="dropdown-lang" href="#" data-toggle="dropdown"

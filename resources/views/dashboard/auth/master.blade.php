@@ -50,7 +50,7 @@
                         class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                             class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="#">
                         <img class="brand-logo" alt="modern admin logo"
                              src="{{ asset('assets/dashboard') }}/images/logo/logo.png">
                         <h3 class="brand-text">Modern Admin</h3>
@@ -83,8 +83,10 @@
                         </div>
                     </li>
                     <li class="dropdown nav-item">
-                        <a class="nav-link mr-2 nav-link-label" href="#" data-toggle="dropdown"><i
-                                class="ficon ft-settings"></i></a>
+                        <a class="nav-link mr-2 nav-link-label" href="#" data-toggle="dropdown"></a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="nav-link mr-2 nav-link-label" href="#" data-toggle="dropdown"></a>
                     </li>
                 </ul>
             </div>
@@ -126,6 +128,9 @@
 <!-- BEGIN PAGE LEVEL JS-->
 <script src="{{ asset('assets/dashboard') }}/js/scripts/forms/form-login-register.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL JS-->
+
+{!! NoCaptcha::renderJs() !!}
+
 </body>
 
 </html>
