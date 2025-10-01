@@ -110,7 +110,7 @@ class ForgetPasswordController extends Controller
         ]);
 
         $email = $request->email;
-        
+
         // Rate limiting: 2 requests per minute per email
         $key = 'otp-requests:' . $email;
         if (RateLimiter::tooManyAttempts($key, 2)) {
@@ -119,7 +119,7 @@ class ForgetPasswordController extends Controller
         }
 
         $admin = Admin::where('email', $email)->first();
-        
+
         if (!$admin) {
             return redirect()->back()->with('error', 'Email address not found in our system.');
         }
@@ -129,7 +129,7 @@ class ForgetPasswordController extends Controller
 
         // Generate new OTP
         $otp = $this->otp2->generate($email, 'numeric', 6, 10);
-        
+
         // Send new OTP
         $admin->notify(new SendOtpNotification($request->token));
 

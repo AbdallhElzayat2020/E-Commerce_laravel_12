@@ -51,12 +51,18 @@
                                     </button>
                                 </form>
 
-                                <!-- Resend OTP Link -->
+                                <!-- Resend OTP Form -->
                                 <div class="text-center mt-3">
                                     <p class="text-muted">Didn't receive the code?</p>
-                                    <a href="{{ route('dashboard.password.forgot-password') }}" class="btn btn-link">
-                                        <i class="ft-refresh-cw"></i> Resend OTP
-                                    </a>
+                                    <form action="{{ route('dashboard.password.resend-otp') }}" method="POST"
+                                        style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="email" value="{{ $email }}">
+                                        <input type="hidden" name="token" value="{{ $token }}">
+                                        <button type="submit" class="btn btn-link">
+                                            <i class="ft-refresh-cw"></i> Resend OTP
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
