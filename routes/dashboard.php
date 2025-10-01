@@ -44,8 +44,9 @@ Route::group(
                     Route::post('/reset-password', 'ResetPassword')->name('reset-password');
                 });
             });
-            ####################### Reset Password Routes #########################
+            ####################### End Reset Password Routes #########################
         });
+        ######################## End Guest Routes #########################
 
 
         ####################### Protected Routes #########################
@@ -59,13 +60,21 @@ Route::group(
                 ->name('logout');
 
             ####################### Roles Route #########################
-
             Route::middleware(['can:roles'])->group(function () {
-
                 Route::resource('roles', RoleController::class);
                 Route::post('roles/update-status', [RoleController::class, 'updateStatus'])->name('roles.update-status');;
             });
-            Route::resource('admins', AdminController::class);
+            ####################### End Roles Route #########################
+
+
+            ####################### Admins Route #########################
+            Route::middleware(['can:admins'])->group(function () {
+                Route::resource('admins', AdminController::class);
+                Route::post('admins/update-status', [AdminController::class, 'updateStatus'])->name('admins.update-status');;
+            });
+            ####################### End Admins  #########################
+
+
         });
     }
 );

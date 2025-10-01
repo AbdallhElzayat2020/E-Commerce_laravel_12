@@ -9,7 +9,9 @@ class RoleRepository
 
     public function getRoles()
     {
-        return Role::select('id', 'name', 'status')->paginate(9)->withQueryString();
+        return Role::select('id', 'name', 'status')
+            ->active()
+            ->paginate(9)->withQueryString();
     }
 
     public function createRole($request)
@@ -60,7 +62,8 @@ class RoleRepository
         if (!$role) {
             return false;
         }
+
         $role->update(['status' => $status]);
-        return $role;
+        return $role->fresh(); // Return updated role
     }
 }

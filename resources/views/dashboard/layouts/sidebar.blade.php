@@ -33,6 +33,26 @@
                 </li>
             @endcan
 
+            @can('admins')
+
+                <li class=" nav-item"><a href="#"><i class="la la-television"></i>
+                        <span class="menu-title" data-i18n="nav.templates.main">{{__('dashboard_admins.title')}}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.admins.create') }}" data-i18n="nav.templates.vert.overlay_menu">
+                                {{__('dashboard_admins.buttons.create')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.admins.index') }}" data-i18n="nav.templates.vert.overlay_menu">
+                                {{__('dashboard_admins.title')}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+
             <li class=" navigation-header">
                 <span data-i18n="nav.category.layouts">Layouts</span><i class="la la-ellipsis-h ft-minus"
                                                                         data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>

@@ -97,9 +97,9 @@ class RoleController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        $role = $this->roleService->updateStatus((int)$request->id, (string)$request->status);
+        $role = $this->roleService->updateStatus($request->id, $request->status);
         if (!$role) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            return redirect()->back()->with('error', 'Something went wrong please try again');
         }
 
         return redirect()->route('dashboard.roles.index')->with('success', 'Role status updated successfully');
