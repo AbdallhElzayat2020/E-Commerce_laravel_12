@@ -62,7 +62,6 @@ class AdminService
 
     public function deleteAdmin($id)
     {
-        // Check if admin exists
         $admin = $this->adminRepository->getAdminById($id);
         if (!$admin) {
             return false;
@@ -78,7 +77,6 @@ class AdminService
 
     public function updateStatus($id, $status)
     {
-        // Check if admin exists
         $admin = $this->adminRepository->getAdminById($id);
         if (!$admin) {
             return false;
