@@ -34,6 +34,7 @@ class AdminService
 
         return $this->adminRepository->createAdmin($data);
     }
+
     public function updateAdmin($id, $request)
     {
         $data = $request->validated();
@@ -49,7 +50,7 @@ class AdminService
             return false;
         }
 
-        // Hash password if provided
+        // Hash password if exist
         if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         } else {

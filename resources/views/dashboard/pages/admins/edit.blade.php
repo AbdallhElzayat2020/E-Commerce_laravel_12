@@ -39,8 +39,7 @@
                             <div class="card-body">
                                 @include('dashboard.includes.alerts')
 
-                                <form class="form" action="{{ route('dashboard.admins.update', $admin->id) }}"
-                                    method="POST">
+                                <form class="form" action="{{ route('dashboard.admins.update', $admin->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
 
@@ -50,11 +49,11 @@
                                                 <div class="form-group">
                                                     <label for="name">Name <span class="text-danger">*</span></label>
                                                     <input type="text" id="name"
-                                                        class="form-control @error('name') is-invalid @enderror"
-                                                        name="name" value="{{ old('name', $admin->name) }}"
-                                                        placeholder="Enter admin name" required>
+                                                           class="form-control @error('name') is-invalid @enderror"
+                                                           name="name" value="{{ old('name', $admin->name) }}"
+                                                           placeholder="Enter admin name" required>
                                                     @error('name')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -63,11 +62,11 @@
                                                 <div class="form-group">
                                                     <label for="email">Email <span class="text-danger">*</span></label>
                                                     <input type="email" id="email"
-                                                        class="form-control @error('email') is-invalid @enderror"
-                                                        name="email" value="{{ old('email', $admin->email) }}"
-                                                        placeholder="Enter admin email" required>
+                                                           class="form-control @error('email') is-invalid @enderror"
+                                                           name="email" value="{{ old('email', $admin->email) }}"
+                                                           placeholder="Enter admin email" required>
                                                     @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -79,10 +78,10 @@
                                                     <label for="password">Password <span class="text-muted">(Leave blank to
                                                             keep current)</span></label>
                                                     <input type="password" id="password"
-                                                        class="form-control @error('password') is-invalid @enderror"
-                                                        name="password" placeholder="Enter new password">
+                                                           class="form-control @error('password') is-invalid @enderror"
+                                                           name="password" placeholder="Enter new password">
                                                     @error('password')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -91,7 +90,7 @@
                                                 <div class="form-group">
                                                     <label for="password_confirmation">Confirm Password</label>
                                                     <input type="password" id="password_confirmation" class="form-control"
-                                                        name="password_confirmation" placeholder="Confirm new password">
+                                                           name="password_confirmation" placeholder="Confirm new password">
                                                 </div>
                                             </div>
                                         </div>
@@ -101,18 +100,18 @@
                                                 <div class="form-group">
                                                     <label for="role_id">Role <span class="text-danger">*</span></label>
                                                     <select id="role_id"
-                                                        class="form-control @error('role_id') is-invalid @enderror"
-                                                        name="role_id" required>
+                                                            class="form-control @error('role_id') is-invalid @enderror"
+                                                            name="role_id" required>
                                                         <option value="">Select Role</option>
                                                         @foreach ($roles as $role)
                                                             <option value="{{ $role->id }}"
-                                                                {{ old('role_id', $admin->role_id) == $role->id ? 'selected' : '' }}>
+                                                                @selected(old('role_id', $admin->role_id) == $role->id)>
                                                                 {{ $role->getTranslation('name', app()->getLocale()) }}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                     @error('role_id')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -120,19 +119,19 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="status">Status <span class="text-danger">*</span></label>
-                                                    <select id="status"
-                                                        class="form-control @error('status') is-invalid @enderror"
-                                                        name="status" required>
+                                                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" required>
                                                         <option value="">Select Status</option>
                                                         <option value="active"
-                                                            {{ old('status', $admin->status) == 'active' ? 'selected' : '' }}>
-                                                            Active</option>
+                                                            @selected(old('status', $admin->status) =='active' )>
+                                                            Active
+                                                        </option>
                                                         <option value="inactive"
-                                                            {{ old('status', $admin->status) == 'inactive' ? 'selected' : '' }}>
-                                                            Inactive</option>
+                                                            @selected(old('status', $admin->status) =='inactive' )>
+                                                            Inactive
+                                                        </option>
                                                     </select>
                                                     @error('status')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>

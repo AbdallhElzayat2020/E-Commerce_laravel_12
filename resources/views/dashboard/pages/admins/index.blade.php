@@ -42,7 +42,7 @@
                                         </h5>
                                     </div>
                                     <a href="{{ route('dashboard.admins.create') }}"
-                                        class="btn btn-primary btn-lg shadow-sm">
+                                       class="btn btn-primary btn-lg shadow-sm">
                                         <i class="la la-plus"></i> {{ __('dashboard_admins.buttons.add_new') }}
                                     </a>
                                 </div>
@@ -50,139 +50,139 @@
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
                                     <thead>
-                                        <tr>
-                                            <th class="border-0">
-                                                <i class="la la-hashtag text-primary"></i> #
-                                            </th>
-                                            <th class="border-0">
-                                                <i class="la la-user text-primary"></i>
-                                                {{ __('dashboard_admins.table.name') }}
-                                            </th>
-                                            <th class="border-0">
-                                                <i class="la la-envelope text-primary"></i>
-                                                {{ __('dashboard_admins.table.email') }}
-                                            </th>
-                                            <th class="border-0">
-                                                <i class="la la-shield text-primary"></i>
-                                                {{ __('dashboard_admins.table.role') }}
-                                            </th>
-                                            <th class="border-0">
-                                                <i class="la la-toggle-on text-primary"></i>
-                                                {{ __('dashboard_admins.table.status') }}
-                                            </th>
-                                            <th class="border-0 text-center">
-                                                <i class="la la-cogs text-primary"></i>
-                                                {{ __('dashboard_admins.table.actions') }}
-                                            </th>
-                                        </tr>
+                                    <tr>
+                                        <th class="border-0">
+                                            <i class="la la-hashtag text-primary"></i> #
+                                        </th>
+                                        <th class="border-0">
+                                            <i class="la la-user text-primary"></i>
+                                            {{ __('dashboard_admins.table.name') }}
+                                        </th>
+                                        <th class="border-0">
+                                            <i class="la la-envelope text-primary"></i>
+                                            {{ __('dashboard_admins.table.email') }}
+                                        </th>
+                                        <th class="border-0">
+                                            <i class="la la-shield text-primary"></i>
+                                            {{ __('dashboard_admins.table.role') }}
+                                        </th>
+                                        <th class="border-0">
+                                            <i class="la la-toggle-on text-primary"></i>
+                                            {{ __('dashboard_admins.table.status') }}
+                                        </th>
+                                        <th class="border-0 text-center">
+                                            <i class="la la-cogs text-primary"></i>
+                                            {{ __('dashboard_admins.table.actions') }}
+                                        </th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($admins as $index => $admin)
-                                            <tr class="{{ $admin->id === 1 ? 'table-warning' : '' }} admin-row">
-                                                <th scope="row" class="align-middle">
-                                                    <span class="badge badge-light-primary">{{ $index + 1 }}</span>
-                                                </th>
-                                                <td class="align-middle">
-                                                    <div class="d-flex align-items-center">
-                                                        @if ($admin->id === 1)
-                                                            <i class="la la-crown text-warning mr-3"
-                                                                style="font-size: 20px;" title="Super Admin"></i>
-                                                        @else
-                                                            <i class="la la-user text-primary mr-3"
-                                                                style="font-size: 20px;"></i>
-                                                        @endif
-                                                        <div>
+                                    @forelse ($admins as $index => $admin)
+                                        <tr class="{{ $admin->id === 1 ? 'table-warning' : '' }} admin-row">
+                                            <th scope="row" class="align-middle">
+                                                <span class="badge badge-primary">{{ $index + 1 }}</span>
+                                            </th>
+                                            <td class="align-middle">
+                                                <div class="d-flex align-items-center">
+                                                    @if ($admin->id === 1)
+                                                        <i class="la la-crown text-warning mr-3"
+                                                           style="font-size: 20px;" title="Super Admin"></i>
+                                                    @else
+                                                        <i class="la la-user text-primary mr-3"
+                                                           style="font-size: 20px;"></i>
+                                                    @endif
+                                                    <div>
                                                             <span class="font-weight-bold text-dark"
-                                                                style="font-size: 16px;">
+                                                                  style="font-size: 16px;">
                                                                 {{ $admin->name }}
                                                             </span>
-                                                            @if ($admin->id === 1)
-                                                                <span
-                                                                    class="badge badge-warning ml-2">{{ __('dashboard_admins.labels.super_admin') }}</span>
-                                                            @endif
-                                                        </div>
+                                                        @if ($admin->id === 1)
+                                                            <span
+                                                                class="badge badge-warning ml-2">{{ __('dashboard_admins.labels.super_admin') }}</span>
+                                                        @endif
                                                     </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span class="text-muted">{{ $admin->email }}</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    @if ($admin->role)
-                                                        <span class="badge badge-primary">
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <span class="text-muted">{{ $admin->email }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                @if ($admin->role)
+                                                    <span class="badge badge-primary">
                                                             {{ $admin->role->getTranslation('name', app()->getLocale()) }}
                                                         </span>
-                                                    @else
-                                                        <span
-                                                            class="badge badge-secondary">{{ __('dashboard_admins.labels.no_role') }}</span>
-                                                    @endif
-                                                </td>
-                                                <td class="align-middle">
+                                                @else
+                                                    <span
+                                                        class="badge badge-secondary">{{ __('dashboard_admins.labels.no_role') }}</span>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle">
+                                                @if ($admin->id !== 1)
+                                                    <a href="#" data-toggle="modal"
+                                                       data-target="#statusChangeModal_{{ $admin->id }}"
+                                                       class="btn btn-sm {{ $admin->status === 'active' ? 'btn-success' : 'btn-danger' }} shadow-sm"
+                                                       title="{{ __('dashboard_admins.tooltips.change_status') }}">
+                                                        <i
+                                                            class="la la-toggle-{{ $admin->status === 'active' ? 'on' : 'off' }}"></i>
+                                                        {{ $admin->status === 'active' ? __('dashboard_admins.status.active') : __('dashboard_admins.status.inactive') }}
+                                                    </a>
+                                                @else
+                                                    <span
+                                                        class="badge badge-success">{{ __('dashboard_admins.status.active') }}</span>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <div class="btn-group" role="group">
                                                     @if ($admin->id !== 1)
-                                                        <a href="#" data-toggle="modal"
-                                                            data-target="#statusChangeModal_{{ $admin->id }}"
-                                                            class="btn btn-sm {{ $admin->status === 'active' ? 'btn-success' : 'btn-danger' }} shadow-sm"
-                                                            title="{{ __('dashboard_admins.tooltips.change_status') }}">
-                                                            <i
-                                                                class="la la-toggle-{{ $admin->status === 'active' ? 'on' : 'off' }}"></i>
-                                                            {{ $admin->status === 'active' ? __('dashboard_admins.status.active') : __('dashboard_admins.status.inactive') }}
+                                                        <a href="{{ route('dashboard.admins.edit', $admin->id) }}"
+                                                           class="btn btn-primary btn-sm mr-1 shadow-sm"
+                                                           title="{{ __('dashboard_admins.tooltips.edit') }}">
+                                                            <i class="la la-edit"></i>
                                                         </a>
                                                     @else
-                                                        <span
-                                                            class="badge badge-success">{{ __('dashboard_admins.status.active') }}</span>
-                                                    @endif
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <div class="btn-group" role="group">
-                                                        @if ($admin->id !== 1)
-                                                            <a href="{{ route('dashboard.admins.edit', $admin->id) }}"
-                                                                class="btn btn-primary btn-sm mr-1 shadow-sm"
-                                                                title="{{ __('dashboard_admins.tooltips.edit') }}">
-                                                                <i class="la la-edit"></i>
-                                                            </a>
-                                                        @else
-                                                            <button class="btn btn-secondary btn-sm mr-1" disabled
+                                                        <button class="btn btn-secondary btn-sm mr-1" disabled
                                                                 title="{{ __('dashboard_admins.tooltips.cannot_edit_super_admin') }}">
-                                                                <i class="la la-lock"></i>
-                                                            </button>
-                                                        @endif
+                                                            <i class="la la-lock"></i>
+                                                        </button>
+                                                    @endif
 
-                                                        @if ($admin->id !== 1)
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#deleteAdmin_{{ $admin->id }}"
-                                                                class="btn btn-danger btn-sm shadow-sm"
-                                                                title="{{ __('dashboard_admins.tooltips.delete') }}">
-                                                                <i class="la la-trash"></i>
-                                                            </a>
-                                                        @else
-                                                            <button class="btn btn-secondary btn-sm" disabled
+                                                    @if ($admin->id !== 1)
+                                                        <a href="#" data-toggle="modal"
+                                                           data-target="#deleteAdmin_{{ $admin->id }}"
+                                                           class="btn btn-danger btn-sm shadow-sm"
+                                                           title="{{ __('dashboard_admins.tooltips.delete') }}">
+                                                            <i class="la la-trash"></i>
+                                                        </a>
+                                                    @else
+                                                        <button class="btn btn-secondary btn-sm" disabled
                                                                 title="{{ __('dashboard_admins.tooltips.cannot_delete_super_admin') }}">
-                                                                <i class="la la-lock"></i>
-                                                            </button>
-                                                        @endif
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                            <i class="la la-lock"></i>
+                                                        </button>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
 
-                                            @if ($admin->id !== 1)
-                                                @include('dashboard.pages.admins.delete', [
-                                                    'admin' => $admin,
-                                                ])
-                                                @include('dashboard.pages.admins.change_status', [
-                                                    'admin' => $admin,
-                                                ])
-                                            @endif
-                                        @empty
-                                            <tr>
-                                                <td colspan="6" class="text-center py-5">
-                                                    <div class="alert alert-warning border-0 shadow-sm"
-                                                        style="border-radius: 12px;">
-                                                        <i class="la la-exclamation-triangle" style="font-size: 24px;"></i>
-                                                        <h5 class="mt-2 mb-1">
-                                                            {{ __('dashboard_admins.labels.no_admins_found') }}</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse
+                                        @if ($admin->id !== 1)
+                                            @include('dashboard.pages.admins.delete', [
+                                                'admin' => $admin,
+                                            ])
+                                            @include('dashboard.pages.admins.change_status', [
+                                                'admin' => $admin,
+                                            ])
+                                        @endif
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center py-5">
+                                                <div class="alert alert-warning border-0 shadow-sm"
+                                                     style="border-radius: 12px;">
+                                                    <i class="la la-exclamation-triangle" style="font-size: 24px;"></i>
+                                                    <h5 class="mt-2 mb-1">
+                                                        {{ __('dashboard_admins.labels.no_admins_found') }}</h5>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforelse
 
                                     </tbody>
                                 </table>
