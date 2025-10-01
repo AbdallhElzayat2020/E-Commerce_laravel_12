@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "anhskohbo/no-captcha": "^3.7",
+        "codezero/laravel-unique-translation": "^4.3",
         "ichtrojan/laravel-otp": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",

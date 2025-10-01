@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\Auth\ForgetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\RoleController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -33,6 +35,7 @@ Route::group(
                     /* OTP Verification */
                     Route::get('show-otp-form/{email}/{token}', 'showOtpForm')->name('show-otp-form');
                     Route::post('verify-otp-form', 'verifyOtp')->name('verify-otp-form');
+                    Route::post('resend-otp', 'resendOtp')->name('resend-otp');
                 });
 
                 /* Reset Password */
@@ -41,6 +44,7 @@ Route::group(
                     Route::post('/reset-password', 'ResetPassword')->name('reset-password');
                 });
             });
+            ####################### Reset Password Routes #########################
         });
 
 
@@ -48,9 +52,20 @@ Route::group(
         Route::middleware(['auth:admin', 'verified'])->group(function () {
 
             ####################### Home Route #########################
-            Route::get('/admin/home', [HomeController::class, 'index'])->name('home');
+            Route::get('/admin/home', [HomeController::class, 'index'])
+                ->name('home');
+
             Route::post('logout', [LoginController::class, 'logout'])
                 ->name('logout');
+
+            ####################### Roles Route #########################
+
+            Route::middleware(['can:roles'])->group(function () {
+
+                Route::resource('roles', RoleController::class);
+                Route::post('roles/update-status', [RoleController::class, 'updateStatus'])->name('roles.update-status');;
+            });
+            Route::resource('admins', AdminController::class);
         });
     }
 );
