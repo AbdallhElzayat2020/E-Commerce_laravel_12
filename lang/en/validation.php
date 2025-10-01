@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -19,9 +18,8 @@ return [
     'after' => 'The :attribute field must be a date after :date.',
     'after_or_equal' => 'The :attribute field must be a date after or equal to :date.',
     'alpha' => 'The :attribute field must only contain letters.',
-    'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes, and underscores.',
+    'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes and underscores.',
     'alpha_num' => 'The :attribute field must only contain letters and numbers.',
-    'any_of' => 'The :attribute field is invalid.',
     'array' => 'The :attribute field must be an array.',
     'ascii' => 'The :attribute field must only contain single-byte alphanumeric characters and symbols.',
     'before' => 'The :attribute field must be a date before :date.',
@@ -35,7 +33,6 @@ return [
     'boolean' => 'The :attribute field must be true or false.',
     'can' => 'The :attribute field contains an unauthorized value.',
     'confirmed' => 'The :attribute field confirmation does not match.',
-    'contains' => 'The :attribute field is missing a required value.',
     'current_password' => 'The password is incorrect.',
     'date' => 'The :attribute field must be a valid date.',
     'date_equals' => 'The :attribute field must be a date equal to :date.',
@@ -48,7 +45,6 @@ return [
     'digits_between' => 'The :attribute field must be between :min and :max digits.',
     'dimensions' => 'The :attribute field has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
-    'doesnt_contain' => 'The :attribute field must not contain any of the following: :values.',
     'doesnt_end_with' => 'The :attribute field must not end with one of the following: :values.',
     'doesnt_start_with' => 'The :attribute field must not start with one of the following: :values.',
     'email' => 'The :attribute field must be a valid email address.',
@@ -74,13 +70,11 @@ return [
     'image' => 'The :attribute field must be an image.',
     'in' => 'The selected :attribute is invalid.',
     'in_array' => 'The :attribute field must exist in :other.',
-    'in_array_keys' => 'The :attribute field must contain at least one of the following keys: :values.',
     'integer' => 'The :attribute field must be an integer.',
     'ip' => 'The :attribute field must be a valid IP address.',
     'ipv4' => 'The :attribute field must be a valid IPv4 address.',
     'ipv6' => 'The :attribute field must be a valid IPv6 address.',
     'json' => 'The :attribute field must be a valid JSON string.',
-    'list' => 'The :attribute field must be a list.',
     'lowercase' => 'The :attribute field must be lowercase.',
     'lt' => [
         'array' => 'The :attribute field must have less than :value items.',
@@ -134,8 +128,6 @@ return [
     'present_with_all' => 'The :attribute field must be present when :values are present.',
     'prohibited' => 'The :attribute field is prohibited.',
     'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
-    'prohibited_if_accepted' => 'The :attribute field is prohibited when :other is accepted.',
-    'prohibited_if_declined' => 'The :attribute field is prohibited when :other is declined.',
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute field format is invalid.',
@@ -143,13 +135,12 @@ return [
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
-    'required_if_declined' => 'The :attribute field is required when :other is declined.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
     'required_with_all' => 'The :attribute field is required when :values are present.',
     'required_without' => 'The :attribute field is required when :values is not present.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same' => 'The :attribute field must match :other.',
+    'same' => 'The :attribute field and :other must match.',
     'size' => [
         'array' => 'The :attribute field must contain :size items.',
         'file' => 'The :attribute field must be :size kilobytes.',
@@ -172,7 +163,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
+    | convention "rule.attribute" to name the lines. This makes it quick to
     | specify a specific custom language line for a given attribute rule.
     |
     */
@@ -194,6 +185,34 @@ return [
     |
     */
 
-    'attributes' => [],
-
+    'attributes' => [
+        'name' => 'name',
+        'email' => 'email',
+        'password' => 'password',
+        'password_confirmation' => 'password confirmation',
+        'role_id' => 'role',
+        'status' => 'status',
+        'title' => 'title',
+        'description' => 'description',
+        'content' => 'content',
+        'image' => 'image',
+        'phone' => 'phone',
+        'address' => 'address',
+        'city' => 'city',
+        'country' => 'country',
+        'price' => 'price',
+        'quantity' => 'quantity',
+        'category_id' => 'category',
+        'brand_id' => 'brand',
+        'tags' => 'tags',
+        'meta_title' => 'meta title',
+        'meta_description' => 'meta description',
+        'meta_keywords' => 'meta keywords',
+        'slug' => 'slug',
+        'is_active' => 'status',
+        'is_featured' => 'featured',
+        'sort_order' => 'sort order',
+        'created_at' => 'created at',
+        'updated_at' => 'updated at',
+    ],
 ];

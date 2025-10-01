@@ -43,7 +43,7 @@
                                         </h5>
                                     </div>
                                     <a href="{{ route('dashboard.roles.create') }}"
-                                       class="btn btn-primary btn-lg shadow-sm">
+                                        class="btn btn-primary btn-lg shadow-sm">
                                         <i class="la la-plus"></i> {{ __('dashboard_roles.create_role') }}
                                     </a>
                                 </div>
@@ -51,125 +51,122 @@
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
                                     <thead>
-                                    <tr>
-                                        <th class="border-0">
-                                            <i class="la la-hashtag text-primary"></i> #
-                                        </th>
-                                        <th class="border-0">
-                                            <i class="la la-user text-primary"></i>
-                                            {{ __('dashboard_roles.name') }}
-                                        </th>
-                                        <th class="border-0">
-                                            <i class="la la-toggle-on text-primary"></i>
-                                            {{ __('dashboard_roles.status') }}
-                                        </th>
-                                        <th class="border-0 text-center">
-                                            <i class="la la-cogs text-primary"></i>
-                                            {{ __('dashboard_roles.actions') }}
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th class="border-0">
+                                                <i class="la la-hashtag text-primary"></i> #
+                                            </th>
+                                            <th class="border-0">
+                                                <i class="la la-user text-primary"></i>
+                                                {{ __('dashboard_roles.name') }}
+                                            </th>
+                                            <th class="border-0">
+                                                <i class="la la-toggle-on text-primary"></i>
+                                                {{ __('dashboard_roles.status') }}
+                                            </th>
+                                            <th class="border-0 text-center">
+                                                <i class="la la-cogs text-primary"></i>
+                                                {{ __('dashboard_roles.actions') }}
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    @forelse ($roles as $index => $role)
-                                        <tr class="{{ $role->id === 1 ? 'table-warning' : '' }} role-row">
-                                            <th scope="row" class="align-middle">
-                                                <span class="badge badge-light-primary">{{ $index + 1 }}</span>
-                                            </th>
-                                            <td class="align-middle">
-                                                <div class="d-flex align-items-center">
-                                                    @if ($role->id === 1)
-                                                        <i class="la la-crown text-warning mr-3"
-                                                           style="font-size: 20px;" title="Super Admin"></i>
-                                                    @else
-                                                        <i class="la la-shield text-primary mr-3"
-                                                           style="font-size: 20px;"></i>
-                                                    @endif
-                                                    <div>
+                                        @forelse ($roles as $index => $role)
+                                            <tr class="{{ $role->id === 1 ? 'table-warning' : '' }} role-row">
+                                                <th scope="row" class="align-middle">
+                                                    <span class="badge badge-light-primary">{{ $index + 1 }}</span>
+                                                </th>
+                                                <td class="align-middle">
+                                                    <div class="d-flex align-items-center">
+                                                        @if ($role->id === 1)
+                                                            <i class="la la-crown text-warning mr-3"
+                                                                style="font-size: 20px;" title="Super Admin"></i>
+                                                        @else
+                                                            <i class="la la-shield text-primary mr-3"
+                                                                style="font-size: 20px;"></i>
+                                                        @endif
+                                                        <div>
                                                             <span class="font-weight-bold text-dark"
-                                                                  style="font-size: 16px;">
+                                                                style="font-size: 16px;">
                                                                 {{ $role->getTranslation('name', app()->getLocale()) }}
                                                             </span>
-                                                        @if ($role->id === 1)
-                                                            <span class="badge badge-warning ml-2">Super Admin</span>
-                                                        @endif
+                                                            @if ($role->id === 1)
+                                                                <span class="badge badge-warning ml-2">Super Admin</span>
+                                                            @endif
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                @if ($role->id !== 1)
-                                                    <div class="custom-control custom-switch">
-                                                        <input type="checkbox"
-                                                               class="custom-control-input status-switch"
-                                                               id="status_{{ $role->id }}"
-                                                               {{ $role->status === 'active' ? 'checked' : '' }}
-                                                               data-role-id="{{ $role->id }}"
-                                                               data-current-status="{{ $role->status }}">
-                                                        <label class="custom-control-label"
-                                                               for="status_{{ $role->id }}">
-                                                                <span
-                                                                    class="badge {{ $role->status === 'active' ? 'badge-success' : 'badge-danger' }}">
-                                                                    {{ $role->status === 'active' ? __('dashboard_roles.active') : __('dashboard_roles.inactive') }}
-                                                                </span>
-                                                        </label>
-                                                    </div>
-                                                @else
-                                                    <span class="badge badge-success">{{ __('dashboard_roles.active') }}</span>
-                                                @endif
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="btn-group" role="group">
-                                                    @if ($role->id !== 1)
-                                                        <a href="{{ route('dashboard.roles.edit', $role->id) }}"
-                                                           class="btn btn-primary btn-sm mr-1 shadow-sm"
-                                                           title="{{ __('dashboard_roles.edit') }}">
-                                                            <i class="la la-edit"></i>
-                                                        </a>
-                                                    @else
-                                                        <button class="btn btn-secondary btn-sm mr-1" disabled
-                                                                title="Cannot edit Super Admin">
-                                                            <i class="la la-lock"></i>
-                                                        </button>
-                                                    @endif
-
+                                                </td>
+                                                <td class="align-middle">
                                                     @if ($role->id !== 1)
                                                         <a href="#" data-toggle="modal"
-                                                           data-target="#deleteRole_{{ $role->id }}"
-                                                           class="btn btn-danger btn-sm shadow-sm"
-                                                           title="{{ __('dashboard_roles.delete') }}">
-                                                            <i class="la la-trash"></i>
+                                                            data-target="#statusChangeModal_{{ $role->id }}"
+                                                            class="btn btn-sm {{ $role->status === 'active' ? 'btn-success' : 'btn-danger' }} shadow-sm"
+                                                            title="Change Status">
+                                                            <i
+                                                                class="la la-toggle-{{ $role->status === 'active' ? 'on' : 'off' }}"></i>
+                                                            {{ $role->status === 'active' ? __('dashboard_roles.active') : __('dashboard_roles.inactive') }}
                                                         </a>
                                                     @else
-                                                        <button class="btn btn-secondary btn-sm" disabled
-                                                                title="Cannot delete Super Admin">
-                                                            <i class="la la-lock"></i>
-                                                        </button>
+                                                        <span
+                                                            class="badge badge-success">{{ __('dashboard_roles.active') }}</span>
                                                     @endif
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <div class="btn-group" role="group">
+                                                        @if ($role->id !== 1)
+                                                            <a href="{{ route('dashboard.roles.edit', $role->id) }}"
+                                                                class="btn btn-primary btn-sm mr-1 shadow-sm"
+                                                                title="{{ __('dashboard_roles.edit') }}">
+                                                                <i class="la la-edit"></i>
+                                                            </a>
+                                                        @else
+                                                            <button class="btn btn-secondary btn-sm mr-1" disabled
+                                                                title="Cannot edit Super Admin">
+                                                                <i class="la la-lock"></i>
+                                                            </button>
+                                                        @endif
 
-                                        @if ($role->id !== 1)
-                                            @include('dashboard.pages.roles.delete')
-                                        @endif
-                                    @empty
-                                        <tr>
-                                            <td colspan="3" class="text-center py-5">
-                                                <div class="alert alert-warning border-0 shadow-sm"
-                                                     style="border-radius: 12px;">
-                                                    <i class="la la-exclamation-triangle" style="font-size: 24px;"></i>
-                                                    <h5 class="mt-2 mb-1">
-                                                        {{ __('dashboard_roles.no_roles_found') }}</h5>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforelse
+                                                        @if ($role->id !== 1)
+                                                            <a href="#" data-toggle="modal"
+                                                                data-target="#deleteRole_{{ $role->id }}"
+                                                                class="btn btn-danger btn-sm shadow-sm"
+                                                                title="{{ __('dashboard_roles.delete') }}">
+                                                                <i class="la la-trash"></i>
+                                                            </a>
+                                                        @else
+                                                            <button class="btn btn-secondary btn-sm" disabled
+                                                                title="Cannot delete Super Admin">
+                                                                <i class="la la-lock"></i>
+                                                            </button>
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            @if ($role->id !== 1)
+                                                @include('dashboard.pages.roles.delete')
+                                                @include('dashboard.pages.roles.change_status', [
+                                                    'role' => $role,
+                                                ])
+                                            @endif
+                                        @empty
+                                            <tr>
+                                                <td colspan="3" class="text-center py-5">
+                                                    <div class="alert alert-warning border-0 shadow-sm"
+                                                        style="border-radius: 12px;">
+                                                        <i class="la la-exclamation-triangle" style="font-size: 24px;"></i>
+                                                        <h5 class="mt-2 mb-1">
+                                                            {{ __('dashboard_roles.no_roles_found') }}</h5>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforelse
 
                                     </tbody>
                                 </table>
 
-                                    <div class="mx-2">
-                                        {{ $roles->links() }}
-                                    </div>
+                                <div class="mx-2">
+                                    {{ $roles->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>

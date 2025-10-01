@@ -55,11 +55,22 @@ class RoleService
 
     public function updateStatus(int $id, string $status)
     {
-        $role = $this->roleRepository->updateStatus($id, $status);
-
+        $role = $this->roleRepository->getRoleById($id);
         if (!$role) {
-            abort(404);
+            return false;
         }
-        return $role;
+
+        // Prevent changing super admin status
+        if ($role->id === 1) {
+            return false;
+        }
+
+        $updatedRole = $this->roleRepository->updateStatus($id, $status);
+
+        if (!$updatedRole) {
+            return false;
+        }
+
+        return $updatedRole;
     }
 }
