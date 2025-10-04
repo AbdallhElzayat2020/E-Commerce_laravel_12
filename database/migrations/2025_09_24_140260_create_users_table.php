@@ -15,10 +15,12 @@ return new class extends Migration {
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->foreignId('city_id')->constrained('cities')->cascadeOnDelete();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->foreignId('country_id')->constrained('countries')->cascadeOnDelete();
+            $table->foreignId('governorate_id')->constrained('governorates')->cascadeOnDelete();
+            $table->foreignId('city_id')->constrained('cities')->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

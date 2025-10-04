@@ -24,7 +24,7 @@ return [
     'comments' => 'اداره التعليقات',
     'socials' => 'اداره الشبكات الاجتماعية',
     'global_shipping' => 'اداره الشحن العالمي',
-
+    'shipping_countries' => 'ادارة الشحن',
     'attributes' => 'سمات المنتجات',
     'contacts' => 'اداره التواصل',
     'sliders' => 'اداره الاسلايدر',

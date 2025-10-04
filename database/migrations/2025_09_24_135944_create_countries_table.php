@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->boolean('is_active')->default(false);
+            $table->string('flag_code')->nullable();
             $table->string('phone_code')->nullable()->unique();
             $table->timestamps();
         });

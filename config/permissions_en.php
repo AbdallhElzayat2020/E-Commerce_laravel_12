@@ -25,7 +25,7 @@ return [
     'comments' => 'Manage Comments',
     'socials' => 'Manage Socials',
     'global_shipping' => 'Global Shipping',
-
+    'shipping_countries' => 'Shipping Countries',
     'attributes' => 'Product Attributes',
     'contacts' => 'Manage Contacts',
     'pages' => 'Manage Pages',

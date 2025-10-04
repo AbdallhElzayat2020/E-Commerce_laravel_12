@@ -14,7 +14,6 @@
                 </ul>
             </li>
             @can('roles')
-
                 <li class=" nav-item"><a href="#"><i class="la la-television"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{__('sidebar.dashboard_roles')}}</span>
                     </a>
@@ -34,7 +33,6 @@
             @endcan
 
             @can('admins')
-
                 <li class=" nav-item"><a href="#"><i class="la la-television"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{__('dashboard_admins.title')}}</span>
                     </a>
@@ -47,6 +45,20 @@
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.admins.index') }}" data-i18n="nav.templates.vert.overlay_menu">
                                 {{__('dashboard_admins.title')}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+
+            @can('shipping_countries')
+                <li class=" nav-item"><a href="#"><i class="la la-television"></i>
+                        <span class="menu-title" data-i18n="nav.templates.main">{{__('dashboard.shipping')}}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.countries.index') }}" data-i18n="nav.templates.vert.overlay_menu">
+                                {{__('dashboard.shipping')}}
                             </a>
                         </li>
                     </ul>

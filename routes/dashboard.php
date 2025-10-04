@@ -5,8 +5,10 @@ use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\Auth\ForgetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\WorldController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -74,6 +76,27 @@ Route::group(
             });
             ####################### End Admins  #########################
 
+            ####################### Shipping & Countries Route #########################
+            Route::group(['middleware' => 'can:global_shipping'], function () {
+                Route::controller(WorldController::class)->group(function () {
+
+                    Route::prefix('countries')->name('countries.')->group(function () {
+                        Route::get('/', 'getAllCountries')->name('index');
+                        Route::get('/{country_id}/governorates', 'getGovsByCountry')->name('governorates.index');
+                        Route::get('/change-status/{country_id}', 'changeStatus')->name('status');
+                    });
+
+                    Route::prefix('governorates')->name('governorates.')->group(function () {
+                        Route::get('/change-status/{gov_id}', 'changeGovStatus')->name('status');
+                        Route::put('/shipping-price', 'changeShippingPrice')->name('shipping-price');
+                    });
+                });
+            });
+            ####################### Shipping & Countries Route #########################
+
+            ####################### Categories Route #########################
+            Route::resource('categories', CategoryController::class);
+            ####################### Categories Route #########################
 
         });
     }

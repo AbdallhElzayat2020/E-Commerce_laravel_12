@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Paginator::useBootstrap();
+
+
         foreach (config('permissions_en') as $config_permission => $value) {
             Gate::define($config_permission, function ($auth) use ($config_permission) {
                 return $auth->hasAccess($config_permission);

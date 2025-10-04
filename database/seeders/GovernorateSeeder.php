@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Governorate;
+use App\Models\ShippingGovernorate;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class GovernorateSeeder extends Seeder
     public function run(): void
     {
 
-//        DB::table('governorates')->truncate();
+        //        DB::table('governorates')->truncate();
 
         $governorates = [
             // ======== Start: Egypt Governorates ========
@@ -87,10 +88,57 @@ class GovernorateSeeder extends Seeder
             ['name' => ['en' => 'Al Wusta', 'ar' => 'الوسطى'], 'country_id' => 4],
             // ======== End: Oman Governorates ========
 
+            //  // ======== Start: Sudan Governorates ========
+            ['name' => ['en' => 'Khartoum', 'ar' => 'الخرطوم'], 'country_id' => 3],
+            ['name' => ['en' => 'Gezira', 'ar' => 'الجزيرة'], 'country_id' => 3],
+            ['name' => ['en' => 'River Nile', 'ar' => 'نهر النيل'], 'country_id' => 3],
+            ['name' => ['en' => 'North Kordofan', 'ar' => 'شمال كردفان'], 'country_id' => 3],
+            ['name' => ['en' => 'South Kordofan', 'ar' => 'جنوب كردفان'], 'country_id' => 3],
+            ['name' => ['en' => 'North Darfur', 'ar' => 'شمال دارفور'], 'country_id' => 3],
+            ['name' => ['en' => 'South Darfur', 'ar' => 'جنوب دارفور'], 'country_id' => 3],
+            ['name' => ['en' => 'West Darfur', 'ar' => 'غرب دارفور'], 'country_id' => 3],
+            ['name' => ['en' => 'East Darfur', 'ar' => 'شرق دارفور'], 'country_id' => 3],
+            ['name' => ['en' => 'Central Darfur', 'ar' => 'وسط دارفور'], 'country_id' => 3],
+            ['name' => ['en' => 'Northern State', 'ar' => 'الولاية الشمالية'], 'country_id' => 3],
+            ['name' => ['en' => 'White Nile', 'ar' => 'النيل الأبيض'], 'country_id' => 3],
+            ['name' => ['en' => 'Blue Nile', 'ar' => 'النيل الأزرق'], 'country_id' => 3],
+            ['name' => ['en' => 'Sennar', 'ar' => 'سنار'], 'country_id' => 3],
+            ['name' => ['en' => 'Kassala', 'ar' => 'كسلا'], 'country_id' => 3],
+            ['name' => ['en' => 'Gedaref', 'ar' => 'القضارف'], 'country_id' => 3],
+            ['name' => ['en' => 'West Kordofan', 'ar' => 'غرب كردفان'], 'country_id' => 3],
+            // ======== End: Sudan Governorates ========
+
+            // ======== Start: Sudan Governorates ========
+            ['name' => ['en' => 'Rabat-Salé-Kénitra', 'ar' => 'الرباط-سلا-القنيطرة'], 'country_id' => 5],
+            ['name' => ['en' => 'Casablanca-Settat', 'ar' => 'الدار البيضاء-سطات'], 'country_id' => 5],
+            ['name' => ['en' => 'Marrakech-Safi', 'ar' => 'مراكش-آسفي'], 'country_id' => 5],
+            ['name' => ['en' => 'Fès-Meknès', 'ar' => 'فاس-مكناس'], 'country_id' => 5],
+            ['name' => ['en' => 'Tanger-Tetouan-Al Hoceima', 'ar' => 'طنجة-تطوان-الحسيمة'], 'country_id' => 5],
+            ['name' => ['en' => 'Oriental', 'ar' => 'الشرق'], 'country_id' => 5],
+            ['name' => ['en' => 'Béni Mellal-Khénifra', 'ar' => 'بني ملال-خنيفرة'], 'country_id' => 5],
+            ['name' => ['en' => 'Drâa-Tafilalet', 'ar' => 'درعة-تافيلالت'], 'country_id' => 5],
+            ['name' => ['en' => 'Souss-Massa', 'ar' => 'سوس-ماسة'], 'country_id' => 5],
+            ['name' => ['en' => 'Guelmim-Oued Noun', 'ar' => 'كلميم-واد نون'], 'country_id' => 5],
+            ['name' => ['en' => 'Laâyoune-Sakia El Hamra', 'ar' => 'العيون-الساقية الحمراء'], 'country_id' => 5],
+            ['name' => ['en' => 'Dakhla-Oued Ed-Dahab', 'ar' => 'الداخلة-وادي الذهب'], 'country_id' => 5],
+            // ======== End: Sudan Governorates ========
+
         ];
 
         foreach ($governorates as $governorate) {
-            Governorate::updateOrCreate($governorate);
+            $gov = Governorate::updateOrCreate(
+                ['name' => $governorate['name'], 'country_id' => $governorate['country_id']],
+                $governorate
+            );
+
+            // Create an associated shipping governorate
+            ShippingGovernorate::updateOrCreate(
+                ['governorate_id' => $gov->id],
+                [
+                    'governorate_id' => $gov->id,
+                    'price' => (rand(100, 10000) / 100),
+                ]
+            );
         }
     }
 }
