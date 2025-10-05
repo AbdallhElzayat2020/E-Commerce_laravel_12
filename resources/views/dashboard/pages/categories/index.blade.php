@@ -18,9 +18,9 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Slug</th>
-                                    {{--                                <th>Status</th> --}}
-                                    {{--                                <th>Created At</th> --}}
-                                    {{--                                <th>Actions</th> --}}
+                                    <th>Status</th>
+                                    <th>Created At</th>
+                                    <th>actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,9 +28,9 @@
                                     <td>#</td>
                                     <td>name</td>
                                     <td>slug</td>
-                                    {{--                                <td>status</td> --}}
-                                    {{--                                <td>created_at</td> --}}
-                                    {{--                                <td>actions</td> --}}
+                                    <td>status</td>
+                                    <td>created_at</td>
+                                    <td>actions</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -67,21 +67,33 @@
                         data: 'slug',
                         name: 'slug'
                     },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions'
+                    },
                 ],
-                language: {
-                    processing: "loading",
-                    search: "البحث:",
-                    lengthMenu: "عرض _MENU_ عنصر",
-                    info: "عرض _START_ إلى _END_ من _TOTAL_ عنصر",
-                    infoEmpty: "عرض 0 إلى 0 من 0 عنصر",
-                    infoFiltered: "(مفلتر من _MAX_ إجمالي عناصر)",
-                    paginate: {
-                        first: "الأول",
-                        last: "الأخير",
-                        next: "التالي",
-                        previous: "السابق"
-                    }
-                }
+                // language: {
+                //     processing: "loading",
+                //     search: "البحث:",
+                //     lengthMenu: "عرض _MENU_ عنصر",
+                //     info: "عرض _START_ إلى _END_ من _TOTAL_ عنصر",
+                //     infoEmpty: "عرض 0 إلى 0 من 0 عنصر",
+                //     infoFiltered: "(مفلتر من _MAX_ إجمالي عناصر)",
+                //     paginate: {
+                //         first: "الأول",
+                //         last: "الأخير",
+                //         next: "التالي",
+                //         previous: "السابق"
+                //     }
+                // }
             });
         });
     </script>

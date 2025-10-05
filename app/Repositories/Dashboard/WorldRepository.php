@@ -11,20 +11,20 @@ class WorldRepository
 {
     public function getAllCountries()
     {
-        return Country::withCount('governorates')
-            ->selectRaw('countries.*, (SELECT COUNT(*) FROM users
-                INNER JOIN cities ON users.city_id = cities.id
-                INNER JOIN governorates ON cities.governorate_id = governorates.id
-                WHERE governorates.country_id = countries.id) as users_count')
-            ->when(!empty(request()->keyword), function ($query) {
-                $query->where('countries.name', 'like', '%' . request()->keyword . '%');
-            })->paginate(9);
-
-
-//        return Country::withCount(['governorates', 'users'])
+//        return Country::withCount('governorates')
+//            ->selectRaw('countries.*, (SELECT COUNT(*) FROM users
+//                INNER JOIN cities ON users.city_id = cities.id
+//                INNER JOIN governorates ON cities.governorate_id = governorates.id
+//                WHERE governorates.country_id = countries.id) as users_count')
 //            ->when(!empty(request()->keyword), function ($query) {
-//                $query->where('name', 'like', '%' . request()->keyword . '%');
+//                $query->where('countries.name', 'like', '%' . request()->keyword . '%');
 //            })->paginate(9);
+
+
+        return Country::withCount(['governorates', 'users'])
+            ->when(!empty(request()->keyword), function ($query) {
+                $query->where('name', 'like', '%' . request()->keyword . '%');
+            })->paginate(9);
     }
 
     public function getCountryById($id)

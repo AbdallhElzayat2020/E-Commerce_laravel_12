@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\WorldController;
+use App\Http\Controllers\Dashboard\BrandController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -95,8 +96,24 @@ Route::group(
             ####################### Shipping & Countries Route #########################
 
             ####################### Categories Route #########################
-            Route::resource('categories', CategoryController::class);
+            Route::group(['middleware' => 'can:categories'], function () {
+                Route::resource('categories', CategoryController::class);
+                Route::get('categories-all', [CategoryController::class, 'getAllCategories'])->name('categories.all');
+                Route::post('categories/update-status', [CategoryController::class, 'updateStatus'])->name('categories.update-status');
+            });
             ####################### Categories Route #########################
+
+
+
+
+
+
+            ####################### Brands Route #########################
+            Route::group(['middleware' => 'can:brands'], function () {
+                Route::resource('brands', BrandController::class);
+                Route::post('brands/update-status', [BrandController::class, 'updateStatus'])->name('brands.update-status');
+            });
+            ####################### Brands Route #########################
 
         });
     }
