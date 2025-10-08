@@ -60,6 +60,8 @@ return [
     'select_shipping_price' => 'Select Shipping Price',
     'change_price' => 'Change Price',
 
+
+    'you_will_not_be_able_to_revert_this' => 'You will not be able to revert this!',
     'categories' => 'Categories',
     'brands' => 'Brands',
     'category_create' => 'Create Category',
@@ -67,6 +69,10 @@ return [
     'table_yajra_paragraph' => 'A dynamic table displaying database data with features like search, sorting, column visibility, and export options (Excel, Print, Copy).',
 
     'are_you_sure' => 'Are you sure?',
+    'deleted_successfully' => 'Deleted successfully',
+    'your_file_has_been_deleted' => 'Your file has been deleted.',
+    'cancelled' => 'Cancelled',
+    'your_imaginary_file_is_safe' => 'Your imaginary file is safe :)',
     'name_ar' => 'Name (Arabic)',
     'name_en' => 'Name (English)',
 

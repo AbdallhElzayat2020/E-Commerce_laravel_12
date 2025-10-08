@@ -60,6 +60,7 @@ return [
     'select_shipping_price' => 'اختار سعر الشحن',
     'change_price' => ' تغير السعر',
 
+    'you_will_not_be_able_to_revert_this' => 'لا يمكن التراجع عن هذا!',
     'categories' => 'الاقسام',
     'brands' => 'العلامات التجاريه',
     'category_create' => 'انشاء قسم ',
@@ -67,6 +68,10 @@ return [
     'table_yajra_paragraph' => 'جدول ديناميكي يعرض البيانات من قاعدة البيانات مع ميزات مثل البحث، الفرز، إظهار وإخفاء الأعمدة، وخيارات لتصدير البيانات إلى Excel أو طباعتها أو نسخها.',
 
     'are_you_sure' => 'هل انت متاكد؟',
+    'deleted_successfully' => 'تم الحذف بنجاح',
+    'your_file_has_been_deleted' => 'تم حذف الملف الخاص بك.',
+    'cancelled' => 'تم الإلغاء',
+    'your_imaginary_file_is_safe' => 'ملفك الوهمي في أمان :)',
     'name_ar' => 'الاسم بالعربية',
     'name_en' => 'الاسم بالانجليزية',
 

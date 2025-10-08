@@ -9,36 +9,40 @@ class CategoryRepository
 
     public function getCategories()
     {
-        return Category::select('id', 'name', 'status')->paginate(9);
+        return Category::query();
     }
 
-    public function createCategory($data)
-    {
-        Category::create($data);
-    }
-
-    public function getCategoryById($id)
+    public function getById($id)
     {
         return Category::find($id);
     }
 
-    public function updateCategory($id, $data)
+    public function store($data)
     {
-        $category = $this->getCategoryById($id);
-        if (!$category) {
-            return false;
-        }
-        $category->update($data);
-        return true;
+        return Category::create($data);
     }
 
-    public function deleteCategory($id)
+    public function update($category, $data)
     {
-        $category = $this->getCategoryById($id);
-        if (!$category) {
-            return false;
-        }
-        $category->delete();
-        return true;
+        return $category->update($data);
+    }
+
+    public function delete($category)
+    {
+        return $category->delete();
+    }
+
+
+    public function getCategoriesExceptChildren($id)
+    {
+        return Category::where('id', '!=', $id)
+            ->whereNull('parent_id')
+            ->get();
+    }
+
+    public function getParentCategories()
+    {
+        return Category::whereNull('parent_id')
+            ->get();
     }
 }

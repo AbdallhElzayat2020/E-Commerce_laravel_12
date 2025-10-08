@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
+use App\Services\CategoryService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
+
+    public CategoryService $categoryService;
+
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
 
     public function index()
     {
@@ -17,60 +25,62 @@ class CategoryController extends Controller
 
     public function getAllCategories()
     {
-        $categories = Category::query();
-        return DataTables::of($categories)
-            ->addColumn('name', function ($category) {
-                $locale = app()->getLocale();
-                return $category->getTranslation('name', $locale) ?: $category->getTranslation('name', 'en');
-            })
-            ->addColumn('created_at', function ($category) {
-                // returned as string by accessor on Category model
-                return $category->created_at;
-            })
-            ->addColumn('actions', function ($category) {
-                return
-                    '<a href="' . route('dashboard.categories.destroy', $category->id) . '" class="btn btn-sm btn-danger mx-1">Delete</a>' .
-                    '<a href="' . route('dashboard.categories.edit', $category->id) . '" class="btn btn-sm btn-primary mx-1">Edit</a>';
-            })
-            ->addColumn('status', function ($category) {
-                return $category->status === 'active' ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
-            })
-            ->rawColumns(['status', 'actions'])
-            ->make(true);
+        return $this->categoryService->getCategoriesForDataTable();
+    }
+
+    public function getCategoryById($id)
+    {
+        return $this->categoryService->getCategoryById($id);
     }
 
     public function create()
     {
-        //
+        $categories = $this->categoryService->getParentCategories();
+        return view('dashboard.pages.categories.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        $data = $request->only(['name', 'parent_id', 'status']);
+        if (!$this->categoryService->store($data)) {
+            return redirect()->back()->with('error', __('dashboard.error_msg'));
+        }
+        return redirect()->route('dashboard.categories.index')->with('success', __('dashboard.success_msg'));
     }
-
-
-    public function show(string $id)
-    {
-        //
-    }
-
 
     public function edit(string $id)
     {
-        //
+        $category = $this->categoryService->getCategoryById($id);
+
+        if (!$category) {
+            return redirect()->back()->with('error', __('dashboard.error_msg'));
+        }
+        $categories = $this->categoryService->getCategoriesExceptChildren($id);
+        return view('dashboard.pages.categories.edit', compact('category', 'categories'));
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(UpdateCategoryRequest $request)
     {
-        //
+        $data = $request->only(['name', 'parent_id', 'status', 'id']);
+
+        $data['status'] = $request->status == 'active' ? 'active' : 'inactive';
+
+        if (!$this->categoryService->update($data)) {
+            return redirect()->back()->with('error', __('dashboard.error_msg'));
+        }
+        return redirect()->route('dashboard.categories.index')->with('success', __('dashboard.success_msg'));
     }
 
 
     public function destroy(string $id)
     {
-        //
+        $category = $this->categoryService->delete($id);
+
+        if (!$category) {
+            return redirect()->back()->with('error', __('dashboard.error_msg'));
+        }
+        return redirect()->route('dashboard.categories.index')->with('success', __('dashboard.success_msg'));
     }
 
     public function updateStatus()

@@ -72,6 +72,6 @@ class Category extends Model
 
     public function getCreatedAtAttribute(): string
     {
-        return date('Y-m-d', strtotime($this->attributes['created_at']));
+        return date('d/m/y H:i', strtotime($this->attributes['created_at']));
     }
 }
