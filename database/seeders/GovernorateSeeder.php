@@ -16,7 +16,9 @@ class GovernorateSeeder extends Seeder
     public function run(): void
     {
 
-        //        DB::table('governorates')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Governorate::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $governorates = [
             // ======== Start: Egypt Governorates ========

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\City;
-use App\Models\Country;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +14,9 @@ class CitySeeder extends Seeder
      */
     public function run(): void
     {
-//        DB::table('transactions')->delete();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        City::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $cities = [
             [

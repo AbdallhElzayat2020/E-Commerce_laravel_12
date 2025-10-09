@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Admin;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
@@ -15,6 +16,10 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         $first_role = Role::first()->id;
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Admin::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         Admin::updateOrCreate([
             'email' => 'admin@gmail.com',
         ], [

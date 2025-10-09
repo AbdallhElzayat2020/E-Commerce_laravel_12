@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Country;
+use Illuminate\Support\Facades\DB;
 
 class CountrySeeder extends Seeder
 {
@@ -12,6 +13,11 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Country::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $countries = [
             ['id' => 1, 'name' => ['en' => 'Egypt', 'ar' => 'مصر'], 'phone_code' => '20', 'flag_code' => 'eg'],
             ['id' => 2, 'name' => ['en' => 'Saudi Arabia', 'ar' => 'المملكة العربية السعودية'], 'phone_code' => '966', 'flag_code' => 'sa'],
