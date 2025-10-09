@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Dashboard;
 
 use App\Models\Category;
 

@@ -8,7 +8,7 @@
                 </a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="dashboard-ecommerce.html"
-                            data-i18n="nav.dash.ecommerce">eCommerce</a>
+                                          data-i18n="nav.dash.ecommerce">eCommerce</a>
                     </li>
                     <li><a class="menu-item" href="dashboard-crypto.html" data-i18n="nav.dash.crypto">Crypto</a>
                     </li>
@@ -19,17 +19,18 @@
             @can('categories')
                 <li class=" nav-item"><a href="#"><i class="la la-television"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.categories') }}</span>
+                        <span class="badge badge badge-info badge-pill float-right mr-2">{{$categories_count}}</span>
                     </a>
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.categories.create') }}"
-                                data-i18n="nav.templates.vert.overlay_menu">
+                               data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.category_create') }}
                             </a>
                         </li>
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.categories.index') }}"
-                                data-i18n="nav.templates.vert.overlay_menu">
+                               data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.categories') }}
                             </a>
                         </li>
@@ -40,18 +41,19 @@
             @can('brands')
                 <li class=" nav-item"><a href="#"><i class="la la-television"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.brands') }}</span>
+                        <span class="badge badge badge-info badge-pill float-right mr-2">{{$brands_count}}</span>
                     </a>
                     <ul class="menu-content">
                         <li>
-                            <a class="menu-item" href="{{ route('dashboard.categories.create') }}"
+                            <a class="menu-item" href="{{ route('dashboard.brands.create') }}"
                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.brand_create') }}
                             </a>
                         </li>
                         <li>
-                            <a class="menu-item" href="{{ route('dashboard.categories.index') }}"
+                            <a class="menu-item" href="{{ route('dashboard.brands.index') }}"
                                data-i18n="nav.templates.vert.overlay_menu">
-                                {{ __('dashboard.categories') }}
+                                {{ __('dashboard.brands') }}
                             </a>
                         </li>
                     </ul>
@@ -65,13 +67,13 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.roles.create') }}"
-                                data-i18n="nav.templates.vert.overlay_menu">
+                               data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard_roles.create_role') }}
                             </a>
                         </li>
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.roles.index') }}"
-                                data-i18n="nav.templates.vert.overlay_menu">
+                               data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard_roles.roles') }}
                             </a>
                         </li>
@@ -82,17 +84,18 @@
             @can('admins')
                 <li class=" nav-item"><a href="#"><i class="la la-television"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard_admins.title') }}</span>
+                        <span class="badge badge badge-info badge-pill float-right mr-2">{{$admins_count}}</span>
                     </a>
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.admins.create') }}"
-                                data-i18n="nav.templates.vert.overlay_menu">
+                               data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard_admins.buttons.create') }}
                             </a>
                         </li>
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.admins.index') }}"
-                                data-i18n="nav.templates.vert.overlay_menu">
+                               data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard_admins.title') }}
                             </a>
                         </li>
@@ -107,7 +110,7 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.countries.index') }}"
-                                data-i18n="nav.templates.vert.overlay_menu">
+                               data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.shipping') }}
                             </a>
                         </li>
@@ -117,10 +120,10 @@
 
             <li class=" navigation-header">
                 <span data-i18n="nav.category.layouts">Layouts</span><i class="la la-ellipsis-h ft-minus"
-                    data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
+                                                                        data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-columns"></i><span class="menu-title"
-                        data-i18n="nav.page_layouts.main">Page layouts</span><span
+                                                                                 data-i18n="nav.page_layouts.main">Page layouts</span><span
                         class="badge badge badge-pill badge-danger float-right mr-2">New</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="layout-1-column.html" data-i18n="nav.page_layouts.1_column">1
@@ -133,55 +136,55 @@
                             Sidebar</a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="layout-content-left-sidebar.html"
-                                    data-i18n="nav.page_layouts.3_columns.left_sidebar">Left sidebar</a>
+                                   data-i18n="nav.page_layouts.3_columns.left_sidebar">Left sidebar</a>
                             </li>
                             <li><a class="menu-item" href="layout-content-left-sticky-sidebar.html"
-                                    data-i18n="nav.page_layouts.3_columns.left_sticky_sidebar">Left sticky
+                                   data-i18n="nav.page_layouts.3_columns.left_sticky_sidebar">Left sticky
                                     sidebar</a>
                             </li>
                             <li><a class="menu-item" href="layout-content-right-sidebar.html"
-                                    data-i18n="nav.page_layouts.3_columns.right_sidebar">Right sidebar</a>
+                                   data-i18n="nav.page_layouts.3_columns.right_sidebar">Right sidebar</a>
                             </li>
                             <li><a class="menu-item" href="layout-content-right-sticky-sidebar.html"
-                                    data-i18n="nav.page_layouts.3_columns.right_sticky_sidebar">Right sticky
+                                   data-i18n="nav.page_layouts.3_columns.right_sticky_sidebar">Right sticky
                                     sidebar</a>
                             </li>
                         </ul>
                     </li>
                     <li><a class="menu-item" href="#"
-                            data-i18n="nav.page_layouts.3_columns_detached.main">Content
+                           data-i18n="nav.page_layouts.3_columns_detached.main">Content
                             Det. Sidebar</a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="layout-content-detached-left-sidebar.html"
-                                    data-i18n="nav.page_layouts.3_columns_detached.detached_left_sidebar">Detached
+                                   data-i18n="nav.page_layouts.3_columns_detached.detached_left_sidebar">Detached
                                     left sidebar</a>
                             </li>
                             <li><a class="menu-item" href="layout-content-detached-left-sticky-sidebar.html"
-                                    data-i18n="nav.page_layouts.3_columns_detached.detached_sticky_left_sidebar">Detached
+                                   data-i18n="nav.page_layouts.3_columns_detached.detached_sticky_left_sidebar">Detached
                                     sticky left sidebar</a>
                             </li>
                             <li><a class="menu-item" href="layout-content-detached-right-sidebar.html"
-                                    data-i18n="nav.page_layouts.3_columns_detached.detached_right_sidebar">Detached
+                                   data-i18n="nav.page_layouts.3_columns_detached.detached_right_sidebar">Detached
                                     right sidebar</a>
                             </li>
                             <li><a class="menu-item" href="layout-content-detached-right-sticky-sidebar.html"
-                                    data-i18n="nav.page_layouts.3_columns_detached.detached_sticky_right_sidebar">Detached
+                                   data-i18n="nav.page_layouts.3_columns_detached.detached_sticky_right_sidebar">Detached
                                     sticky right sidebar</a>
                             </li>
                         </ul>
                     </li>
                     <li class="navigation-divider"></li>
                     <li><a class="menu-item" href="layout-fixed-navbar.html"
-                            data-i18n="nav.page_layouts.fixed_navbar">Fixed navbar</a>
+                           data-i18n="nav.page_layouts.fixed_navbar">Fixed navbar</a>
                     </li>
                     <li><a class="menu-item" href="layout-fixed-navigation.html"
-                            data-i18n="nav.page_layouts.fixed_navigation">Fixed navigation</a>
+                           data-i18n="nav.page_layouts.fixed_navigation">Fixed navigation</a>
                     </li>
                     <li><a class="menu-item" href="layout-fixed-navbar-navigation.html"
-                            data-i18n="nav.page_layouts.fixed_navbar_navigation">Fixed navbar &amp; navigation</a>
+                           data-i18n="nav.page_layouts.fixed_navbar_navigation">Fixed navbar &amp; navigation</a>
                     </li>
                     <li><a class="menu-item" href="layout-fixed-navbar-footer.html"
-                            data-i18n="nav.page_layouts.fixed_navbar_footer">Fixed navbar &amp; footer</a>
+                           data-i18n="nav.page_layouts.fixed_navbar_footer">Fixed navbar &amp; footer</a>
                     </li>
                     <li class="navigation-divider"></li>
                     <li><a class="menu-item" href="layout-fixed.html" data-i18n="nav.page_layouts.fixed_layout">Fixed
@@ -191,7 +194,7 @@
                             layout</a>
                     </li>
                     <li><a class="menu-item" href="layout-static.html"
-                            data-i18n="nav.page_layouts.static_layout">Static layout</a>
+                           data-i18n="nav.page_layouts.static_layout">Static layout</a>
                     </li>
                     <li class="navigation-divider"></li>
                     <li><a class="menu-item" href="layout-light.html" data-i18n="nav.page_layouts.light_layout">Light
@@ -201,12 +204,12 @@
                             layout</a>
                     </li>
                     <li><a class="menu-item" href="layout-semi-dark.html"
-                            data-i18n="nav.page_layouts.semi_dark_layout">Semi dark layout</a>
+                           data-i18n="nav.page_layouts.semi_dark_layout">Semi dark layout</a>
                     </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-navicon"></i><span class="menu-title"
-                        data-i18n="nav.navbars.main">Navbars</span></a>
+                                                                                 data-i18n="nav.navbars.main">Navbars</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="navbar-light.html" data-i18n="nav.navbars.nav_light">Navbar
                             Light</a>
@@ -218,7 +221,7 @@
                             Semi Dark</a>
                     </li>
                     <li><a class="menu-item" href="navbar-brand-center.html"
-                            data-i18n="nav.navbars.nav_brand_center">Brand Center</a>
+                           data-i18n="nav.navbars.nav_brand_center">Brand Center</a>
                     </li>
                     <li><a class="menu-item" href="navbar-fixed-top.html" data-i18n="nav.navbars.nav_fixed_top">Fixed
                             Top</a>
@@ -227,17 +230,17 @@
                             on Scroll</a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="navbar-hide-on-scroll-top.html"
-                                    data-i18n="nav.navbars.nav_hide_on_scroll.nav_hide_on_scroll_top">Hide on
+                                   data-i18n="nav.navbars.nav_hide_on_scroll.nav_hide_on_scroll_top">Hide on
                                     Scroll Top</a>
                             </li>
                             <li><a class="menu-item" href="navbar-hide-on-scroll-bottom.html"
-                                    data-i18n="nav.navbars.nav_hide_on_scroll.nav_hide_on_scroll_bottom">Hide on
+                                   data-i18n="nav.navbars.nav_hide_on_scroll.nav_hide_on_scroll_bottom">Hide on
                                     Scroll Bottom</a>
                             </li>
                         </ul>
                     </li>
                     <li><a class="menu-item" href="navbar-components.html"
-                            data-i18n="nav.navbars.nav_components">Navbar Components</a>
+                           data-i18n="nav.navbars.nav_components">Navbar Components</a>
                     </li>
                     <li><a class="menu-item" href="navbar-styling.html" data-i18n="nav.navbars.nav_styling">Navbar
                             Styling</a>
@@ -245,86 +248,86 @@
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-arrows-v"></i><span class="menu-title"
-                        data-i18n="nav.vertical_nav.main">Vertical Nav</span></a>
+                                                                                  data-i18n="nav.vertical_nav.main">Vertical Nav</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#"
-                            data-i18n="nav.vertical_nav.vertical_navigation_types.main">Navigation Types</a>
+                           data-i18n="nav.vertical_nav.vertical_navigation_types.main">Navigation Types</a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="../vertical-menu-template"
-                                    data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_menu">Vertical
+                                   data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_menu">Vertical
                                     Menu</a>
                             </li>
                             <li><a class="menu-item" href="../vertical-modern-menu-template"
-                                    data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_modern-menu">Vertical
+                                   data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_modern-menu">Vertical
                                     Modern Menu</a>
                             </li>
                             <li><a class="menu-item" href="../vertical-overlay-menu-template"
-                                    data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_overlay">Vertical
+                                   data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_overlay">Vertical
                                     Overlay</a>
                             </li>
                             <li><a class="menu-item" href="../vertical-compact-menu-template"
-                                    data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_compact">Vertical
+                                   data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_compact">Vertical
                                     Compact</a>
                             </li>
                             <li><a class="menu-item" href="../vertical-content-menu-template"
-                                    data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_content">Vertical
+                                   data-i18n="nav.vertical_nav.vertical_navigation_types.vertical_content">Vertical
                                     Content</a>
                             </li>
                         </ul>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-fixed.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_fixed">Fixed Navigation</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_fixed">Fixed Navigation</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-static.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_static">Static Navigation</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_static">Static Navigation</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-light.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_light">Navigation Light</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_light">Navigation Light</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-dark.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_dark">Navigation Dark</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_dark">Navigation Dark</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-accordion.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_accordion">Accordion Navigation</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_accordion">Accordion Navigation</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-collapsible.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_collapsible">Collapsible Navigation</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_collapsible">Collapsible Navigation</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-flipped.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_flipped">Flipped Navigation</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_flipped">Flipped Navigation</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-native-scroll.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_native_scroll">Native scroll</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_native_scroll">Native scroll</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-right-side-icon.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_right_side_icon">Right side icons</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_right_side_icon">Right side icons</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-bordered.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_bordered">Bordered Navigation</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_bordered">Bordered Navigation</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-disabled-link.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_disabled_link">Disabled Navigation</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_disabled_link">Disabled Navigation</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-styling.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_styling">Navigation Styling</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_styling">Navigation Styling</a>
                     </li>
                     <li><a class="menu-item" href="vertical-nav-tags-pills.html"
-                            data-i18n="nav.vertical_nav.vertical_nav_tags_pills">Tags &amp; Pills</a>
+                           data-i18n="nav.vertical_nav.vertical_nav_tags_pills">Tags &amp; Pills</a>
                     </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-arrows-h"></i><span class="menu-title"
-                        data-i18n="nav.horz_nav.main">Horizontal Nav</span></a>
+                                                                                  data-i18n="nav.horz_nav.main">Horizontal Nav</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#"
-                            data-i18n="nav.horz_nav.horizontal_navigation_types.main">Navigation Types</a>
+                           data-i18n="nav.horz_nav.horizontal_navigation_types.main">Navigation Types</a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="../horizontal-menu-template"
-                                    data-i18n="nav.horz_nav.horizontal_navigation_types.horizontal_left_icon_navigation">Left
+                                   data-i18n="nav.horz_nav.horizontal_navigation_types.horizontal_left_icon_navigation">Left
                                     Icon Navigation</a>
                             </li>
                             <li><a class="menu-item" href="../horizontal-menu-template-nav"
-                                    data-i18n="nav.horz_nav.horizontal_navigation_types.horizontal_menu_template_nav">Top
+                                   data-i18n="nav.horz_nav.horizontal_navigation_types.horizontal_menu_template_nav">Top
                                     Icon Navigation</a>
                             </li>
                         </ul>
@@ -332,49 +335,49 @@
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-header"></i><span class="menu-title"
-                        data-i18n="nav.page_headers.main">Page Headers</span></a>
+                                                                                data-i18n="nav.page_headers.main">Page Headers</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="headers-breadcrumbs-basic.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_basic">Breadcrumbs basic</a>
+                           data-i18n="nav.page_headers.headers_breadcrumbs_basic">Breadcrumbs basic</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-top.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_top">Breadcrumbs top</a>
+                           data-i18n="nav.page_headers.headers_breadcrumbs_top">Breadcrumbs top</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-bottom.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_bottom">Breadcrumbs bottom</a>
+                           data-i18n="nav.page_headers.headers_breadcrumbs_bottom">Breadcrumbs bottom</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-top-with-description.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_top_with_description">Breadcrumbs top
+                           data-i18n="nav.page_headers.headers_breadcrumbs_top_with_description">Breadcrumbs top
                             with desc</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-with-button.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_with_button">Breadcrumbs with
+                           data-i18n="nav.page_headers.headers_breadcrumbs_with_button">Breadcrumbs with
                             button</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-with-round-button.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_with_round_button">Breadcrumbs with
+                           data-i18n="nav.page_headers.headers_breadcrumbs_with_round_button">Breadcrumbs with
                             button 2</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-with-button-group.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_with_button_group">Breadcrumbs with
+                           data-i18n="nav.page_headers.headers_breadcrumbs_with_button_group">Breadcrumbs with
                             buttons</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-with-description.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_breadcrumbs_with_description">Breadcrumbs
+                           data-i18n="nav.page_headers.headers_breadcrumbs_breadcrumbs_with_description">Breadcrumbs
                             with desc</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-with-search.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_breadcrumbs_with_search">Breadcrumbs
+                           data-i18n="nav.page_headers.headers_breadcrumbs_breadcrumbs_with_search">Breadcrumbs
                             with search</a>
                     </li>
                     <li><a class="menu-item" href="headers-breadcrumbs-with-stats.html"
-                            data-i18n="nav.page_headers.headers_breadcrumbs_breadcrumbs_with_stats">Breadcrumbs
+                           data-i18n="nav.page_headers.headers_breadcrumbs_breadcrumbs_with_stats">Breadcrumbs
                             with stats</a>
                     </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-download"></i><span class="menu-title"
-                        data-i18n="nav.footers.main">Footers</span></a>
+                                                                                  data-i18n="nav.footers.main">Footers</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="footer-light.html" data-i18n="nav.footers.footer_light">Footer
                             Light</a>
@@ -383,146 +386,146 @@
                             Dark</a>
                     </li>
                     <li><a class="menu-item" href="footer-transparent.html"
-                            data-i18n="nav.footers.footer_transparent">Footer Transparent</a>
+                           data-i18n="nav.footers.footer_transparent">Footer Transparent</a>
                     </li>
                     <li><a class="menu-item" href="footer-fixed.html" data-i18n="nav.footers.footer_fixed">Footer
                             Fixed</a>
                     </li>
                     <li><a class="menu-item" href="footer-components.html"
-                            data-i18n="nav.footers.footer_components">Footer Components</a>
+                           data-i18n="nav.footers.footer_components">Footer Components</a>
                     </li>
                 </ul>
             </li>
             <li class=" navigation-header">
                 <span data-i18n="nav.category.general">General</span><i class="la la-ellipsis-h ft-minus"
-                    data-toggle="tooltip" data-placement="right" data-original-title="General"></i>
+                                                                        data-toggle="tooltip" data-placement="right" data-original-title="General"></i>
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-paint-brush"></i><span class="menu-title"
-                        data-i18n="nav.color_palette.main">Color Palette</span></a>
+                                                                                     data-i18n="nav.color_palette.main">Color Palette</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="color-palette-primary.html"
-                            data-i18n="nav.color_palette.color_palette_primary">Primary palette</a>
+                           data-i18n="nav.color_palette.color_palette_primary">Primary palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-danger.html"
-                            data-i18n="nav.color_palette.color_palette_danger">Danger palette</a>
+                           data-i18n="nav.color_palette.color_palette_danger">Danger palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-success.html"
-                            data-i18n="nav.color_palette.color_palette_success">Success palette</a>
+                           data-i18n="nav.color_palette.color_palette_success">Success palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-warning.html"
-                            data-i18n="nav.color_palette.color_palette_warning">Warning palette</a>
+                           data-i18n="nav.color_palette.color_palette_warning">Warning palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-info.html"
-                            data-i18n="nav.color_palette.color_palette_info">Info palette</a>
+                           data-i18n="nav.color_palette.color_palette_info">Info palette</a>
                     </li>
                     <li class="navigation-divider"></li>
                     <li><a class="menu-item" href="color-palette-red.html"
-                            data-i18n="nav.color_palette.color_palette_red">Red palette</a>
+                           data-i18n="nav.color_palette.color_palette_red">Red palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-pink.html"
-                            data-i18n="nav.color_palette.color_palette_pink">Pink palette</a>
+                           data-i18n="nav.color_palette.color_palette_pink">Pink palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-purple.html"
-                            data-i18n="nav.color_palette.color_palette_purple">Purple palette</a>
+                           data-i18n="nav.color_palette.color_palette_purple">Purple palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-blue.html"
-                            data-i18n="nav.color_palette.color_palette_blue">Blue palette</a>
+                           data-i18n="nav.color_palette.color_palette_blue">Blue palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-cyan.html"
-                            data-i18n="nav.color_palette.color_palette_cyan">Cyan palette</a>
+                           data-i18n="nav.color_palette.color_palette_cyan">Cyan palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-teal.html"
-                            data-i18n="nav.color_palette.color_palette_teal">Teal palette</a>
+                           data-i18n="nav.color_palette.color_palette_teal">Teal palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-yellow.html"
-                            data-i18n="nav.color_palette.color_palette_yellow">Yellow palette</a>
+                           data-i18n="nav.color_palette.color_palette_yellow">Yellow palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-amber.html"
-                            data-i18n="nav.color_palette.color_palette_amber">Amber palette</a>
+                           data-i18n="nav.color_palette.color_palette_amber">Amber palette</a>
                     </li>
                     <li><a class="menu-item" href="color-palette-blue-grey.html"
-                            data-i18n="nav.color_palette.color_palette_blue_grey">Blue Grey palette</a>
+                           data-i18n="nav.color_palette.color_palette_blue_grey">Blue Grey palette</a>
                     </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-puzzle-piece"></i><span class="menu-title"
-                        data-i18n="nav.starter_kit.main">Starter kit</span></a>
+                                                                                      data-i18n="nav.starter_kit.main">Starter kit</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-1-column.html"
-                            data-i18n="nav.starter_kit.1_column">1 column</a>
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-1-column.html"
+                           data-i18n="nav.starter_kit.1_column">1 column</a>
                     </li>
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-2-columns.html"
-                            data-i18n="nav.starter_kit.2_columns">2 columns</a>
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-2-columns.html"
+                           data-i18n="nav.starter_kit.2_columns">2 columns</a>
                     </li>
                     <li><a class="menu-item" href="#"
-                            data-i18n="nav.starter_kit.3_columns_detached.main">Content
+                           data-i18n="nav.starter_kit.3_columns_detached.main">Content
                             Det. Sidebar</a>
                         <ul class="menu-content">
                             <li><a class="menu-item"
-                                    href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-content-detached-left-sidebar.html"
-                                    data-i18n="nav.starter_kit.3_columns_detached.3_columns_detached_left_sidebar">Detached
+                                   href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-content-detached-left-sidebar.html"
+                                   data-i18n="nav.starter_kit.3_columns_detached.3_columns_detached_left_sidebar">Detached
                                     left sidebar</a>
                             </li>
                             <li><a class="menu-item"
-                                    href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-content-detached-left-sticky-sidebar.html"
-                                    data-i18n="nav.starter_kit.3_columns_detached.3_columns_detached_sticky_left_sidebar">Detached
+                                   href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-content-detached-left-sticky-sidebar.html"
+                                   data-i18n="nav.starter_kit.3_columns_detached.3_columns_detached_sticky_left_sidebar">Detached
                                     sticky left sidebar</a>
                             </li>
                             <li><a class="menu-item"
-                                    href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-content-detached-right-sidebar.html"
-                                    data-i18n="nav.starter_kit.3_columns_detached.3_columns_detached_right_sidebar">Detached
+                                   href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-content-detached-right-sidebar.html"
+                                   data-i18n="nav.starter_kit.3_columns_detached.3_columns_detached_right_sidebar">Detached
                                     right sidebar</a>
                             </li>
                             <li><a class="menu-item"
-                                    href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-content-detached-right-sticky-sidebar.html"
-                                    data-i18n="nav.starter_kit.3_columns_detached.3_columns_detached_sticky_right_sidebar">Detached
+                                   href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-content-detached-right-sticky-sidebar.html"
+                                   data-i18n="nav.starter_kit.3_columns_detached.3_columns_detached_sticky_right_sidebar">Detached
                                     sticky right sidebar</a>
                             </li>
                         </ul>
                     </li>
                     <li class="navigation-divider"></li>
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed-navbar.html"
-                            data-i18n="nav.starter_kit.fixed_navbar">Fixed navbar</a>
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed-navbar.html"
+                           data-i18n="nav.starter_kit.fixed_navbar">Fixed navbar</a>
                     </li>
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed-navigation.html"
-                            data-i18n="nav.starter_kit.fixed_navigation">Fixed navigation</a>
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed-navigation.html"
+                           data-i18n="nav.starter_kit.fixed_navigation">Fixed navigation</a>
                     </li>
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed-navbar-navigation.html"
-                            data-i18n="nav.starter_kit.fixed_navbar_navigation">Fixed navbar &amp; navigation</a>
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed-navbar-navigation.html"
+                           data-i18n="nav.starter_kit.fixed_navbar_navigation">Fixed navbar &amp; navigation</a>
                     </li>
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed-navbar-footer.html"
-                            data-i18n="nav.starter_kit.fixed_navbar_footer">Fixed navbar &amp; footer</a>
-                    </li>
-                    <li class="navigation-divider"></li>
-                    <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed.html"
-                            data-i18n="nav.starter_kit.fixed_layout">Fixed layout</a>
-                    </li>
-                    <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-boxed.html"
-                            data-i18n="nav.starter_kit.boxed_layout">Boxed layout</a>
-                    </li>
-                    <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-static.html"
-                            data-i18n="nav.starter_kit.static_layout">Static layout</a>
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed-navbar-footer.html"
+                           data-i18n="nav.starter_kit.fixed_navbar_footer">Fixed navbar &amp; footer</a>
                     </li>
                     <li class="navigation-divider"></li>
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-light.html"
-                            data-i18n="nav.starter_kit.light_layout">Light layout</a>
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-fixed.html"
+                           data-i18n="nav.starter_kit.fixed_layout">Fixed layout</a>
                     </li>
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-dark.html"
-                            data-i18n="nav.starter_kit.dark_layout">Dark layout</a>
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-boxed.html"
+                           data-i18n="nav.starter_kit.boxed_layout">Boxed layout</a>
                     </li>
                     <li><a class="menu-item"
-                            href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-semi-dark.html"
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-static.html"
+                           data-i18n="nav.starter_kit.static_layout">Static layout</a>
+                    </li>
+                    <li class="navigation-divider"></li>
+                    <li><a class="menu-item"
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-light.html"
+                           data-i18n="nav.starter_kit.light_layout">Light layout</a>
+                    </li>
+                    <li><a class="menu-item"
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-dark.html"
+                           data-i18n="nav.starter_kit.dark_layout">Dark layout</a>
+                    </li>
+                    <li><a class="menu-item"
+                           href="{{ asset('assets/dashboard') }}/starter-kit/rtl/vertical-modern-menu-template/layout-semi-dark.html"
                             data-i18n="nav.starter_kit.semi_dark_layout">Semi dark layout</a>
                     </li>
                 </ul>

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Dashboard;
 
-use App\Repositories\CategoryRepository;
+use App\Repositories\Dashboard\CategoryRepository;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoryService
@@ -26,15 +26,18 @@ class CategoryService
                 $locale = app()->getLocale();
                 return $category->getTranslation('name', $locale) ?: $category->getTranslation('name', 'en');
             })
+            ->addColumn('products_count', function ($category) {
+                return $category->products()->count() == 0 ? __('dashboard.not_found') : $category->products()->count();
+            })
             ->addColumn('created_at', function ($category) {
                 // returned by accessor on a Category model
                 return $category->created_at;
             })
             ->addColumn('actions', function ($category) {
-                return view('dashboard.pages.categories.actions', compact('category'))->render();
+                return view('dashboard.pages.categories.datatables.actions', compact('category'))->render();
             })
             ->addColumn('status', function ($category) {
-                return $category->status === 'active' ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
+                return view('dashboard.pages.categories.datatables.status', compact('category'))->render();
             })
             ->rawColumns(['status', 'actions'])
             ->make(true);

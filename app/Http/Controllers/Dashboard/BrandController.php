@@ -3,68 +3,78 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\Store\StoreBrandRequest;
+use App\Http\Requests\Dashboard\Update\UpdateBrandRequest;
+use App\Services\Dashboard\BrandService;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public BrandService $brandService;
+
+    public function __construct(BrandService $brandService)
+    {
+        $this->brandService = $brandService;
+    }
+
+
+    public function getAll()
+    {
+        return $this->brandService->getBrandsForDataTables();
+    }
+
     public function index()
     {
-        //
+        return view('dashboard.pages.brands.index');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreBrandRequest $request)
     {
-        //
+        $data = $request->validated();
+        $brand = $this->brandService->createBrand($data);
+        if (!$brand) {
+            return redirect()->back()->with('error', __('dashboard.error_msg'));
+        }
+        return redirect()->route('dashboard.brands.index')->with('success', __('dashboard.success_msg'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
-        //
+        $brand = $this->brandService->getBrand($id);
+        return view('dashboard.pages.brands.edit', compact('brand'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+
+    public function update(UpdateBrandRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+
+        $brand = $this->brandService->updateBrand($id, $data);
+
+        if (!$brand) {
+            return redirect()->back()->with('error', __('dashboard.error_msg'));
+        }
+        return redirect()->route('dashboard.brands.index')->with('success', __('dashboard.success_msg'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        $brand = $this->brandService->deleteBrand($id);
+        if (!$brand) {
+            return redirect()->back()->with('error', __('dashboard.error_msg'));
+        }
+        return redirect()->route('dashboard.brands.index')->with('success', __('dashboard.success_msg'));
     }
 
-    public function updateStatus()
-    {
-        
-    }
+    public function updateStatus() {}
+
+    public function getAllBrands() {}
 }

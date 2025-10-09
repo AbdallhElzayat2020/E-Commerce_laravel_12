@@ -61,6 +61,7 @@ return [
     'change_price' => 'Change Price',
 
 
+    'edit_brand' => 'Edit Brand',
     'you_will_not_be_able_to_revert_this' => 'You will not be able to revert this!',
     'categories' => 'Categories',
     'brands' => 'Brands',

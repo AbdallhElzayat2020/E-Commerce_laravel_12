@@ -54,6 +54,7 @@
         <!-- BEGIN Custom CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard') }}/assets/css/style-rtl.css">
         <!-- END Custom CSS-->
+        
     @else
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard') }}/css/vendors.css">
 
@@ -98,6 +99,12 @@
     {{-- Scroller Datatables CDN --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.4.3/css/scroller.dataTables.min.css">
 
+    {{-- file input --}}
+    <link rel="stylesheet" href="{{ asset('vendor/fileinput/css/fileinput.min.css') }}">
+    {{-- file input font awesome --}}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
+
+    {{-- file input --}}
 
     @stack('dashboard_css')
 </head>

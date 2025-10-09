@@ -60,6 +60,7 @@ return [
     'select_shipping_price' => 'اختار سعر الشحن',
     'change_price' => ' تغير السعر',
 
+    'edit_brand' => 'تعديل العلامه التجاريه',
     'you_will_not_be_able_to_revert_this' => 'لا يمكن التراجع عن هذا!',
     'categories' => 'الاقسام',
     'brands' => 'العلامات التجاريه',

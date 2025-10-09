@@ -108,14 +108,12 @@ Route::group(
             ####################### Categories Route #########################
 
 
-
-
-
-
             ####################### Brands Route #########################
             Route::group(['middleware' => 'can:brands'], function () {
-                Route::resource('brands', BrandController::class);
-                Route::post('brands/update-status', [BrandController::class, 'updateStatus'])->name('brands.update-status');
+                Route::resource('brands', BrandController::class)->except(['show']);
+
+                Route::get('brands-all', [BrandController::class, 'getAll'])
+                    ->name('brands.all');
             });
             ####################### Brands Route #########################
 

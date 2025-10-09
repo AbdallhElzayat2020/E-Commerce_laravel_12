@@ -16,6 +16,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('dashboard.name') }}</th>
+                                <th>{{ __('dashboard.products_count') }}</th>
                                 <th>{{ __('dashboard.status') }}</th>
                                 <th>{{ __('dashboard.created_at') }}</th>
                                 <th>{{ __('dashboard.actions') }}</th>
@@ -25,6 +26,7 @@
                             <tr>
                                 <td>#</td>
                                 <td>name</td>
+                                <td>Product Count</td>
                                 <td>status</td>
                                 <td>created_at</td>
                                 <td>actions</td>
@@ -79,6 +81,10 @@
                     {
                         data: 'name',
                         name: 'name',
+                    },
+                    {
+                        data: 'products_count',
+                        name: 'products_count',
                     },
                     {
                         data: 'status',
