@@ -2,19 +2,64 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
+    use HasFactory;
+
     protected $table = 'coupons';
     protected $fillable = [
-        'code',
-        'discount',
-        'discount_percentage',
-        'start_date',
-        'end_date',
-        'limit',
-        'time_used',
         'status',
+        'time_used',
+        'limit',
+        'end_date',
+        'start_date',
+        'discount_percentage',
+        'discount',
+        'code',
     ];
+
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d/m/y H:i', strtotime($value));
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return date('d/m/y H:i', strtotime($value));
+    }
+
+    /*  --------------------- Relations --------------------- */
+
+
+    /*  --------------------- Scopes --------------------- */
+
+    #[Scope]
+    protected function Valid(Builder $query): Builder
+    {
+        return $query->where('status', 'active')
+            ->where('time_used', '<', 'limit')
+            ->where('end_date', '>', now());
+    }
+
+    #[Scope]
+    protected function NotValid(Builder $query): Builder
+    {
+        return $query->where('status', 'inactive')
+            ->orWhere('time_used', '>=', 'limit')
+            ->orWhere('end_date', '<', now());
+    }
+
+    public function couponIsValid()
+    {
+        return $this->status == 'active' && $this->time_used < $this->limit && $this->end_date > now();
+    }
+
+
+    /*  --------------------- Methods --------------------- */
 }

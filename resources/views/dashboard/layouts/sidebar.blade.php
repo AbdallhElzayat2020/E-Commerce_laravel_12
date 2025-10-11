@@ -103,6 +103,28 @@
                 </li>
             @endcan
 
+            @can('coupons')
+                <li class=" nav-item"><a href="#"><i class="la la-television"></i>
+                        <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.coupons') }}</span>
+                        <span class="badge badge badge-info badge-pill float-right mr-2">{{$coupons_count}}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.coupons.index') }}"
+                               data-i18n="nav.templates.vert.overlay_menu">
+                                {{ __('dashboard.coupons') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.coupons.create') }}"
+                               data-i18n="nav.templates.vert.overlay_menu">
+                                {{ __('dashboard.create_coupon') }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+
             @can('shipping_countries')
                 <li class=" nav-item"><a href="#"><i class="la la-television"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.shipping') }}</span>
@@ -124,7 +146,7 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-columns"></i><span class="menu-title"
                                                                                  data-i18n="nav.page_layouts.main">Page layouts</span><span
-                        class="badge badge badge-pill badge-danger float-right mr-2">New</span></a>
+                            class="badge badge badge-pill badge-danger float-right mr-2">New</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="layout-1-column.html" data-i18n="nav.page_layouts.1_column">1
                             column</a>
