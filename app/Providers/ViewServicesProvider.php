@@ -42,6 +42,11 @@ class ViewServicesProvider extends ServiceProvider
                     return Admin::count();
                 });
             }
+            if (!Cache::has('coupons_count')) {
+                Cache::remember('coupons_count', 60 * 60 * 24, function () {
+                    return Admin::count();
+                });
+            }
         });
 
         view()->share([
@@ -49,6 +54,7 @@ class ViewServicesProvider extends ServiceProvider
             'brands_count' => Cache::get('brands_count'),
             'coupons_count' => Cache::get('coupons_count'),
             'admins_count' => Cache::get('admins_count'),
+            'faqs_count' => Cache::get('faqs_count'),
         ]);
 
     }

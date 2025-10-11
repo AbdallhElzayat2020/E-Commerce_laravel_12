@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\WorldController;
 use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\Dashboard\FaqController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -126,6 +127,12 @@ Route::group(
                     ->name('coupons.all');
             });
             ####################### Coupon Route #########################
+
+            ####################### Faqs Route #########################
+            Route::group(['middleware' => 'can:faqs'], function () {
+                Route::resource('faqs', FaqController::class)->except(['show']);
+            });
+            ####################### Faqs Route #########################
 
         });
     }

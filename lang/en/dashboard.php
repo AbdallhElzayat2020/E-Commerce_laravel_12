@@ -106,6 +106,8 @@ return [
     'faqs' => 'FAQs',
     'create_faq' => 'Create FAQ',
     'edit_faq' => 'Edit FAQ',
+    'question' => 'Question',
+    'answer' => 'Answer',
     'question_ar' => 'Question (Arabic)',
     'answer_ar' => 'Answer (Arabic)',
     'question_en' => 'Question (English)',
