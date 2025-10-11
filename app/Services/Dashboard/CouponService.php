@@ -23,6 +23,9 @@ class CouponService
             ->addColumn('status', function ($coupon) {
                 return view('dashboard.pages.coupons.datatables.status', compact('coupon'))->render();
             })
+            ->addColumn('discount_percentage', function ($coupon) {
+                return $coupon->discount_percentage . '%';
+            })
             ->addColumn('actions', function ($coupon) {
                 return view('dashboard.pages.coupons.datatables.actions', compact('coupon'))->render();
             })

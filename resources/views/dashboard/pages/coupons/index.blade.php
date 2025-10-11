@@ -22,32 +22,32 @@
                     <div class="card-body card-dashboard">
                         <table id="yajra_datatable" class="table table-striped table-bordered language-file">
                             <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __('dashboard.code') }}</th>
-                                    <th>{{ __('dashboard.discount') }}</th>
-                                    <th>{{ __('dashboard.limitation') }}</th>
-                                    <th>{{ __('dashboard.time_used') }}</th>
-                                    <th>{{ __('dashboard.start_date') }}</th>
-                                    <th>{{ __('dashboard.end_date') }}</th>
-                                    <th>{{ __('dashboard.status') }}</th>
-                                    <th>{{ __('dashboard.created_at') }}</th>
-                                    <th>{{ __('dashboard.actions') }}</th>
-                                </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>{{ __('dashboard.code') }}</th>
+                                <th>{{ __('dashboard.discount') }}</th>
+                                <th>{{ __('dashboard.limitation') }}</th>
+                                <th>{{ __('dashboard.time_used') }}</th>
+                                <th>{{ __('dashboard.start_date') }}</th>
+                                <th>{{ __('dashboard.end_date') }}</th>
+                                <th>{{ __('dashboard.status') }}</th>
+                                <th>{{ __('dashboard.created_at') }}</th>
+                                <th>{{ __('dashboard.actions') }}</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Code</td>
-                                    <td>Discount Percentage</td>
-                                    <td>Limit</td>
-                                    <td>TimeUsed</td>
-                                    <td>Start Date</td>
-                                    <td>End Date</td>
-                                    <td>status</td>
-                                    <td>created_at</td>
-                                    <td>Actions</td>
-                                </tr>
+                            <tr>
+                                <td>#</td>
+                                <td>Code</td>
+                                <td>Discount Percentage</td>
+                                <td>Limit</td>
+                                <td>TimeUsed</td>
+                                <td>Start Date</td>
+                                <td>End Date</td>
+                                <td>status</td>
+                                <td>created_at</td>
+                                <td>Actions</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -65,12 +65,14 @@
     <script>
         var lang = "{{ app()->getLocale() }}";
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#yajra_datatable').DataTable({
                 rowReorder: true,
                 processing: true,
                 serverSide: true,
-                colReorder: true,
+                colReorder: {
+                    update: false,
+                },
                 fixedHeader: true,
                 // scroller: true,
                 // scrollY: 400,
@@ -78,7 +80,7 @@
                 responsive: {
                     details: {
                         display: DataTable.Responsive.display.modal({
-                            header: function(row) {
+                            header: function (row) {
                                 var data = row.data();
                                 return 'Details for ' + data[0] + ' ' + data[1];
                             }
@@ -90,11 +92,11 @@
                 },
                 ajax: "{{ route('dashboard.coupons.all') }}",
                 columns: [{
-                        name: 'id',
-                        data: 'DT_RowIndex',
-                        searchable: false,
-                        orderable: false,
-                    },
+                    name: 'id',
+                    data: 'DT_RowIndex',
+                    searchable: false,
+                    orderable: false,
+                },
                     {
                         data: 'code',
                         name: 'code',
@@ -144,7 +146,8 @@
                 } : {},
             });
 
-            $('#createCoupon').on('submit', function(e) {
+            // create coupon
+            $('#createCoupon').on('submit', function (e) {
                 e.preventDefault();
                 $.ajax({
                     url: "{{ route('dashboard.coupons.store') }}",
@@ -153,7 +156,7 @@
                     processData: false,
                     contentType: false,
 
-                    success: function(data) {
+                    success: function (data) {
                         if (data.status === 'success') {
                             $('#createCoupon')[0].reset();
                             $('#yajra_datatable').DataTable().ajax.reload();
@@ -181,13 +184,13 @@
                         }
                     },
 
-                    error: function(data) {
+                    error: function (data) {
 
                         if (data.responseJSON && data.responseJSON.errors) {
 
                             $('#error_list').empty();
 
-                            $.each(data.responseJSON.errors, function(key, value) {
+                            $.each(data.responseJSON.errors, function (key, value) {
 
                                 $('#error_list').append('<li>' + value[0] + '</li>');
                                 $('#error_div').show();
@@ -202,9 +205,8 @@
                 });
             })
 
-
             // edit coupon modal
-            $(document).on('click', '.edit_coupon', function(e) {
+            $(document).on('click', '.edit_coupon', function (e) {
                 e.preventDefault();
 
                 let couponId = $(this).attr('coupon-id');
@@ -233,7 +235,7 @@
             });
 
             // Update Coupon Using Ajax
-            $('#updateCoupon').on('submit', function(e) {
+            $('#updateCoupon').on('submit', function (e) {
                 e.preventDefault();
                 let currentPage = $('#yajra_datatable').DataTable().page(); // get the current page number
                 let coupon_id = $('#coupon_id').val();
@@ -243,7 +245,7 @@
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
-                    success: function(data) {
+                    success: function (data) {
                         if (data.status == 'success') {
                             $('#yajra_datatable').DataTable().page(currentPage).draw(false);
                             $('#editCouponModal').modal('hide');
@@ -266,10 +268,10 @@
                             });
                         }
                     },
-                    error: function(data) {
+                    error: function (data) {
                         if (data.responseJSON && data.responseJSON.errors) {
                             $('#error_list_edit').empty();
-                            $.each(data.responseJSON.errors, function(key, value) {
+                            $.each(data.responseJSON.errors, function (key, value) {
                                 $('#error_list_edit').append('<li>' + value[0] +
                                     '</li>');
                                 $('#error_div_edit').show();
@@ -278,6 +280,50 @@
                             $('#error_div_edit').hide();
                             $('#error_list_edit').empty();
                         }
+                    }
+                });
+            });
+
+
+            // delete coupon
+            $(document).on('click', '.delete_confirm_btn', function (e) {
+                e.preventDefault();
+
+                let coupon_id = $(this).attr('coupon-id');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            'url': "{{ route('dashboard.coupons.destroy', 'id') }}".replace('id', coupon_id),
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function (response) {
+                                if (response.status == 'success') {
+                                    Swal.fire({
+                                        title: response.status,
+                                        text: response.message,
+                                        icon: "success"
+                                    });
+                                    $('#yajra_datatable').DataTable().ajax.reload();
+                                } else {
+                                    Swal.fire({
+                                        title: response.status,
+                                        text: response.message,
+                                        icon: "error"
+                                    });
+                                }
+                            },
+                        });
                     }
                 });
             });

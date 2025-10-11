@@ -29,7 +29,9 @@ class CouponController extends Controller
     }
 
 
-    public function create() {}
+    public function create()
+    {
+    }
 
 
     public function store(StoreCouponRequest $request)
@@ -69,11 +71,15 @@ class CouponController extends Controller
 
     public function destroy(string $id)
     {
-        $coupon = $this->couponService->getCouponById($id);
-        if (!$coupon) {
-            return redirect()->back()->with('error', __('dashboard.error_msg'));
+        if (!$this->couponService->deleteCoupon($id)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('dashboard.error_msg'),
+            ], 500);
         }
-        $this->couponService->deleteCoupon($coupon);
-        return redirect()->route('dashboard.coupons.index')->with('success', __('dashboard.success_msg'));
+        return response()->json([
+            'status' => 'success',
+            'message' => __('dashboard.success_msg'),
+        ], 200);
     }
 }
