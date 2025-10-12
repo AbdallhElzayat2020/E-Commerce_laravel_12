@@ -28,6 +28,7 @@ class BrandController extends Controller
     {
         return view('dashboard.pages.brands.index');
     }
+
     public function store(StoreBrandRequest $request)
     {
         $data = $request->validated();
@@ -38,6 +39,10 @@ class BrandController extends Controller
         return redirect()->route('dashboard.brands.index')->with('success', __('dashboard.success_msg'));
     }
 
+    public function create()
+    {
+        //
+    }
 
     public function show(string $id)
     {
@@ -74,7 +79,11 @@ class BrandController extends Controller
         return redirect()->route('dashboard.brands.index')->with('success', __('dashboard.success_msg'));
     }
 
-    public function updateStatus() {}
+    public function updateStatus()
+    {
+    }
 
-    public function getAllBrands() {}
+    public function getAllBrands()
+    {
+    }
 }

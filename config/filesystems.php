@@ -37,11 +37,10 @@ return [
             'throw' => false,
             'report' => false,
         ],
-
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -49,7 +48,15 @@ return [
         'brands' => [
             'driver' => 'local',
             'root' => public_path('/uploads/brands'),
-            'url' => env('APP_URL').'/uploads/brands',
+            'url' => env('APP_URL') . '/uploads/brands',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+        'settings' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/settings'),
+            'url' => env('APP_URL'),
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -57,7 +64,7 @@ return [
         'products' => [
             'driver' => 'local',
             'root' => public_path('/uploads/products'),
-            'url' => env('APP_URL').'/uploads/products',
+            'url' => env('APP_URL') . '/uploads/products',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -65,12 +72,11 @@ return [
         'users' => [
             'driver' => 'local',
             'root' => public_path('/uploads/users'),
-            'url' => env('APP_URL').'/uploads/users',
+            'url' => env('APP_URL') . '/uploads/users',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
         ],
-
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

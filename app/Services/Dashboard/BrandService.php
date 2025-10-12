@@ -55,7 +55,7 @@ class BrandService
 
     public function createBrand($data)
     {
-        if (isset($data['logo']) && $data['logo'] != null) {
+        if (array_key_exists('logo', $data) && $data['logo'] != null) {
 
             $file_name = $this->imageManager->uploadSingleFile('/', $data['logo'], 'brands');
             $data['logo'] = $file_name;
@@ -75,7 +75,7 @@ class BrandService
             abort(404);
         }
 
-        if (isset($data['logo']) && $data['logo'] != null) {
+        if (array_key_exists('logo', $data) && $data['logo'] != null) {
             if (!empty($brand->logo)) {
                 $this->imageManager->deleteImageLocal($brand->logo);
             }

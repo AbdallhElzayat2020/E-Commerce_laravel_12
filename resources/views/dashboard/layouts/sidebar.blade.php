@@ -51,12 +51,6 @@
                     </a>
                     <ul class="menu-content">
                         <li>
-                            <a class="menu-item" href="{{ route('dashboard.brands.create') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
-                                {{ __('dashboard.brand_create') }}
-                            </a>
-                        </li>
-                        <li>
                             <a class="menu-item" href="{{ route('dashboard.brands.index') }}"
                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.brands') }}

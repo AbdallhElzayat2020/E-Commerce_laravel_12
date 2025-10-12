@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\WorldController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\FaqController;
@@ -131,6 +132,11 @@ Route::group(
             ####################### Faqs Route #########################
             Route::group(['middleware' => 'can:faqs'], function () {
                 Route::resource('faqs', FaqController::class)->except(['show']);
+            });
+            ####################### Faqs Route #########################\
+            ####################### Faqs Route #########################
+            Route::group(['middleware' => 'can:settings'], function () {
+                Route::resource('settings', SettingController::class)->except(['show']);
             });
             ####################### Faqs Route #########################
 

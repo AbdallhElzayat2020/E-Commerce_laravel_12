@@ -64,7 +64,7 @@ class ImageManager
         return '_' . Str::uuid() . time() . '.' . $image->getClientOriginalExtension();
     }
 
-    private function storeImageInLocal($image, $path, $file_name, $disk)
+    private function storeImageInLocal($image, $path, $file_name, $disk): void
     {
         $image->storeAs($path, $file_name, ['disk' => $disk]);
     }
@@ -74,9 +74,5 @@ class ImageManager
         if (File::exists(public_path($imagePath))) {
             File::delete(public_path($imagePath));
         }
-
-        // if (Storage::disk('brands')->exists($imagePath)) {
-        //     Storage::disk('brands')->delete($imagePath);
-        // }
     }
 }
