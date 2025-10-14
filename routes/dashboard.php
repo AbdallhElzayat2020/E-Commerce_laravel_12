@@ -13,6 +13,8 @@ use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\WorldController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\FaqController;
+use App\Http\Controllers\Dashboard\AttributeController;
+use App\Http\Controllers\Dashboard\AttributeValueController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -133,12 +135,22 @@ Route::group(
             Route::group(['middleware' => 'can:faqs'], function () {
                 Route::resource('faqs', FaqController::class)->except(['show']);
             });
-            ####################### Faqs Route #########################\
             ####################### Faqs Route #########################
+
+            ####################### Settings Route #########################
             Route::group(['middleware' => 'can:settings'], function () {
                 Route::resource('settings', SettingController::class)->except(['show']);
             });
-            ####################### Faqs Route #########################
+            ####################### Settings Route #########################
+
+            ####################### Attributes Route #########################
+            Route::group(['middleware' => 'can:attributes'], function () {
+                Route::resource('attributes', AttributeController::class)->except(['show']);
+                Route::get('attributes-all', [AttributeController::class, 'getAll'])
+                    ->name('attributes.all');
+            });
+            ####################### Attributes Route #########################
+
 
         });
     }
