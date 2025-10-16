@@ -13,8 +13,8 @@
                     </a>
                 </li>
                 <li class="nav-item d-none d-md-block float-right"><a class="nav-link modern-nav-toggle pr-0"
-                        data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white"
-                            data-ticon="ft-toggle-right"></i></a></li>
+                                                                      data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white"
+                                                                                                data-ticon="ft-toggle-right"></i></a></li>
                 <li class="nav-item d-md-none">
                     <a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i
                             class="la la-ellipsis-v"></i></a>
@@ -27,7 +27,7 @@
                     <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i
                                 class="ficon ft-maximize"></i></a></li>
                     <li class="dropdown nav-item mega-dropdown"><a class="dropdown-toggle nav-link" href="#"
-                            data-toggle="dropdown">Mega</a>
+                                                                   data-toggle="dropdown">Mega</a>
                         <ul class="mega-dropdown-menu dropdown-menu row">
                             <li class="col-md-2">
                                 <h6 class="dropdown-menu-header text-uppercase mb-1"><i class="la la-newspaper-o"></i>
@@ -35,8 +35,8 @@
                                 <div id="mega-menu-carousel-example">
                                     <div>
                                         <img class="rounded img-fluid mb-1"
-                                            src="{{ asset('assets/dashboard') }}/images/slider/slider-2.png"
-                                            alt="First slide"><a class="news-title mb-0" href="#">Poster Frame
+                                             src="{{ asset('assets/dashboard') }}/images/slider/slider-2.png"
+                                             alt="First slide"><a class="news-title mb-0" href="#">Poster Frame
                                             PSD</a>
                                         <p class="news-content">
                                             <span class="font-small-2">January 26, 2018</span>
@@ -109,7 +109,7 @@
                                                 aria-controls="accordionOne">Accordion
                                                 Item #1</a></div>
                                         <div class="card-collapse collapse show" id="accordionOne" role="tabpanel"
-                                            aria-labelledby="headingOne" aria-expanded="true">
+                                             aria-labelledby="headingOne" aria-expanded="true">
                                             <div class="card-content">
                                                 <p class="accordion-text text-small-3">Caramels dessert chocolate cake
                                                     pastry jujubes bonbon.
@@ -123,7 +123,7 @@
                                                 aria-controls="accordionTwo">Accordion
                                                 Item #2</a></div>
                                         <div class="card-collapse collapse" id="accordionTwo" role="tabpanel"
-                                            aria-labelledby="headingTwo" aria-expanded="false">
+                                             aria-labelledby="headingTwo" aria-expanded="false">
                                             <div class="card-content">
                                                 <p class="accordion-text">Sugar plum bear claw oat cake chocolate jelly
                                                     tiramisu
@@ -133,12 +133,12 @@
                                         </div>
                                         <div class="card-header p-0 pb-2 border-0" id="headingThree" role="tab">
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionWrap"
-                                                href="#accordionThree" aria-expanded="false"
-                                                aria-controls="accordionThree">Accordion
+                                               href="#accordionThree" aria-expanded="false"
+                                               aria-controls="accordionThree">Accordion
                                                 Item #3</a>
                                         </div>
                                         <div class="card-collapse collapse" id="accordionThree" role="tabpanel"
-                                            aria-labelledby="headingThree" aria-expanded="false">
+                                             aria-labelledby="headingThree" aria-expanded="false">
                                             <div class="card-content">
                                                 <p class="accordion-text">Candy cupcake sugar plum oat cake wafer
                                                     marzipan jujubes
@@ -159,7 +159,7 @@
                                             <div class="col-sm-9">
                                                 <div class="position-relative has-icon-left">
                                                     <input class="form-control" type="text" id="inputName1"
-                                                        placeholder="John Doe">
+                                                           placeholder="John Doe">
                                                     <div class="form-control-position pl-1"><i class="la la-user"></i>
                                                     </div>
                                                 </div>
@@ -170,7 +170,7 @@
                                             <div class="col-sm-9">
                                                 <div class="position-relative has-icon-left">
                                                     <input class="form-control" type="email" id="inputEmail1"
-                                                        placeholder="john@example.com">
+                                                           placeholder="john@example.com">
                                                     <div class="form-control-position pl-1"><i
                                                             class="la la-envelope-o"></i></div>
                                                 </div>
@@ -178,7 +178,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-3 form-control-label"
-                                                for="inputMessage1">Message</label>
+                                                   for="inputMessage1">Message</label>
                                             <div class="col-sm-9">
                                                 <div class="position-relative has-icon-left">
                                                     <textarea class="form-control" id="inputMessage1" rows="2" placeholder="Simple Textarea"></textarea>
@@ -214,37 +214,38 @@
                             </span>
                             <span class="avatar avatar-online">
                                 <img src="{{ asset('assets/dashboard') }}/images/portrait/small/avatar-s-19.png"
-                                    alt="avatar"><i></i></span>
+                                     alt="avatar"><i></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i
                                     class="ft-user"></i> Edit Profile</a>
                             <a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a>
                             <a class="dropdown-item" href="#"><i class="ft-check-square"></i> Task</a>
                             <a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
+                            <a class="dropdown-item" href="{{ route('dashboard.settings.index') }}"><i class="ft-message-square"></i> Settings</a>
                             <div class="dropdown-divider"></div>
 
                             <a class="dropdown-item d-flex align-items-center justify-content-center" href="#"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {{ __('auth.logout') }}
                             </a>
                         </div>
                     </li>
                     <form id="logout-form" action="{{ route('dashboard.logout') }}" method="POST"
-                        style="display: none;">
+                          style="display: none;">
                         @csrf
                     </form>
 
                     <li class="nav-item dropdown dropdown-language">
                         <a class="nav-link dropdown-toggle" id="dropdown-lang" href="#" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                           aria-haspopup="true" aria-expanded="false">
                             {{ LaravelLocalization::getCurrentLocaleNative() }}
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdown-lang">
                             @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
-                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                   href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                     <i
                                         class="flag-icon @if ($localeCode == 'en') flag-icon-gb @else flag-icon-eg @endif"></i>
                                     {{ $properties['native'] }}
@@ -280,7 +281,8 @@
                                                 elit.</p>
                                             <small>
                                                 <time class="media-meta text-muted"
-                                                    datetime="2015-06-11T18:29:20+08:00">30 minutes ago</time>
+                                                      datetime="2015-06-11T18:29:20+08:00">30 minutes ago
+                                                </time>
                                             </small>
                                         </div>
                                     </div>
@@ -296,7 +298,8 @@
                                                 mauris eu risus.</p>
                                             <small>
                                                 <time class="media-meta text-muted"
-                                                    datetime="2015-06-11T18:29:20+08:00">Five hour ago</time>
+                                                      datetime="2015-06-11T18:29:20+08:00">Five hour ago
+                                                </time>
                                             </small>
                                         </div>
                                     </div>
@@ -312,7 +315,8 @@
                                                 dapibus neque.</p>
                                             <small>
                                                 <time class="media-meta text-muted"
-                                                    datetime="2015-06-11T18:29:20+08:00">Today</time>
+                                                      datetime="2015-06-11T18:29:20+08:00">Today
+                                                </time>
                                             </small>
                                         </div>
                                     </div>
@@ -325,7 +329,8 @@
                                             <h6 class="media-heading">Complete the task</h6>
                                             <small>
                                                 <time class="media-meta text-muted"
-                                                    datetime="2015-06-11T18:29:20+08:00">Last week</time>
+                                                      datetime="2015-06-11T18:29:20+08:00">Last week
+                                                </time>
                                             </small>
                                         </div>
                                     </div>
@@ -338,14 +343,15 @@
                                             <h6 class="media-heading">Generate monthly report</h6>
                                             <small>
                                                 <time class="media-meta text-muted"
-                                                    datetime="2015-06-11T18:29:20+08:00">Last month</time>
+                                                      datetime="2015-06-11T18:29:20+08:00">Last month
+                                                </time>
                                             </small>
                                         </div>
                                     </div>
                                 </a>
                             </li>
                             <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
-                                    href="javascript:void(0)">Read all
+                                                                href="javascript:void(0)">Read all
                                     notifications</a></li>
                         </ul>
                     </li>
@@ -366,7 +372,7 @@
                                         <div class="media-left">
                                             <span class="avatar avatar-sm avatar-online rounded-circle">
                                                 <img src="{{ asset('assets/dashboard') }}/images/portrait/small/avatar-s-19.png"
-                                                    alt="avatar"><i></i></span>
+                                                     alt="avatar"><i></i></span>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading">Margaret Govan</h6>
@@ -374,7 +380,8 @@
                                                 let's start.</p>
                                             <small>
                                                 <time class="media-meta text-muted"
-                                                    datetime="2015-06-11T18:29:20+08:00">Today</time>
+                                                      datetime="2015-06-11T18:29:20+08:00">Today
+                                                </time>
                                             </small>
                                         </div>
                                     </div>
@@ -384,7 +391,7 @@
                                         <div class="media-left">
                                             <span class="avatar avatar-sm avatar-busy rounded-circle">
                                                 <img src="{{ asset('assets/dashboard') }}/images/portrait/small/avatar-s-2.png"
-                                                    alt="avatar"><i></i></span>
+                                                     alt="avatar"><i></i></span>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading">Bret Lezama</h6>
@@ -392,7 +399,8 @@
                                                 there is</p>
                                             <small>
                                                 <time class="media-meta text-muted"
-                                                    datetime="2015-06-11T18:29:20+08:00">Tuesday</time>
+                                                      datetime="2015-06-11T18:29:20+08:00">Tuesday
+                                                </time>
                                             </small>
                                         </div>
                                     </div>
@@ -402,7 +410,7 @@
                                         <div class="media-left">
                                             <span class="avatar avatar-sm avatar-online rounded-circle">
                                                 <img src="{{ asset('assets/dashboard') }}/images/portrait/small/avatar-s-3.png"
-                                                    alt="avatar"><i></i></span>
+                                                     alt="avatar"><i></i></span>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading">Carie Berra</h6>
@@ -410,7 +418,8 @@
                                                 this week ?</p>
                                             <small>
                                                 <time class="media-meta text-muted"
-                                                    datetime="2015-06-11T18:29:20+08:00">Friday</time>
+                                                      datetime="2015-06-11T18:29:20+08:00">Friday
+                                                </time>
                                             </small>
                                         </div>
                                     </div>

@@ -146,7 +146,8 @@
             @endcan
 
             @can('shipping_countries')
-                <li class=" nav-item"><a href="#"><i class="la la-truck"></i>
+                <li class=" nav-item">
+                    <a href="#"><i class="la la-truck"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.shipping') }}</span>
                     </a>
                     <ul class="menu-content">
@@ -160,7 +161,8 @@
                 </li>
             @endcan
             @can('settings')
-                <li class=" nav-item"><a href="#"><i class="la la-cog"></i>
+                <li class=" nav-item">
+                    <a href="#"><i class="la la-cog"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.settings') }}</span>
                     </a>
                     <ul class="menu-content">
@@ -175,7 +177,8 @@
             @endcan
 
             @can('attributes')
-                <li class=" nav-item"><a href="#"><i class="la la-cog"></i>
+                <li class=" nav-item">
+                    <a href="#"><i class="la la-cog"></i>
                         <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.products') }}</span>
                     </a>
                     <ul class="menu-content">

@@ -10,6 +10,7 @@ class Setting extends Model
     use HasTranslations;
 
     protected $table = 'settings';
+
     public array $translatable = [
         'site_name',
         'site_address',
