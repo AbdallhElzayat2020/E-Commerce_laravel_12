@@ -160,6 +160,7 @@
                     </ul>
                 </li>
             @endcan
+
             @can('settings')
                 <li class=" nav-item">
                     <a href="#"><i class="la la-cog"></i>
@@ -176,21 +177,23 @@
                 </li>
             @endcan
 
-            @can('attributes')
-                <li class=" nav-item">
-                    <a href="#"><i class="la la-cog"></i>
-                        <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.products') }}</span>
-                    </a>
-                    <ul class="menu-content">
+            {{--            @can('products')--}}
+            <li class=" nav-item">
+                <a href="#"><i class="la la-cubes"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.products') }}</span>
+                </a>
+                <ul class="menu-content">
+                    @can('attributes')
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.attributes.index') }}"
                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.attributes') }}
                             </a>
                         </li>
-                    </ul>
-                </li>
-            @endcan
+                    @endcan
+                </ul>
+            </li>
+            {{--            @endcan--}}
 
 
         </ul>

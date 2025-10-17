@@ -24,7 +24,7 @@ class AttributeSeeder extends Seeder
         $size_attribute = Attribute::create([
             'name' => [
                 'en' => 'Size',
-                'ar' => 'المقاس'
+                'ar' => 'المقاس',
             ],
         ]);
 
@@ -57,6 +57,7 @@ class AttributeSeeder extends Seeder
                 'ar' => 'اللون'
             ],
         ]);
+
         // attribute values
         $color_attribute->attributeValues()->createMany([
             [
@@ -75,6 +76,12 @@ class AttributeSeeder extends Seeder
                 'value' => [
                     'en' => 'green',
                     'ar' => 'أخضر',
+                ],
+            ],
+            [
+                'value' => [
+                    'en' => 'black',
+                    'ar' => 'أسود',
                 ],
             ]
         ]);
