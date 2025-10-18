@@ -5,7 +5,7 @@ namespace App\Http\Requests\Dashboard\Store;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAttributeRequest extends FormRequest
+class AttributeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,11 @@ class StoreAttributeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name.*' => ['required', 'string', 'max:255', UniqueTranslationRule::for('attributes', 'name')],
-            'value.*.*' => ['required', 'string', 'max:255'],
 
-            'name.ar' => ['required', 'string', 'max:255', UniqueTranslationRule::for('attributes', 'name')],
-            'name.en' => ['required', 'string', 'max:255', UniqueTranslationRule::for('attributes', 'name')],
+        return [
+
+            'name.*' => ['required', 'string', 'max:60', UniqueTranslationRule::for('attributes')->ignore($this->id)],
+            'value.*.*' => ['required', 'string', 'max:255'],
         ];
     }
 
@@ -35,10 +34,8 @@ class StoreAttributeRequest extends FormRequest
     {
         return [
             'name.*' => __('dashboard.attribute_name'),
-            'value.*.*' => __('dashboard.attribute_values'),
-
-            'name.ar' => __('dashboard.attribute_name_ar'),
-            'name.en' => __('dashboard.attribute_name_en'),
+            'value.*.ar' => __('dashboard.attribute_value_ar'),
+            'value.*.en' => __('dashboard.attribute_value_en'),
         ];
     }
 }

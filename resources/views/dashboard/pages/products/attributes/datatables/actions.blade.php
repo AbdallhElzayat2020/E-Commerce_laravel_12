@@ -1,21 +1,24 @@
 <div class="form-group">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <a href="{{ route('dashboard.attributes.edit', $item->id) }}" type="button" class="btn  btn-outline-success">
-            {{ __('dashboard.edit') }} <i class="la la-edit"></i>
-        </a>
-        <div class="btn-group" role="group">
-            <button id="btnGroupDrop2" type="button" class="btn btn-outline-danger dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ __('dashboard.delete') }}<i class="la la-trash"></i>
-            </button>
 
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
-                <form action="{{ route('dashboard.attributes.destroy', $item->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="delete_confirm dropdown-item">{{ __('dashboard.delete') }}</button>
-                </form>
-            </div>
-        </div>
+        <button class="btn btn-sm btn-outline-primary edit-attribute" data-id="{{ $item->id }}"
+            data-name-ar="{{ $item->getTranslation('name', 'ar') }}"
+            data-name-en="{{ $item->getTranslation('name', 'en') }}"
+            data-values="{{ $item->attributeValues->map(
+                    fn($value) => [
+                        'id' => $value->id,
+                        'value_ar' => $value->getTranslation('value', 'ar'),
+                        'value_en' => $value->getTranslation('value', 'en'),
+                    ],
+                )->toJson() }}">
+            {{ __('dashboard.edit') }} <i class="la la-edit"></i>
+        </button>
+
+        <button id="btnGroupDrop2" attribute-id="{{ $item->id }}" type="button"
+            class="delete_confirm_btn btn btn-outline-danger">
+            {{ __('dashboard.delete') }}<i class="la la-trash"></i>
+        </button>
+
+
     </div>
 </div>

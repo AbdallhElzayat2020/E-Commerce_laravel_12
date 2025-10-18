@@ -14,7 +14,6 @@ use App\Http\Controllers\Dashboard\WorldController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\FaqController;
 use App\Http\Controllers\Dashboard\AttributeController;
-use App\Http\Controllers\Dashboard\AttributeValueController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 

@@ -12,5 +12,5 @@ class ProductImage extends Model
         'file_size',
         'file_type',
         'product_id'
-        ];
+    ];
 }

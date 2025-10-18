@@ -11,59 +11,85 @@ use Yajra\DataTables\Facades\DataTables;
 
 class AttributeService
 {
-    protected $attributeRepository, $attributeValueRepository;
+    protected $attribute, $attributeValue;
 
     public function __construct(AttributeRepository $attributeRepository, AttributeValueRepository $attributeValueRepository)
     {
-        $this->attributeRepository = $attributeRepository;
-        $this->attributeValueRepository = $attributeValueRepository;
+        $this->attribute = $attributeRepository;
+        $this->attributeValue = $attributeValueRepository;
+    }
+
+    public function getAttribute($id)
+    {
+        $attribute = $this->attribute->getAttribute($id);
+        return $attribute ?? abort(404, 'Attribute Not Found');
     }
 
     public function getAttributes()
     {
-        return $this->attributeRepository->getAttributes();
+        return $this->attribute->getAttributes();
     }
 
-    public function getAttributesForDataTables()
+    public function getAttributesForDatatables()
     {
-        $attributes = $this->attributeRepository->getAttributes();
+        $attributes = $this->getAttributes();
         return DataTables::of($attributes)
             ->addIndexColumn()
-            ->addColumn('name', function ($attribute) {
-                return $attribute->getTranslation('name', app()->getLocale());
+            ->addColumn('name', function ($item) {
+                return $item->getTranslation('name', app()->getLocale());
             })
             ->addColumn('attributeValues', function ($item) {
-                return view('dashboard.pages.products.attributes.datatables.actions', compact('item'))->render();
-            })
-            ->addColumn('created_at', function ($attribute) {
-                return $attribute->created_at->format('Y-m-d');
+                return view('dashboard.pages.products.attributes.datatables.attributeValues', compact('item'));
             })
             ->addColumn('actions', function ($item) {
-                return view('dashboard.pages.products.attributes.datatables.attributeValues', compact('item'))->render();
+                return view('dashboard.pages.products.attributes.datatables.actions', compact('item'));
             })
-            ->rawColumns(['actions', 'attributeValues'])
             ->make(true);
     }
-
 
     public function createAttribute($data)
     {
         try {
             DB::beginTransaction();
-            $attribute = $this->attributeRepository->createAttribute($data);
+            $attribute = $this->attribute->createAttribute($data);
 
             foreach ($data['value'] as $value) {
-                $this->attributeValueRepository->createAttributeValues($attribute, $value);
+                $this->attributeValue->createAttributeValues($attribute, $value);
             }
             DB::commit();
-            return $attribute;
-
+            return true;
         } catch (\Exception $e) {
-
             DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
+            Log::error('Error creating attribute: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            return false;
         }
 
+    }
 
+    public function updateAttribute($data, $id)
+    {
+        try {
+            $attribute_obj = $this->getAttribute($id);
+
+            DB::beginTransaction();
+            $this->attribute->updateAttribute($attribute_obj, $data);
+
+            $this->attributeValue->deleteAttributeValues($attribute_obj);
+            foreach ($data['value'] as $value) {
+                $this->attributeValue->createAttributeValues($attribute_obj, $value);
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error creating attribute: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            return false;
+        }
+    }
+
+    public function deleteAttribute($id)
+    {
+        $attribute = $this->getAttribute($id);
+        return $this->attribute->deleteAttribute($attribute);
     }
 }

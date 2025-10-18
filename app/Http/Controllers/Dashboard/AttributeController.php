@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Store\StoreAttributeRequest;
+use App\Http\Requests\Dashboard\Store\AttributeRequest;
 use App\Models\Attribute;
 use App\Services\Dashboard\AttributeService;
 use Illuminate\Http\Request;
@@ -26,37 +26,34 @@ class AttributeController extends Controller
 
     public function getAll()
     {
-        return $this->attributeService->getAttributesForDataTables();
+        return $this->attributeService->getAttributesForDatatables();
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        //
+        return view('dashboard.pages.products.attributes.create');
     }
 
-
-    public function store(StoreAttributeRequest $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(AttributeRequest $request)
     {
-
-
-        $data = $request->except('_token');
-
+        $data = $request->except(['_token']);
         $attribute = $this->attributeService->createAttribute($data);
-
         if (!$attribute) {
-            return redirect()->back()
-                ->with('error', __('dashboard.error_msg'));
+            return response()->json([
+                'status' => 'error',
+                'message' => __('dashboard.error_msg'),
+            ], 500);
         }
-
-        return redirect()->route('dashboard.attributes.index')
-            ->with(['success' => __('dashboard.success_msg')]);
-
-    }
-
-
-    public function show(string $id)
-    {
-        //
+        return response()->json([
+            'status' => 'success',
+            'message' => __('dashboard.success_msg'),
+        ], 201);
     }
 
 
@@ -65,15 +62,40 @@ class AttributeController extends Controller
         //
     }
 
-
-    public function update(Request $request, string $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(AttributeRequest $request, string $id)
     {
-        //
+        $data = $request->except(['_token']);
+        $attribute = $this->attributeService->updateAttribute($data, $id);
+        if (!$attribute) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('dashboard.error_msg'),
+            ], 500);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => __('dashboard.success_msg')
+        ], 200);
+
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(string $id)
     {
-        //
+        if (!$this->attributeService->deleteAttribute($id)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('dashboard.error_msg'),
+            ], 500);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => __('dashboard.success_msg')
+        ], 200);
     }
 }
