@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Services\Dashboard\ProductService;
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    protected ProductService $productService;
-    public function __construct(ProductService $productService)
+
+    public function __construct()
     {
-        $this->productService = $productService;
+
     }
 
     public function index()
@@ -24,7 +25,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brand::all();
+        $categories = Category::all();
+        return view('dashboard.pages.products.create', compact('brands', 'categories'));
     }
 
     /**
@@ -59,11 +62,14 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getAll()
+    {
+
     }
 }

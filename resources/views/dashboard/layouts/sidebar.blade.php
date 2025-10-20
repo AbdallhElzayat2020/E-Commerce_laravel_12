@@ -116,12 +116,6 @@
                                 {{ __('dashboard.coupons') }}
                             </a>
                         </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('dashboard.coupons.create') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
-                                {{ __('dashboard.create_coupon') }}
-                            </a>
-                        </li>
                     </ul>
                 </li>
             @endcan
@@ -188,6 +182,14 @@
                             <a class="menu-item" href="{{ route('dashboard.attributes.index') }}"
                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.attributes') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('products')
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.products.create') }}"
+                               data-i18n="nav.templates.vert.overlay_menu">
+                                {{ __('dashboard.products') }}
                             </a>
                         </li>
                     @endcan

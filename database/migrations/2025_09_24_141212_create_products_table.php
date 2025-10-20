@@ -22,16 +22,16 @@ return new class extends Migration {
             $table->integer('views')->default(0);
 
 
-            $table->boolean('has_variant')->default(0);
+            $table->boolean('has_variants')->default(0);
 
-            $table->decimal('price', 10, 3)->nullable();  // if has variant then price will be null
-            $table->boolean('has_discount')->default(0); // if has variant then price will be null
+            $table->decimal('price', 10, 3)->nullable();  // if it has variant then price will be null
+            $table->boolean('has_discount')->default(0); // if it has variant then price will be null
             $table->decimal('discount', 10, 3)->nullable();
             $table->date('start_discount')->nullable();
             $table->date('end_discount')->nullable();
 
             $table->boolean('manage_stock')->default(0);
-            $table->integer('quantity')->nullable(); // if has variant, then quantity will be null
+            $table->integer('quantity')->nullable(); // if it has variant, then quantity will be null
             $table->integer('available_in_stock')->default(1);
 
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();

@@ -1,0 +1,135 @@
+
+.displayNone {
+    display: none;
+}
+
+.center-align {
+    display: flex;
+    align-items: center;
+}
+
+.wizard-timeline {
+    margin: 20px;
+    list-style: none;
+
+    li {
+        flex: 1 1 0;
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        position: relative;
+        color: rgba(0, 0, 0, 0.54);
+
+        > label {
+            display: inline-block;
+            background-color: white;
+            padding: 5px;
+            z-index: 1;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            height: 2px;
+            position: absolute;
+            top: 50%;
+            left: 0;
+        }
+
+        &::before {
+            width: 0%;
+            transition: all 0.5s ease;
+            background-color: green;
+        }
+
+        &::after {
+            width: 100%;
+            z-index: -1;
+            background-color: #eee;
+        }
+
+        &:last-child {
+            flex: none;
+        }
+
+        .step-num {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 30px;
+            margin-right: 20px;
+            overflow: hidden;
+            background-color: white;
+            border: 1px solid rgba(0, 0, 0, 0.54);
+            border-radius: 50%;
+            z-index: 1;
+
+            &::before {
+                content: '';
+                width: 30px;
+                height: 30px;
+                display: none;
+                background: url("https://img.icons8.com/android/24/000000/checkmark.png") center no-repeat;
+                background-size: 50%;
+            }
+        }
+
+        &.active {
+            color: inherit;
+        }
+
+        &.completed {
+            &::before {
+                width: 100%;
+            }
+
+            .step-num {
+                background-color: #bdf799;
+
+                &::before {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .wizard-timeline {
+        flex-flow: column;
+        align-items: flex-start;
+
+        li {
+
+            &::after,
+            &::before {
+                width: 2px;
+                left: 15px;
+                height: 0;
+            }
+
+            &::after,
+            &.completed::before {
+                width: 2px;
+                height: 100%;
+            }
+
+            .step-num {
+                z-index: 2;
+                margin-right: 10px;
+            }
+
+            &:last-child {
+                padding-bottom: 0;
+
+                &::after,
+                &::before {
+                    top: 0;
+                }
+            }
+        }
+    }
+}

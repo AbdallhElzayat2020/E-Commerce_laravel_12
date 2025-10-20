@@ -64,7 +64,7 @@ return [
         'products' => [
             'driver' => 'local',
             'root' => public_path('/uploads/products'),
-            'url' => env('APP_URL') . '/uploads/products',
+            'url' => env('APP_URL'),
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

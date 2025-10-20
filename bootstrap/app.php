@@ -36,6 +36,9 @@ return Application::configure(basePath: dirname(__DIR__))
             return route('login');
         });
 
+        /*
+         * redirect Admins
+         */
         $middleware->redirectUsersTo(function () {
             if (Auth::guard('admin')->check()) {
                 return route('dashboard.home');

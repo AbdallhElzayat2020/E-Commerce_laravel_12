@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class AttributeController extends Controller
 {
 
-    protected $attributeService;
+    protected AttributeService $attributeService;
 
     public function __construct(AttributeService $attributeService)
     {

@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\WorldController;
@@ -151,6 +152,19 @@ Route::group(
             });
             ####################### Attributes Route #########################
 
+            ####################### Products Route #########################
+            Route::group(['middleware' => 'can:products'], function () {
+
+                Route::resource('products', ProductController::class);
+
+                Route::get('products-all', [ProductController::class, 'getAll'])
+                    ->name('products.all');
+            });
+            ####################### Products Route #########################
+
+            Livewire::setUpdateRoute(function ($handle) {
+                return Route::post('/livewire/update', $handle);
+            });
 
         });
     }

@@ -23,7 +23,7 @@ class Product extends Model
         'sku',
         'available_for',
         'views',
-        'has_variant',
+        'has_variants',
         'price',
         'has_discount',
         'discount',
@@ -52,11 +52,6 @@ class Product extends Model
         return $this->belongsTo(Brand::class, 'brand_id');
     }
 
-    public function productImages(): HasMany
-    {
-        return $this->hasMany(ProductImage::class, 'product_id');;
-    }
-
     public function productPreviews(): HasMany
     {
         return $this->hasMany(ProductReview::class, 'product_id');
@@ -72,10 +67,15 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class, 'product_id');
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
     /* ================== Methods ==================*/
     public function isSimple(): bool
     {
-        return !$this->has_variant;
+        return !$this->has_variants;
     }
 
     public function getCreatedAtAttribute($value): string

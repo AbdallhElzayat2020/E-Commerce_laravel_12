@@ -9,26 +9,27 @@ use Illuminate\Support\Str;
 class ImageManager
 {
 
-    public function uploadSingleFile($path, $image, $disk)
+    public static function uploadSingleFile($path, $image, $disk)
     {
         $file_name = self::generateImageName($image);
         self::storeImageInLocal($image, $path, $file_name, $disk);
         return $file_name;
     }
 
-    //    public static function uploadImage($request, $post = null, $user = null): void
-    //    {
-    //        // upload multiple images
-    //        if ($request->hasFile('images')) {
-    //            foreach ($request->images as $image) {
-    //                $filename = self::generateImageName($image);
-    //                $path = self::storeImageLocal($image, 'posts', $filename);
-    //                $post->images()->create([
-    //                    'path' => $path,
-    //                    'alt_text' => Str::slug($request->title) . '_' . Str::uuid(),
-    //                ]);
-    //            }
-    //        }
+    public static function uploadImages($images, $model, $disk): void
+    {
+        // upload multiple images
+        if ($images) {
+            foreach ($images as $image) {
+                $filename = self::generateImageName($image);
+                self::storeImageInLocal($image, 'products', $filename, $disk);
+
+                $model->images()->create([
+                    'file_name' => $filename,
+                ]);
+            }
+        }
+    }
     //
     //        // upload single image for User avatar
     //        if ($request->hasFile('avatar')) {
@@ -59,17 +60,19 @@ class ImageManager
     //    }
 
 
-    public static function generateImageName($image): string
+    public
+    static function generateImageName($image): string
     {
         return '_' . Str::uuid() . time() . '.' . $image->getClientOriginalExtension();
     }
 
-    private function storeImageInLocal($image, $path, $file_name, $disk): void
+    private static function storeImageInLocal($image, $path, $file_name, $disk): void
     {
         $image->storeAs($path, $file_name, ['disk' => $disk]);
     }
 
-    public static function deleteImageLocal($imagePath): void
+    public
+    static function deleteImageLocal($imagePath): void
     {
         if (File::exists(public_path($imagePath))) {
             File::delete(public_path($imagePath));

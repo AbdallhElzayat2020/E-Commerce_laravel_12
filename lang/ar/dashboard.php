@@ -2,6 +2,7 @@
 
 return [
     'dashboard' => 'لوحة القيادة',
+    'roles' => 'الصلاحيات',
     'create_role' => 'اضافة صلاحية',
     'edit_role' => 'تعديل صلاحية',
     'delete_role' => 'حذف صلاحية',
@@ -10,9 +11,10 @@ return [
     'role_permissions' => 'صلاحيات الصلاحية',
     'role' => 'صلاحية',
 
-    'success_msg' => 'تمت العملية بنجاح',
     'error_msg' => 'هناك خطأ ما',
     'add' => 'اضافة',
+    'success_msg' => 'تمت العمليه بنجاح  ',
+    'well_done' => 'أحسنت',
     'operations' => 'العمليات',
     'created_at' => 'تاريخ الانشاء ',
     'status' => 'الحاله',
@@ -34,7 +36,6 @@ return [
     'name' => 'الاسم',
     'phone' => 'Phone',
     'address' => 'Address',
-    'image' => 'الصورة',
     'created_by' => 'Created By',
     'updated_by' => 'Updated By',
     'deleted_by' => 'Deleted By',
@@ -60,21 +61,15 @@ return [
     'select_shipping_price' => 'اختار سعر الشحن',
     'change_price' => ' تغير السعر',
 
-    'edit_brand' => 'تعديل العلامه التجاريه',
-    'you_will_not_be_able_to_revert_this' => 'لا يمكن التراجع عن هذا!',
-    'categories' => 'الاقسام',
     'brands' => 'العلامات التجاريه',
     'category_create' => 'انشاء قسم ',
     'brand_create' => 'انشاء علامه تجاريه ',
     'table_yajra_paragraph' => 'جدول ديناميكي يعرض البيانات من قاعدة البيانات مع ميزات مثل البحث، الفرز، إظهار وإخفاء الأعمدة، وخيارات لتصدير البيانات إلى Excel أو طباعتها أو نسخها.',
 
     'are_you_sure' => 'هل انت متاكد؟',
-    'deleted_successfully' => 'تم الحذف بنجاح',
-    'your_file_has_been_deleted' => 'تم حذف الملف الخاص بك.',
-    'cancelled' => 'تم الإلغاء',
-    'your_imaginary_file_is_safe' => 'ملفك الوهمي في أمان :)',
     'name_ar' => 'الاسم بالعربية',
     'name_en' => 'الاسم بالانجليزية',
+    'image' => 'الصورة',
 
     'select_Parent' => 'اختارالصنف الرئيسي',
     'form_edit' => 'الشكل تعديل',
@@ -85,9 +80,9 @@ return [
     'not_found' => 'لا يوجد',
 
     'admins' => ' المسؤلين',
+    'categories' => ' الاقسام',
     'products' => ' المنتجات',
     'orders' => '  الطلبات',
-    'roles' => ' الصلاحيات',
     'create_brand' => 'انشاء علامه تجاريه',
 
     'coupons' => ' الكوبونات',
@@ -101,12 +96,9 @@ return [
     'end_date' => ' تاريخ الانتهاء',
     'time_used' => ' عدد مرات الاستخدام',
     'coupons_table' => 'جدول الكوبونات',
-
     'faqs' => 'الاسئلة الشائعة',
     'create_faq' => ' انشاء سؤال شائع',
     'edit_faq' => ' تعديل سؤال شائع',
-    'question' => 'السؤال',
-    'answer' => 'الاجابة',
     'question_ar' => ' السؤال عربي',
     'answer_ar' => ' الاجابه عربي',
     'question_en' => ' السؤال انجليزي',
@@ -173,4 +165,6 @@ return [
     'email_verified_at' => 'تاريخ التحقق من البريد الالكتروني',
 
     'contacts' => 'اداره التواصل',
+    'product_create' => 'اضافة منتج'
+
 ];
