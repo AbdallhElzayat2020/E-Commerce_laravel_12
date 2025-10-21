@@ -379,6 +379,7 @@
                                     class="btn btn-primary btn-sm position-absolute" style="bottom: 5px; right: 5px;">
                                     <i class="fa fa-expand"></i>
                                 </button>
+
                             </div>
                         @endforeach
                     </div>
@@ -397,9 +398,11 @@
                     </div>
                 </div>
             </div>
+
             <button class="btn btn-success  pull-right  mb-3 ml-1" wire:click="thirdStepSubmit" type="button">
                 {{ __('dashboard.next') }}!
             </button>
+
             <button class="btn btn-danger  pull-right  mb-3" type="button" wire:click="back(2)">
                 {{ __('dashboard.back') }}
             </button>
@@ -409,6 +412,7 @@
         {{-- Confirm Step Display Data --}}
         <div class="setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
             <div class="row">
+
                 <!-- Product Details -->
 
             </div>
@@ -416,8 +420,10 @@
             <button class="btn btn-success  pull-right  mb-3 ml-1" wire:click="submitForm"
                 type="button">{{ __('dashboard.confirm') }}!
             </button>
-            <button class="btn btn-danger  pull-right  mb-3" type="button"
-                wire:click="back(3)">{{ __('dashboard.back') }}</button>
+
+            <button class="btn btn-danger  pull-right  mb-3" type="button" wire:click="back(3)">
+                {{ __('dashboard.back') }}
+            </button>
 
         </div>
 

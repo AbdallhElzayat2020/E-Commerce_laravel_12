@@ -37,6 +37,7 @@ return [
             'throw' => false,
             'report' => false,
         ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -45,6 +46,7 @@ return [
             'throw' => false,
             'report' => false,
         ],
+
         'brands' => [
             'driver' => 'local',
             'root' => public_path('/uploads/brands'),
@@ -53,6 +55,7 @@ return [
             'throw' => false,
             'report' => false,
         ],
+
         'settings' => [
             'driver' => 'local',
             'root' => public_path('/uploads/settings'),
@@ -61,22 +64,24 @@ return [
             'throw' => false,
             'report' => false,
         ],
+
         'products' => [
             'driver' => 'local',
             'root' => public_path('/uploads/products'),
             'url' => env('APP_URL'),
             'visibility' => 'public',
             'throw' => false,
-            'report' => false,
         ],
+
         'users' => [
             'driver' => 'local',
             'root' => public_path('/uploads/users'),
-            'url' => env('APP_URL') . '/uploads/users',
+            'url' => env('APP_URL'),
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
         ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

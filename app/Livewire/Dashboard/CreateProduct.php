@@ -158,7 +158,6 @@ class CreateProduct extends Component
             DB::commit();
             $this->successMessage = __('dashboard.success_msg');
             $this->currentStep = 1;
-
         } catch (\Throwable $e) {
             DB::rollBack();
             throw $e;
