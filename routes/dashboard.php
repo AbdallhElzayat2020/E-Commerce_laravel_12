@@ -162,6 +162,7 @@ Route::group(
             });
             ####################### Products Route #########################
 
+            // livewire Localized Routes
             Livewire::setUpdateRoute(function ($handle) {
                 return Route::post('/livewire/update', $handle);
             });

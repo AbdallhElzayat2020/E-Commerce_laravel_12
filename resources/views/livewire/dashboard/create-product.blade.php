@@ -10,6 +10,7 @@
         </div>
     @endif
 
+    {{-- list of step --}}
     <ul class="wizard-timeline center-align">
         <li class="{{ $currentStep > 1 ? 'completed' : '' }}">
             <span class="step-num">1</span>
@@ -284,6 +285,7 @@
                 @endif
             </div>
 
+
             {{-- variants --}}
             @if ($has_variants == 1)
                 <hr class="bg-black">
@@ -322,6 +324,7 @@
                                         @foreach ($attr->attributeValues as $item)
                                             <option value="{{ $item->id }}">{{ $item->value }}</option>
                                         @endforeach
+
                                     </select>
 
                                 </div>
@@ -331,12 +334,14 @@
                     </div>
                     <hr class="bg-black">
                 @endfor
+
                 <button type="button" wire:click="addNewVariant" class="btn btn-success"><i class="la la-plus"></i>
                     Add New Variant
                 </button>
                 <button type="button" wire:click="removeVariant" class="btn btn-danger"><i class="la la-minus"></i>
                     Remove Variant
                 </button>
+
             @endif
 
 
@@ -368,7 +373,7 @@
                                 <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail rounded-md"
                                     width="300px" height="300px" alt="image">
 
-                                <!-- Delete Button -->
+                                {{-- Delete Button --}}
                                 <button type="button" wire:click="deleteImage({{ $key }})"
                                     class="btn btn-danger btn-sm position-absolute" style="top: 5px; right: 5px;">
                                     <i class="fa fa-trash"></i>
@@ -379,7 +384,6 @@
                                     class="btn btn-primary btn-sm position-absolute" style="bottom: 5px; right: 5px;">
                                     <i class="fa fa-expand"></i>
                                 </button>
-
                             </div>
                         @endforeach
                     </div>

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class ImageManager
 {
 
-    public static function uploadSingleFile($path, $image, $disk)
+    public static function uploadSingleFile($path, $image, $disk): string
     {
         $file_name = self::generateImageName($image);
         self::storeImageInLocal($image, $path, $file_name, $disk);
@@ -21,8 +21,9 @@ class ImageManager
         // upload multiple images
         if ($images) {
             foreach ($images as $image) {
+
                 $filename = self::generateImageName($image);
-                self::storeImageInLocal($image, 'products', $filename, $disk);
+                self::storeImageInLocal($image, '/', $filename, $disk);
 
                 $model->images()->create([
                     'file_name' => $filename,
@@ -30,24 +31,6 @@ class ImageManager
             }
         }
     }
-    //
-    //        // upload single image for User avatar
-    //        if ($request->hasFile('avatar')) {
-    //
-    //            $image = $request->file('avatar');
-    //
-    //            self::deleteImageLocal($user->avatar);
-    //
-    //            $filename = self::generateImageName($image);
-    //
-    //            $path = self::storeImageLocal($image, 'users', $filename, '');
-    //
-    //            $user->update([
-    //                'avatar' => $path,
-    //            ]);
-    //        }
-    //
-    //    }
 
     public static function deleteImages($model): void
     {

@@ -11,10 +11,10 @@
                                 href="{{ route('dashboard.home') }}">{{ __('dashboard.dashboard') }}</a>
                         </li>
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.products.index') }}">
-                            {{--                                {{ __('dashboard.products') }}</a>--}}
+                                {{ __('dashboard.products') }}</a>
                         </li>
                         <li class="breadcrumb-item active"><a href="#">
-                            {{--                                {{ __('dashboard.product_create') }}</a>--}}
+                                {{ __('dashboard.product_create') }}</a>
                         </li>
                     </ol>
                 </div>

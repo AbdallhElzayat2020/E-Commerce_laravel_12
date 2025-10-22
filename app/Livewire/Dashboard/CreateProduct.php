@@ -2,10 +2,14 @@
 
 namespace App\Livewire\Dashboard;
 
+use App\Models\Attribute;
 use App\Models\Product;
+use App\Models\ProductVariant;
+use App\Models\VariantAttribute;
 use App\Utils\ImageManager;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\Features\SupportAttributes\AttributeCollection;
 use Livewire\WithFileUploads;
 
 class CreateProduct extends Component
@@ -21,7 +25,7 @@ class CreateProduct extends Component
     public $images, $tags, $discount, $start_discount, $end_discount, $quantity, $price, $sku;
     public $name_ar, $name_en, $desc_ar, $desc_en, $small_desc_ar, $small_desc_en, $category_id, $brand_id, $available_for;
     public $has_variants = 0, $manage_stock = 0, $has_discount = 0;
-
+    public $prices = [], $quantities = [], $attributeValues = [];
     public $fullscreenImage = '';
 
     public $valueRowCount = 1;
@@ -30,6 +34,24 @@ class CreateProduct extends Component
     {
         $this->categories = $categories;
         $this->brands = $brands;
+    }
+
+    public function addNewVariant()
+    {
+        $this->prices[] = null;
+        $this->quantities[] = null;
+        $this->attributeValues[] = [];
+        $this->valueRowCount = count($this->prices);
+    }
+
+    public function removeVariant()
+    {
+        if ($this->valueRowCount > 1) {
+            $this->valueRowCount--;
+            array_pop($this->prices);
+            array_pop($this->quantities);
+            array_pop($this->attributeValues);
+        }
     }
 
     public function deleteImage($key)
@@ -45,24 +67,11 @@ class CreateProduct extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.create-product');
+        $attributes = Attribute::with('attributeValues')->get();
+        return view('livewire.dashboard.create-product', [
+            'attributes' => $attributes,
+        ]);
     }
-
-
-    //    protected function rules()
-    //    {
-    //        return [
-    //            'name' => ['required', 'string', 'max:255', 'min:2'],
-    //            'desc' => ['required', 'string', 'max:1000', 'min:2'],
-    //            'price' => ['required', 'numeric', 'min:0'],
-    //            'quantity' => ['required', 'numeric', 'min:0'],
-    //        ];
-    //    }
-
-    //    public function updated()
-    //    {
-    //        $this->validate();
-    //    }
 
     public function back($step)
     {
@@ -84,6 +93,8 @@ class CreateProduct extends Component
             'available_for' => ['required', 'date'],
             'tags' => ['required', 'string'],
         ]);
+
+
         $this->currentStep = 2;
     }
 
@@ -95,15 +106,24 @@ class CreateProduct extends Component
             'has_discount' => ['required', 'in:0,1'],
         ];
         if ($this->has_variants == 0) {
-            $data['price'] = ['required', 'numeric', 'min:1', 'max:1000000'];
+            $data['price'] = ['required', 'numeric', 'min:1', 'max:10000000'];
         }
         if ($this->manage_stock == 1) {
-            $data['quantity'] = ['required', 'numeric', 'min:1', 'max:1000000'];
+            $data['quantity'] = ['required', 'numeric', 'min:1', 'max:10000000'];
         }
         if ($this->has_discount == 1) {
             $data['discount'] = ['required', 'numeric', 'min:1', 'max:100'];
             $data['start_discount'] = ['required', 'date', 'before:end_discount'];
             $data['end_discount'] = ['required', 'date', 'after:start_discount'];
+        }
+        if ($this->has_variants == 1) {
+            $data['prices'] = ['required', 'array', 'min:1'];
+            $data['price.*'] = ['required', 'numeric', 'min:1', 'max:10000000'];
+            $data['quantities'] = ['required', 'array', 'min:1'];
+            $data['quantities.*'] = ['required', 'integer', 'min:0'];
+            $data['attributeValues'] = ['required', 'array', 'min:1'];
+            $data['attributeValues.*'] = ['required', 'array'];
+            $data['attributeValues.*.*'] = ['required', 'integer', 'exists:attribute_values,id'];
         }
 
         $this->validate($data);
@@ -144,13 +164,30 @@ class CreateProduct extends Component
                 'sku' => $this->sku,
                 'available_for' => $this->available_for,
                 'has_variants' => $this->has_variants,
-                'price' => $this->has_variants == 1 ? null : $this->price,
                 'manage_stock' => $this->manage_stock,
+                'price' => $this->has_variants == 1 ? null : $this->price,
                 'quantity' => $this->manage_stock == 0 ? null : $this->quantity,
                 'discount' => $this->has_discount == 0 ? null : $this->discount,
                 'start_discount' => $this->has_discount == 0 ? null : $this->start_discount,
                 'end_discount' => $this->has_discount == 0 ? null : $this->end_discount,
             ]);
+
+            if ($this->has_variants) {
+                foreach ($this->prices as $index => $price) {
+                    $variant = ProductVariant::create([
+                        'product_id' => $product->id,
+                        'price' => $price,
+                        'stock' => $this->quantities[$index] ?? 0,
+                    ]);
+
+                    foreach ($this->attributeValues[$index] as $attributeValueId) {
+                        VariantAttribute::create([
+                            'product_variant_id' => $variant->id,
+                            'attribute_value_id' => $attributeValueId,
+                        ]);
+                    }
+                }
+            }
 
             // store product images
             ImageManager::uploadImages($this->images, $product, 'products');
