@@ -187,7 +187,7 @@
                     @endcan
                     @can('products')
                         <li>
-                            <a class="menu-item" href="{{ route('dashboard.products.create') }}"
+                            <a class="menu-item" href="{{ route('dashboard.products.index') }}"
                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.products') }}
                             </a>

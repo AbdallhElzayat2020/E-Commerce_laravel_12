@@ -345,10 +345,12 @@
             @endif
 
 
-            <button class="btn btn-primary pull-right  mb-3 ml-1" type="button"
-                wire:click="secondStepSubmit">{{ __('dashboard.next') }}</button>
-            <button class="btn btn-danger  pull-right" type="button"
-                wire:click="back(1)">{{ __('dashboard.back') }}</button>
+            <button class="btn btn-primary pull-right  mb-3 ml-1" type="button" wire:click="secondStepSubmit">
+                {{ __('dashboard.next') }}
+            </button>
+            <button class="btn btn-danger  pull-right" type="button" wire:click="back(1)">
+                {{ __('dashboard.back') }}
+            </button>
         </div>
 
         {{-- third step Product Images --}}

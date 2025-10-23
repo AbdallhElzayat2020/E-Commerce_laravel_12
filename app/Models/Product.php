@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Config;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
@@ -88,4 +89,40 @@ class Product extends Model
         return date('d/m/y H:i', strtotime($value));
     }
 
+    public function hasVariantsTranslated()
+    {
+        if (Config::get('app.locale') === 'ar') {
+            return $this->has_variants == 1 ? 'يوجد متغيرات' : 'لا يوجد متغيرات';
+        }
+        return $this->has_variants == 1 ? 'Has Variants' : 'No Variants';
+    }
+
+    public function getStatusTranslated()
+    {
+        if (Config::get('app.locale') === 'ar') {
+            return $this->status == 'active' ? 'نشط' : 'غير نشط';
+        }
+        return $this->status == 'active' ? 'Active' : 'Inactive';
+    }
+
+    public function priceAttribute()
+    {
+        return $this->has_variants == 0 ? number_format($this->price, 2) : __("dashboard.has_variants");
+    }
+
+    public function quantityAttribute()
+    {
+        return $this->has_variants == 0 ? $this->quantity : __("dashboard.has_variants");
+    }
+
+    /** ================== Scopes ================== */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('status', 0);
+    }
 }

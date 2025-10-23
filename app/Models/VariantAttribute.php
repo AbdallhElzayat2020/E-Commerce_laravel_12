@@ -13,11 +13,11 @@ class VariantAttribute extends Model
 
     public function ProductVariant(): BelongsTo
     {
-        return $this->belongsTo(ProductVariant::class);
+        return $this->belongsTo(ProductVariant::class, 'product_variant_id');
     }
 
     public function attributeValue(): BelongsTo
     {
-        return $this->belongsTo(AttributeValue::class);
+        return $this->belongsTo(AttributeValue::class, 'attribute_value_id');
     }
 }

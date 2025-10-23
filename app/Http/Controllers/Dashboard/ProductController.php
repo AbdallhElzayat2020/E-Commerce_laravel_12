@@ -5,19 +5,23 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Services\Dashboard\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
 
-    public function __construct()
-    {
+    protected $productService;
 
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
     }
 
     public function index()
     {
-        //
+
+        return view('dashboard.pages.products.index');
     }
 
     /**
@@ -63,13 +67,36 @@ class ProductController extends Controller
     }
 
 
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        if ($this->productService->deleteProduct($request)) {
+            return response()->json([
+                'status' => 'success',
+                'message' => __('dashboard.success_msg'),
+            ], 200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => __('dashboard.error_msg'),
+        ], 500);
     }
 
     public function getAll()
     {
+        return $this->productService->getProductsForDataTable();
+    }
 
+    public function updateStatus(Request $request)
+    {
+        if ($this->productService->changeStatus($request)) {
+            return response()->json([
+                'status' => 'success',
+                'message' => __('dashboard.success_msg'),
+            ], 200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => __('dashboard.error_msg'),
+        ], 500);
     }
 }

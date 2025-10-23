@@ -6,6 +6,7 @@ use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\VariantAttribute;
+use App\Services\Dashboard\ProductService;
 use App\Utils\ImageManager;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -27,8 +28,14 @@ class CreateProduct extends Component
     public $has_variants = 0, $manage_stock = 0, $has_discount = 0;
     public $prices = [], $quantities = [], $attributeValues = [];
     public $fullscreenImage = '';
-
     public $valueRowCount = 1;
+
+    protected ProductService $productService;
+
+    public function boot(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
 
     public function mount($categories, $brands)
     {
@@ -94,7 +101,6 @@ class CreateProduct extends Component
             'tags' => ['required', 'string'],
         ]);
 
-
         $this->currentStep = 2;
     }
 
@@ -142,8 +148,7 @@ class CreateProduct extends Component
     public function submitForm()
     {
         try {
-            DB::beginTransaction();
-            $product = Product::create([
+            $product = [
                 'name' => [
                     'ar' => $this->name_ar,
                     'en' => $this->name_en,
@@ -164,48 +169,34 @@ class CreateProduct extends Component
                 'sku' => $this->sku,
                 'available_for' => $this->available_for,
                 'has_variants' => $this->has_variants,
-                'manage_stock' => $this->manage_stock,
+                'manage_stock' => $this->has_variants == 0 ? null : $this->manage_stock,
                 'price' => $this->has_variants == 1 ? null : $this->price,
                 'quantity' => $this->manage_stock == 0 ? null : $this->quantity,
                 'discount' => $this->has_discount == 0 ? null : $this->discount,
                 'start_discount' => $this->has_discount == 0 ? null : $this->start_discount,
                 'end_discount' => $this->has_discount == 0 ? null : $this->end_discount,
-            ]);
+            ];
 
+            $productVariants = [];
             if ($this->has_variants) {
                 foreach ($this->prices as $index => $price) {
-                    $variant = ProductVariant::create([
-                        'product_id' => $product->id,
+                    $productVariants[] = [
+                        'product_id' => null,
                         'price' => $price,
                         'stock' => $this->quantities[$index] ?? 0,
-                    ]);
-
-                    foreach ($this->attributeValues[$index] as $attributeValueId) {
-                        VariantAttribute::create([
-                            'product_variant_id' => $variant->id,
-                            'attribute_value_id' => $attributeValueId,
-                        ]);
-                    }
+                        'attribute_value_ids' => $this->attributeValues[$index] ?? [],
+                    ];
                 }
             }
 
-            // store product images
-            ImageManager::uploadImages($this->images, $product, 'products');
+            $this->productService->createProductWithDetails($product, $productVariants, $this->images);
 
-            DB::commit();
             $this->successMessage = __('dashboard.success_msg');
+            $this->resetExcept(['categories', 'brands', 'successMessage']);
             $this->currentStep = 1;
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            throw $e;
+
+        } catch (\Throwable $th) {
+            $this->addError('general', $th->getMessage());
         }
     }
-
-    //    public function resetForm()
-    //    {
-    //        $this->name = '';
-    //        $this->desc = '';
-    //        $this->price = '';
-    //        $this->quantity = '';
-    //    }
 }

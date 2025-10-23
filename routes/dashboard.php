@@ -156,6 +156,7 @@ Route::group(
             Route::group(['middleware' => 'can:products'], function () {
 
                 Route::resource('products', ProductController::class);
+                Route::post('products/update-status', [ProductController::class, 'updateStatus'])->name('products.update-status');;
 
                 Route::get('products-all', [ProductController::class, 'getAll'])
                     ->name('products.all');
