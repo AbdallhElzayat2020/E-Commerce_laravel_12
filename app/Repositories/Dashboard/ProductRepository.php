@@ -38,6 +38,7 @@ class ProductRepository
         $product->status = $status;
         return $product->save();
     }
+
     public function deleteProduct($product)
     {
         if (!$product) {

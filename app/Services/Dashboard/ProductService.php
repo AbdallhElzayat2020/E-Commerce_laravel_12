@@ -40,7 +40,7 @@ class ProductService
                 return view('dashboard.pages.products.datatables.images', compact('row'));
             })
             ->addColumn('status', function ($row) {
-                return $row->getStatusTranslated();
+                return view('dashboard.pages.products.datatables.status', compact('row'));
             })
             ->addColumn('category', function ($row) {
                 return $row->category->name;

@@ -14,13 +14,12 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('small_desc')->nullable();
-//            $table->string('slug')->unique();
+            //            $table->string('slug')->unique();
             $table->longText('desc');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('sku');
             $table->date('available_for')->nullable();
             $table->integer('views')->default(0);
-
 
             $table->boolean('has_variants')->default(0);
 
