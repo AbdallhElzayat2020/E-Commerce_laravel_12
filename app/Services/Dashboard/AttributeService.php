@@ -35,15 +35,19 @@ class AttributeService
         $attributes = $this->getAttributes();
         return DataTables::of($attributes)
             ->addIndexColumn()
+
             ->addColumn('name', function ($item) {
                 return $item->getTranslation('name', app()->getLocale());
             })
+
             ->addColumn('attributeValues', function ($item) {
                 return view('dashboard.pages.products.attributes.datatables.attributeValues', compact('item'));
             })
+
             ->addColumn('actions', function ($item) {
                 return view('dashboard.pages.products.attributes.datatables.actions', compact('item'));
             })
+
             ->make(true);
     }
 
@@ -63,7 +67,6 @@ class AttributeService
             Log::error('Error creating attribute: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return false;
         }
-
     }
 
     public function updateAttribute($data, $id)

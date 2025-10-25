@@ -10,7 +10,7 @@ return [
     'role_description' => 'وصف الصلاحية',
     'role_permissions' => 'صلاحيات الصلاحية',
     'role' => 'صلاحية',
-
+    'product_edit' => 'تعديل المنتج',
     'error_msg' => 'هناك خطأ ما',
     'add' => 'اضافة',
     'success_msg' => 'تمت العمليه بنجاح  ',

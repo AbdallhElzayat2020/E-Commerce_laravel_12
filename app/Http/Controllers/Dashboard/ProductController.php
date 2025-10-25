@@ -2,20 +2,31 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
-use App\Services\Dashboard\ProductService;
 use Illuminate\Http\Request;
+use App\Models\ProductVariant;
+use App\Http\Controllers\Controller;
+use App\Services\Dashboard\BrandService;
+use App\Services\Dashboard\ProductService;
+use App\Services\Dashboard\CategoryService;
+use App\Services\Dashboard\AttributeService;
 
 class ProductController extends Controller
 {
 
-    protected $productService;
+    protected $productService, $categoryService, $brandService, $attributeService;
 
-    public function __construct(ProductService $productService)
-    {
+    public function __construct(
+        ProductService $productService,
+        CategoryService $categoryService,
+        BrandService $brandService,
+        AttributeService $attributeService
+    ) {
         $this->productService = $productService;
+        $this->categoryService = $categoryService;
+        $this->brandService = $brandService;
+        $this->attributeService = $attributeService;
     }
 
     public function index()
@@ -24,9 +35,7 @@ class ProductController extends Controller
         return view('dashboard.pages.products.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $brands = Brand::all();
@@ -34,33 +43,30 @@ class ProductController extends Controller
         return view('dashboard.pages.products.create', compact('brands', 'categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $product = $this->productService->getProduct($id);
+        return view('dashboard.pages.products.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
-        //
+        $productId = $id;
+        $categories = $this->categoryService->getAllCategories();
+        $brands = $this->brandService->getAllBrands();
+        $attributes = $this->attributeService->getAttributes();
+
+        return view('dashboard.pages.products.edit', compact('productId', 'categories', 'brands', 'attributes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         //
@@ -98,5 +104,16 @@ class ProductController extends Controller
             'status' => 'error',
             'message' => __('dashboard.error_msg'),
         ], 500);
+    }
+
+    public function deleteVariant($variant_id)
+    {
+        $variant = ProductVariant::findOrFail($variant_id);
+        $product = $variant->product;
+        if ($product->variants()->count() == 1) {
+            return redirect()->back()->with('error', 'you can not delete the last variant');
+        }
+        $variant->delete();
+        return redirect()->back()->with('success', 'variant deleted successfully');
     }
 }

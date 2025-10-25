@@ -160,6 +160,8 @@ Route::group(
 
                 Route::get('products-all', [ProductController::class, 'getAll'])
                     ->name('products.all');
+
+                Route::post('product/variants/{variant}', [ProductController::class, 'deleteVariant'])->name('products.variants.delete');
             });
             ####################### Products Route #########################
 

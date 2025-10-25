@@ -21,6 +21,10 @@
 <!-- END PAGE LEVEL JS-->
 
 
+{{-- Bootstrap JS --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+{{-- Bootstrap JS --}}
+
 {{-- sweetalert2 --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{-- sweetalert2 --}}

@@ -13,6 +13,11 @@ class ProductRepository
         return Product::with(['category', 'brand', 'images', 'variants']);
     }
 
+    public function getProductWithEagerLoading($id)
+    {
+        return Product::with(['category', 'brand', 'images', 'variants.variantAttribute'])->find($id);
+    }
+
     public function getProduct($id)
     {
         return Product::find($id);

@@ -18,10 +18,14 @@ class BrandService
         $this->imageManager = $imageManager;
     }
 
+    public function getAllBrands()
+    {
+        return $this->brandRepository->getBrands();
+    }
 
     public function getBrandsForDataTables()
     {
-        $brands = $this->brandRepository->getBrands();
+        $brands = $this->getAllBrands();
 
         return DataTables::of($brands)
             ->addIndexColumn()

@@ -14,7 +14,7 @@ return [
     'delete_permission' => 'Delete Permission',
     'permission_name' => 'Permission Name',
     'permission_description' => 'Permission Description',
-
+    'product_edit' => 'Edit Product',
     'success_msg' => 'Operation Done Successfuly',
     'well_done' => 'Well Done',
     'error_msg' => 'Operation Failed',

@@ -9,7 +9,7 @@ class CategoryRepository
 
     public function getCategories()
     {
-        return Category::query();
+        return Category::all();
     }
 
     public function getById($id)

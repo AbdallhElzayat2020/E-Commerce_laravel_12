@@ -25,6 +25,11 @@ class ProductService
         return $product ?? abort(404, 'Product Not Found');
     }
 
+    public function getProductWithEagerLoading($id)
+    {
+        return $this->productRepository->getProductWithEagerLoading($id);
+    }
+
     public function getProductsForDataTable()
     {
         $products = $this->productRepository->getProductsForDataTable();
