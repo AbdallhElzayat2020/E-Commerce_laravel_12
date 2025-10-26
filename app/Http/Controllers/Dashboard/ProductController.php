@@ -17,12 +17,9 @@ class ProductController extends Controller
 
     protected $productService, $categoryService, $brandService, $attributeService;
 
-    public function __construct(
-        ProductService $productService,
-        CategoryService $categoryService,
-        BrandService $brandService,
-        AttributeService $attributeService
-    ) {
+    public function __construct(ProductService   $productService, CategoryService  $categoryService, BrandService     $brandService, AttributeService $attributeService
+    )
+    {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
         $this->brandService = $brandService;
@@ -31,7 +28,6 @@ class ProductController extends Controller
 
     public function index()
     {
-
         return view('dashboard.pages.products.index');
     }
 
@@ -58,10 +54,10 @@ class ProductController extends Controller
 
     public function edit(string $id)
     {
-        $productId = $id;
-        $categories = $this->categoryService->getAllCategories();
-        $brands = $this->brandService->getAllBrands();
-        $attributes = $this->attributeService->getAttributes();
+        $productId    = $id;
+        $categories   = $this->categoryService->getAllCategories();
+        $brands       = $this->brandService->getAllBrands();
+        $attributes   = $this->attributeService->getAttributes();
 
         return view('dashboard.pages.products.edit', compact('productId', 'categories', 'brands', 'attributes'));
     }

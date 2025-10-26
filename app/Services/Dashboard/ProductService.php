@@ -27,7 +27,8 @@ class ProductService
 
     public function getProductWithEagerLoading($id)
     {
-        return $this->productRepository->getProductWithEagerLoading($id);
+        $product = $this->productRepository->getProductWithEagerLoading($id);
+        return $product ?? abort(404);
     }
 
     public function getProductsForDataTable()

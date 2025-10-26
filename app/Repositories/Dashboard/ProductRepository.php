@@ -15,7 +15,7 @@ class ProductRepository
 
     public function getProductWithEagerLoading($id)
     {
-        return Product::with(['category', 'brand', 'images', 'variants.variantAttribute'])->find($id);
+        return Product::with('variants.VariantAttribute')->find($id);
     }
 
     public function getProduct($id)

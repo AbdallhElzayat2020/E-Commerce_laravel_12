@@ -194,7 +194,6 @@ class CreateProduct extends Component
             $this->successMessage = __('dashboard.success_msg');
             $this->resetExcept(['categories', 'brands', 'successMessage']);
             $this->currentStep = 1;
-
         } catch (\Throwable $th) {
             $this->addError('general', $th->getMessage());
         }
