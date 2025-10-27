@@ -20,6 +20,7 @@ class EditProduct extends Component
     public $has_variants, $has_discount, $manage_stock, $quantity, $price, $discount, $start_discount, $end_discount;
 
     public $variants, $quantities, $prices, $variantAttributes = [], $valueRowCount = 0;
+
     // third step properties
     public $images, $newImages;
 
@@ -73,9 +74,9 @@ class EditProduct extends Component
                 foreach ($variant->variantAttribute as $variantAttribute) {
                     $this->variantAttributes[$key][$variantAttribute->attributeValue->attribute_id] = $variantAttribute->attribute_value_id;
                 }
+
             }
         }
-
 
     }
 

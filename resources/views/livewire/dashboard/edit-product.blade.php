@@ -271,60 +271,60 @@
             </div>
 
             {{-- variants --}}
-{{--            @if ($has_variants == 1)--}}
-{{--                <hr class="bg-black">--}}
-{{--                @for ($i = 0; $i < $valueRowCount; $i++)--}}
-{{--                    <div class="row">--}}
-{{--                        <hr>--}}
-{{--                        <div class="col-3">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="price">Product Price</label>--}}
-{{--                                <input wire:model="prices.{{ $i }}" type="number" class="form-control"--}}
-{{--                                       placeholder="Product Price">--}}
-{{--                                @error('prices.' . $i)--}}
-{{--                                <span class="text-danger">{{ $message }}</span>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-3">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="price">Product Quantity</label>--}}
-{{--                                <input wire:model="quantities.{{ $i }}" type="number"--}}
-{{--                                       class="form-control" placeholder="Product Quantity">--}}
-{{--                                @error('quantities.' . $i)--}}
-{{--                                <span class="text-danger">{{ $message }}</span>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @foreach ($productAttributes as $attr)--}}
-{{--                            <div class="col-3">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="price">Product {{ $attr->name }}</label>--}}
-{{--                                    <select wire:model="variantAttributes.{{ $i }}.{{ $attr->id }}"--}}
-{{--                                            class="form-control">--}}
-{{--                                        <option value="">Select {{ $attr->name }}</option>--}}
-{{--                                        @foreach ($attr->attributeValues as $item)--}}
-{{--                                            <option value="{{ $item->id }}" @selected(($variantAttributes[$i][$attr->id]?? null)== $item->id)>--}}
-{{--                                                {{ $item->value }}--}}
-{{--                                            </option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-{{--                    <hr class="bg-black">--}}
-{{--                @endfor--}}
-{{--                <button type="button" wire:click="addNewVariant" class="btn btn-success"><i class="la la-plus"></i>--}}
-{{--                    Add New Variant--}}
-{{--                </button>--}}
-{{--                @if ($valueRowCount > 1)--}}
-{{--                    <button type="button" wire:click="removeVariant" class="btn btn-danger"><i--}}
-{{--                            class="la la-minus"></i>--}}
-{{--                        Remove Variant--}}
-{{--                    </button>--}}
-{{--                @endif--}}
-{{--            @endif--}}
+            @if ($has_variants == 1)
+                <hr class="bg-black">
+                @for ($i = 0; $i < $valueRowCount; $i++)
+                    <div class="row">
+                        <hr>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="price">Product Price</label>
+                                <input wire:model="prices.{{ $i }}" type="number" class="form-control"
+                                       placeholder="Product Price">
+                                @error('prices.' . $i)
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="price">Product Quantity</label>
+                                <input wire:model="quantities.{{ $i }}" type="number"
+                                       class="form-control" placeholder="Product Quantity">
+                                @error('quantities.' . $i)
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        @foreach ($productAttributes as $attr)
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="price">Product {{ $attr->name }}</label>
+                                    <select wire:model="variantAttributes.{{ $i }}.{{ $attr->id }}"
+                                            class="form-control">
+                                        {{-- <option value="">Select {{ $attr->name }}</option> --}}
+                                        @foreach ($attr->attributeValues as $item)
+                                            <option value="{{ $item->id }}" @selected(($variantAttributes[$i][$attr->id]?? null)== $item->id)>
+                                                {{ $item->value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <hr class="bg-black">
+                @endfor
+                <button type="button" wire:click="addNewVariant" class="btn btn-success"><i class="la la-plus"></i>
+                    Add New Variant
+                </button>
+                @if ($valueRowCount > 1)
+                    <button type="button" wire:click="removeVariant" class="btn btn-danger"><i
+                            class="la la-minus"></i>
+                        Remove Variant
+                    </button>
+                @endif
+            @endif
 
             <button class="btn btn-primary pull-right  mb-3 ml-1" type="button"
                     wire:click="secondStepSubmit">{{ __('dashboard.next') }}</button>
