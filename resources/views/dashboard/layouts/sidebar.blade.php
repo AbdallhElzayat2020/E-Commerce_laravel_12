@@ -18,13 +18,13 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.categories.create') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.category_create') }}
                             </a>
                         </li>
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.categories.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.categories') }}
                             </a>
                         </li>
@@ -43,7 +43,7 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.brands.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.brands') }}
                             </a>
                         </li>
@@ -62,13 +62,13 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.roles.create') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard_roles.create_role') }}
                             </a>
                         </li>
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.roles.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard_roles.roles') }}
                             </a>
                         </li>
@@ -87,13 +87,13 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.admins.create') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard_admins.buttons.create') }}
                             </a>
                         </li>
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.admins.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard_admins.title') }}
                             </a>
                         </li>
@@ -112,7 +112,7 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.coupons.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.coupons') }}
                             </a>
                         </li>
@@ -131,7 +131,7 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.faqs.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.faqs') }}
                             </a>
                         </li>
@@ -147,7 +147,7 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.countries.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.shipping') }}
                             </a>
                         </li>
@@ -163,7 +163,7 @@
                     <ul class="menu-content">
                         <li>
                             <a class="menu-item" href="{{ route('dashboard.settings.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
+                                data-i18n="nav.templates.vert.overlay_menu">
                                 {{ __('dashboard.settings') }}
                             </a>
                         </li>
@@ -171,33 +171,49 @@
                 </li>
             @endcan
 
-            {{--            @can('products')--}}
-            <li class=" nav-item">
-                <a href="#"><i class="la la-cubes"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.products') }}</span>
-                </a>
-                <ul class="menu-content">
-                    @can('attributes')
-                        <li>
-                            <a class="menu-item" href="{{ route('dashboard.attributes.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
-                                {{ __('dashboard.attributes') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('products')
-                        <li>
-                            <a class="menu-item" href="{{ route('dashboard.products.index') }}"
-                               data-i18n="nav.templates.vert.overlay_menu">
-                                {{ __('dashboard.products') }}
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-            {{--            @endcan--}}
+            @can('products')
+                <li class=" nav-item">
+                    <a href="#"><i class="la la-cubes"></i>
+                        <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.products') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        @can('attributes')
+                            <li>
+                                <a class="menu-item" href="{{ route('dashboard.attributes.index') }}"
+                                    data-i18n="nav.templates.vert.overlay_menu">
+                                    {{ __('dashboard.attributes') }}
+                                </a>
+                            </li>
+                        @endcan
+                        @can('products')
+                            <li>
+                                <a class="menu-item" href="{{ route('dashboard.products.index') }}"
+                                    data-i18n="nav.templates.vert.overlay_menu">
+                                    {{ __('dashboard.products') }}
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
 
 
+
+            @can('users')
+                <li class=" nav-item">
+                    <a href="#"><i class="la la-users"></i>
+                        <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.users') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.users.index') }}"
+                                data-i18n="nav.templates.vert.overlay_menu">
+                                {{ __('dashboard.users') }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
         </ul>
     </div>
 </div>

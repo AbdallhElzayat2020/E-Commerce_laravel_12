@@ -9,14 +9,14 @@ use Illuminate\Support\Str;
 class ImageManager
 {
 
-    public static function uploadSingleFile($path, $image, $disk): string
+    public function uploadSingleFile($path, $image, $disk): string
     {
         $file_name = self::generateImageName($image);
         self::storeImageInLocal($image, $path, $file_name, $disk);
         return $file_name;
     }
 
-    public static function uploadImages($images, $model, $disk): void
+    public function uploadImages($images, $model, $disk): void
     {
         // upload multiple images
         if ($images) {
@@ -32,7 +32,7 @@ class ImageManager
         }
     }
 
-    public static function deleteImages($model): void
+    public function deleteImages($model): void
     {
         if ($model->images->count() > 0) {
             foreach ($model->images as $image) {
@@ -43,17 +43,17 @@ class ImageManager
     }
 
 
-    public static function generateImageName($image): string
+    public function generateImageName($image): string
     {
         return '_' . Str::uuid() . time() . '.' . $image->getClientOriginalExtension();
     }
 
-    private static function storeImageInLocal($image, $path, $file_name, $disk): void
+    private function storeImageInLocal($image, $path, $file_name, $disk): void
     {
         $image->storeAs($path, $file_name, ['disk' => $disk]);
     }
 
-    public static function deleteImageLocal($imagePath): void
+    public function deleteImageLocal($imagePath): void
     {
         if (File::exists(public_path($imagePath))) {
             File::delete(public_path($imagePath));

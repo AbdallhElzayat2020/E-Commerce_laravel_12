@@ -15,6 +15,10 @@ class GovernorateSeeder extends Seeder
      */
     public function run(): void
     {
+        // Ensure countries exist before seeding governorates
+        $this->call([
+            CountrySeeder::class,
+        ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Governorate::truncate();
@@ -91,39 +95,50 @@ class GovernorateSeeder extends Seeder
             // ======== End: Oman Governorates ========
 
             //  // ======== Start: Sudan Governorates ========
-            ['name' => ['en' => 'Khartoum', 'ar' => 'الخرطوم'], 'country_id' => 3],
-            ['name' => ['en' => 'Gezira', 'ar' => 'الجزيرة'], 'country_id' => 3],
-            ['name' => ['en' => 'River Nile', 'ar' => 'نهر النيل'], 'country_id' => 3],
-            ['name' => ['en' => 'North Kordofan', 'ar' => 'شمال كردفان'], 'country_id' => 3],
-            ['name' => ['en' => 'South Kordofan', 'ar' => 'جنوب كردفان'], 'country_id' => 3],
-            ['name' => ['en' => 'North Darfur', 'ar' => 'شمال دارفور'], 'country_id' => 3],
-            ['name' => ['en' => 'South Darfur', 'ar' => 'جنوب دارفور'], 'country_id' => 3],
-            ['name' => ['en' => 'West Darfur', 'ar' => 'غرب دارفور'], 'country_id' => 3],
-            ['name' => ['en' => 'East Darfur', 'ar' => 'شرق دارفور'], 'country_id' => 3],
-            ['name' => ['en' => 'Central Darfur', 'ar' => 'وسط دارفور'], 'country_id' => 3],
-            ['name' => ['en' => 'Northern State', 'ar' => 'الولاية الشمالية'], 'country_id' => 3],
-            ['name' => ['en' => 'White Nile', 'ar' => 'النيل الأبيض'], 'country_id' => 3],
-            ['name' => ['en' => 'Blue Nile', 'ar' => 'النيل الأزرق'], 'country_id' => 3],
-            ['name' => ['en' => 'Sennar', 'ar' => 'سنار'], 'country_id' => 3],
-            ['name' => ['en' => 'Kassala', 'ar' => 'كسلا'], 'country_id' => 3],
-            ['name' => ['en' => 'Gedaref', 'ar' => 'القضارف'], 'country_id' => 3],
-            ['name' => ['en' => 'West Kordofan', 'ar' => 'غرب كردفان'], 'country_id' => 3],
+            ['name' => ['en' => 'Khartoum', 'ar' => 'الخرطوم'], 'country_id' => 5],
+            ['name' => ['en' => 'Gezira', 'ar' => 'الجزيرة'], 'country_id' => 5],
+            ['name' => ['en' => 'River Nile', 'ar' => 'نهر النيل'], 'country_id' => 5],
+            ['name' => ['en' => 'North Kordofan', 'ar' => 'شمال كردفان'], 'country_id' => 5],
+            ['name' => ['en' => 'South Kordofan', 'ar' => 'جنوب كردفان'], 'country_id' => 5],
+            ['name' => ['en' => 'North Darfur', 'ar' => 'شمال دارفور'], 'country_id' => 5],
+            ['name' => ['en' => 'South Darfur', 'ar' => 'جنوب دارفور'], 'country_id' => 5],
+            ['name' => ['en' => 'West Darfur', 'ar' => 'غرب دارفور'], 'country_id' => 5],
+            ['name' => ['en' => 'East Darfur', 'ar' => 'شرق دارفور'], 'country_id' => 5],
+            ['name' => ['en' => 'Central Darfur', 'ar' => 'وسط دارفور'], 'country_id' => 5],
+            ['name' => ['en' => 'Northern State', 'ar' => 'الولاية الشمالية'], 'country_id' => 5],
+            ['name' => ['en' => 'White Nile', 'ar' => 'النيل الأبيض'], 'country_id' => 5],
+            ['name' => ['en' => 'Blue Nile', 'ar' => 'النيل الأزرق'], 'country_id' => 5],
+            ['name' => ['en' => 'Sennar', 'ar' => 'سنار'], 'country_id' => 5],
+            ['name' => ['en' => 'Kassala', 'ar' => 'كسلا'], 'country_id' => 5],
+            ['name' => ['en' => 'Gedaref', 'ar' => 'القضارف'], 'country_id' => 5],
+            ['name' => ['en' => 'West Kordofan', 'ar' => 'غرب كردفان'], 'country_id' => 5],
             // ======== End: Sudan Governorates ========
 
-            // ======== Start: Sudan Governorates ========
-            ['name' => ['en' => 'Rabat-Salé-Kénitra', 'ar' => 'الرباط-سلا-القنيطرة'], 'country_id' => 5],
-            ['name' => ['en' => 'Casablanca-Settat', 'ar' => 'الدار البيضاء-سطات'], 'country_id' => 5],
-            ['name' => ['en' => 'Marrakech-Safi', 'ar' => 'مراكش-آسفي'], 'country_id' => 5],
-            ['name' => ['en' => 'Fès-Meknès', 'ar' => 'فاس-مكناس'], 'country_id' => 5],
-            ['name' => ['en' => 'Tanger-Tetouan-Al Hoceima', 'ar' => 'طنجة-تطوان-الحسيمة'], 'country_id' => 5],
-            ['name' => ['en' => 'Oriental', 'ar' => 'الشرق'], 'country_id' => 5],
-            ['name' => ['en' => 'Béni Mellal-Khénifra', 'ar' => 'بني ملال-خنيفرة'], 'country_id' => 5],
-            ['name' => ['en' => 'Drâa-Tafilalet', 'ar' => 'درعة-تافيلالت'], 'country_id' => 5],
-            ['name' => ['en' => 'Souss-Massa', 'ar' => 'سوس-ماسة'], 'country_id' => 5],
-            ['name' => ['en' => 'Guelmim-Oued Noun', 'ar' => 'كلميم-واد نون'], 'country_id' => 5],
-            ['name' => ['en' => 'Laâyoune-Sakia El Hamra', 'ar' => 'العيون-الساقية الحمراء'], 'country_id' => 5],
-            ['name' => ['en' => 'Dakhla-Oued Ed-Dahab', 'ar' => 'الداخلة-وادي الذهب'], 'country_id' => 5],
-            // ======== End: Sudan Governorates ========
+            // ======== Start: Morocco Regions ========
+            // ['name' => ['en' => 'Rabat-Salé-Kénitra', 'ar' => 'الرباط-سلا-القنيطرة'], 'country_id' => 6],
+            // ['name' => ['en' => 'Casablanca-Settat', 'ar' => 'الدار البيضاء-سطات'], 'country_id' => 6],
+            // ['name' => ['en' => 'Marrakech-Safi', 'ar' => 'مراكش-آسفي'], 'country_id' => 6],
+            // ['name' => ['en' => 'Fès-Meknès', 'ar' => 'فاس-مكناس'], 'country_id' => 6],
+            // ['name' => ['en' => 'Tanger-Tetouan-Al Hoceima', 'ar' => 'طنجة-تطوان-الحسيمة'], 'country_id' => 6],
+            // ['name' => ['en' => 'Oriental', 'ar' => 'الشرق'], 'country_id' => 6],
+            // ['name' => ['en' => 'Béni Mellal-Khénifra', 'ar' => 'بني ملال-خنيفرة'], 'country_id' => 6],
+            // ['name' => ['en' => 'Drâa-Tafilalet', 'ar' => 'درعة-تافيلالت'], 'country_id' => 6],
+            // ['name' => ['en' => 'Souss-Massa', 'ar' => 'سوس-ماسة'], 'country_id' => 6],
+            // ['name' => ['en' => 'Guelmim-Oued Noun', 'ar' => 'كلميم-واد نون'], 'country_id' => 6],
+            // ['name' => ['en' => 'Laâyoune-Sakia El Hamra', 'ar' => 'العيون-الساقية الحمراء'], 'country_id' => 6],
+            // ['name' => ['en' => 'Dakhla-Oued Ed-Dahab', 'ar' => 'الداخلة-وادي الذهب'], 'country_id' => 6],
+            // ======== End: Morocco Regions ========
+
+            // ======== Start: Lebanon Governorates ========
+            // ['name' => ['en' => 'Beirut', 'ar' => 'بيروت'], 'country_id' => 11],
+            // ['name' => ['en' => 'Mount Lebanon', 'ar' => 'جبل لبنان'], 'country_id' => 11],
+            // ['name' => ['en' => 'North Lebanon', 'ar' => 'الشمال'], 'country_id' => 11],
+            // ['name' => ['en' => 'Akkar', 'ar' => 'عكار'], 'country_id' => 11],
+            // ['name' => ['en' => 'Bekaa', 'ar' => 'البقاع'], 'country_id' => 11],
+            // ['name' => ['en' => 'Baalbek-Hermel', 'ar' => 'بعلبك-الهرمل'], 'country_id' => 11],
+            // ['name' => ['en' => 'Nabatieh', 'ar' => 'النبطية'], 'country_id' => 11],
+            // ['name' => ['en' => 'South Lebanon', 'ar' => 'الجنوب'], 'country_id' => 11],
+            // ======== End: Lebanon Governorates ========
 
         ];
 

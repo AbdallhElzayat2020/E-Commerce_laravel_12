@@ -1,22 +1,24 @@
 <?php
 
+use Livewire\Livewire;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Dashboard\AdminController;
-use App\Http\Controllers\Dashboard\Auth\ForgetPasswordController;
-use App\Http\Controllers\Dashboard\Auth\LoginController;
-use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
-use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Dashboard\CouponController;
-use App\Http\Controllers\Dashboard\HomeController;
-use App\Http\Controllers\Dashboard\ProductController;
-use App\Http\Controllers\Dashboard\RoleController;
-use App\Http\Controllers\Dashboard\SettingController;
-use App\Http\Controllers\Dashboard\WorldController;
-use App\Http\Controllers\Dashboard\BrandController;
-use App\Http\Controllers\Dashboard\FaqController;
-use App\Http\Controllers\Dashboard\AttributeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\FaqController;
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\AdminController;
+use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\Dashboard\WorldController;
+use App\Http\Controllers\Dashboard\CouponController;
+use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\AttributeController;
+use App\Http\Controllers\Dashboard\Auth\LoginController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
+use App\Http\Controllers\Dashboard\Auth\ForgetPasswordController;
 
 Route::group(
     [
@@ -165,11 +167,21 @@ Route::group(
             });
             ####################### Products Route #########################
 
+            ####################### Users Route #########################
+            Route::group(['middleware' => 'can:users'], function () {
+
+                Route::resource('users', UserController::class);
+                Route::post('users/update-status', [UserController::class, 'updateStatus'])->name('users.update-status');
+
+                Route::get('users-all', [UserController::class, 'getAll'])
+                    ->name('users.all');
+            });
+            ####################### Users Route #########################
+
             // livewire Localized Routes
             Livewire::setUpdateRoute(function ($handle) {
                 return Route::post('/livewire/update', $handle);
             });
-
         });
     }
 );

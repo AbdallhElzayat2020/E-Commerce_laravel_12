@@ -161,6 +161,8 @@ return [
     'products_show' => 'Products Show',
 
     'users' => 'المستخدمين',
+    'users_create' => 'انشاء مستخدم',
+    'users_table' => 'جدول المستخدمين',
     'num_of_orders' => 'عدد الطلبات',
     'email_verified_at' => 'تاريخ التحقق من البريد الالكتروني',
 

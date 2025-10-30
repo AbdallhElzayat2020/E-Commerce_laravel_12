@@ -14,11 +14,11 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <strong>{{ __('dashboard.well_done') }}!</strong> {{ $errorMessage }}
+            <strong>{{ __('dashboard.error_msg') }}!</strong> {{ $errorMessage }}
         </div>
     @endif
 
-    {{-- Steps--}}
+    {{-- Steps --}}
     <ul class="wizard-timeline center-align">
         <li class="{{ $currentStep > 1 ? 'completed' : '' }}">
             <span class="step-num">1</span>
@@ -33,7 +33,7 @@
             <label>{{ __('dashboard.product_images') }}</label>
         </li>
     </ul>
-    {{-- Steps--}}
+    {{-- Steps --}}
 
     <form class="wizard-circle">
 
@@ -220,11 +220,12 @@
                 @endif
 
                 {{-- edit this part --}}
-                @if($has_variants == 0)
+                @if ($has_variants == 0)
                     <div class="col-6">
                         <div class="form-group">
                             <label for="status">{{ __('dashboard.has_discount') }} :</label>
-                            <select name="status" id="status" class="form-control" wire:model.live="has_discount">
+                            <select name="status" id="status" class="form-control"
+                                    wire:model.live="has_discount">
                                 <option value="0" selected>{{ __('dashboard.no_discount') }}</option>
                                 <option value="1">{{ __('dashboard.has_discount') }}</option>
                             </select>
@@ -304,7 +305,7 @@
                                             class="form-control">
                                         {{-- <option value="">Select {{ $attr->name }}</option> --}}
                                         @foreach ($attr->attributeValues as $item)
-                                            <option value="{{ $item->id }}" @selected(($variantAttributes[$i][$attr->id]?? null)== $item->id)>
+                                            <option value="{{ $item->id }}" @selected(($variantAttributes[$i][$attr->id] ?? null) == $item->id)>
                                                 {{ $item->value }}
                                             </option>
                                         @endforeach
@@ -326,10 +327,12 @@
                 @endif
             @endif
 
-            <button class="btn btn-primary pull-right  mb-3 ml-1" type="button"
-                    wire:click="secondStepSubmit">{{ __('dashboard.next') }}</button>
-            <button class="btn btn-danger  pull-right" type="button"
-                    wire:click="back(1)">{{ __('dashboard.back') }}</button>
+            <button class="btn btn-primary pull-right  mb-3 ml-1" type="button" wire:click="secondStepSubmit">
+                {{ __('dashboard.next') }}
+            </button>
+            <button class="btn btn-danger  pull-right" type="button" wire:click="back(1)">
+                {{ __('dashboard.back') }}
+            </button>
         </div>
 
         {{-- third step Product Images --}}
@@ -341,7 +344,7 @@
                         <input type="file" wire:model.live="newImages" class="form-control" multiple>
                     </div>
                 </div>
-                @error('images')
+                @error('newImages')
                 <div class="col-md-12 alert  alert-danger">
                     {{ $message }}
                 </div>
@@ -351,20 +354,16 @@
                     <div class="col-md-12">
                         @foreach ($images as $key => $image)
                             <div class="position-relative d-inline-block mr-2 mb-2">
-                                <img src="{{ asset('uploads/products/'.$image->file_name) }}" class="img-thumbnail rounded-md"
-                                     width="300px" height="300px">
+                                <img src="{{ asset('uploads/products/' . $image->file_name) }}"
+                                     class="img-thumbnail rounded-md" width="300px" height="300px"
+                                     alt="{{ $image->file_name }}">
 
                                 <!-- Delete Button -->
-                                <button type="button" wire:click="deleteImage({{ $image->id }},{{ $key }},'{{ $image->file_name }}')"
+                                <button type="button"
+                                        wire:click="deleteImage({{ $image->id }}, {{ $key }}, '{{ $image->file_name }}')"
                                         class="btn btn-danger btn-sm position-absolute" style="top: 5px; right: 5px;">
                                     <i class="fa fa-trash"></i>
                                 </button>
-
-                                {{-- <!-- Fullscreen Button -->
-                                <button type="button" wire:click="openFullscreen({{ $key }})"
-                                    class="btn btn-primary btn-sm position-absolute" style="bottom: 5px; right: 5px;">
-                                    <i class="fa fa-expand"></i>
-                                </button> --}}
                             </div>
                         @endforeach
                     </div>
@@ -376,7 +375,7 @@
                         @foreach ($newImages as $key => $image)
                             <div class="position-relative d-inline-block mr-2 mb-2">
                                 <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail rounded-md"
-                                     width="300px" height="300px">
+                                     width="300px" height="300px" alt="New Image">
 
                                 <!-- Delete Button -->
                                 <button type="button" wire:click="deleteNewImage({{ $key }})"
@@ -389,7 +388,7 @@
                 @endif
             </div>
             <button class="btn btn-success  pull-right  mb-3 ml-1" wire:click="submitForm"
-                    type="button">{{ __('dashboard.next') }}!
+                    type="button">{{ __('dashboard.save') }}!
             </button>
             <button class="btn btn-danger  pull-right  mb-3" type="button" wire:click="back(2)">
                 {{ __('dashboard.back') }}

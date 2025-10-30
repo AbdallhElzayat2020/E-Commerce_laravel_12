@@ -196,6 +196,8 @@ return [
     'products_show' => 'Products Show',
 
     'users' => 'Users',
+    'users_create' => 'Create User',
+    'users_table' => 'Users Table',
     'num_of_orders' => 'Num Of Orders',
     'email_verified_at' => 'Email Verified At',
     'contacts' => 'Email Application',

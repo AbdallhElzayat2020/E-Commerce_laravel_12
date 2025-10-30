@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 
 class Governorate extends Model
 {
@@ -49,5 +51,17 @@ class Governorate extends Model
             return $value == 1 ? 'مفعل' : 'غير مفعل';
         }
         return $value == 1 ? 'Active' : 'Inactive';
+    }
+
+    /*  ==================== Methods ==================== */
+    #[Scope]
+    protected function active(Builder $query): Builder
+    {
+        return $query->where('is_active', 'active');
+    }
+    #[Scope]
+    protected function inActive(Builder $query): Builder
+    {
+        return $query->where('is_active', 'inactive');
     }
 }

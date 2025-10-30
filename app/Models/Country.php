@@ -49,7 +49,7 @@ class Country extends Model
     #[Scope]
     protected function active(Builder $query): Builder
     {
-        return $query->where('is_active', 'active');
+        return $query->where('is_active', 1);
     }
 
 

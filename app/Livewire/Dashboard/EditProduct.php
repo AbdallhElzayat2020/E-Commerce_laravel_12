@@ -3,6 +3,7 @@
 namespace App\Livewire\Dashboard;
 
 use App\Services\Dashboard\ProductService;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -42,7 +43,7 @@ class EditProduct extends Component
         $this->productAttributes = $productAttributes;
         $this->images = $this->product->images;
 
-//        // first step properties
+        //        // first step properties
         $this->name_ar = $this->product->getTranslation('name', 'ar');
         $this->name_en = $this->product->getTranslation('name', 'en');
         $this->desc_ar = $this->product->getTranslation('desc', 'ar');
@@ -74,10 +75,8 @@ class EditProduct extends Component
                 foreach ($variant->variantAttribute as $variantAttribute) {
                     $this->variantAttributes[$key][$variantAttribute->attributeValue->attribute_id] = $variantAttribute->attribute_value_id;
                 }
-
             }
         }
-
     }
 
     public function back($step)
@@ -105,33 +104,39 @@ class EditProduct extends Component
     public function secondStepSubmit()
     {
         $data = [
-            'has_variants' => ['required', 'in:1,0'],
+            'has_variants' => ['required', 'in:0,1'],
             'manage_stock' => ['required', 'in:0,1'],
-            'has_discount' => ['required', 'in:1,0'],
+            'has_discount' => ['required', 'in:0,1'],
         ];
         if ($this->has_variants == 0) {
             $data['price'] = ['required', 'numeric', 'min:1', 'max:1000000'];
         }
         if ($this->manage_stock == 1 && $this->has_variants == 0) {
-            $data['quantity'] = ['required', 'min:1', 'max:1000000'];
+            $data['quantity'] = ['required', 'numeric', 'min:1', 'max:1000000'];
         }
         if ($this->has_discount == 1) {
             $data['discount'] = ['required', 'numeric', 'min:1', 'max:100'];
-            $data['start_discount'] = ['date', 'before:end_discount'];
-            $data['end_discount'] = ['date', 'after:start_discount'];
+            $data['start_discount'] = ['nullable', 'date', 'before:end_discount'];
+            $data['end_discount'] = ['nullable', 'date', 'after:start_discount'];
         }
         if ($this->has_variants == 1) {
-            $data['prices'] = 'required|array|min:1';
-            $data['prices.*'] = 'required|numeric|min:1|max:1000000';
-            $data['quantities'] = 'required|array|min:1';
-            $data['quantities.*'] = 'required|integer|min:0';
-            $data['variantAttributes'] = 'required|array|min:1';
-            $data['variantAttributes.*'] = 'required|array';
-            $data['variantAttributes.*.*'] = 'required|integer|exists:attribute_values,id';
+            $data['prices'] = ['required', 'array', 'min:1'];
+            $data['prices.*'] = ['required', 'numeric', 'min:1', 'max:1000000'];
+            $data['quantities'] = ['required', 'array', 'min:1'];
+            $data['quantities.*'] = ['required', 'integer', 'min:0'];
+            $data['variantAttributes'] = ['required', 'array', 'min:1'];
+            $data['variantAttributes.*'] = ['required', 'array'];
+            $data['variantAttributes.*.*'] = ['required', 'integer', 'exists:attribute_values,id'];
         }
 
-        $this->validate($data);
-        $this->currentStep = 3;
+        try {
+            $this->validate($data);
+            $this->errorMessage = '';
+            $this->currentStep = 3;
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $firstError = collect($e->validator->errors()->all())->first();
+            $this->errorMessage = $firstError ?: 'Validation error';
+        }
     }
 
     public function addNewVariant()
@@ -161,6 +166,61 @@ class EditProduct extends Component
     public function deleteNewImage($key)
     {
         unset($this->newImages[$key]);
+    }
+
+    public function submitForm()
+    {
+        //
+        $productData = [
+            'name' => [
+                'ar' => $this->name_ar,
+                'en' => $this->name_en,
+            ],
+
+            'desc' => [
+                'ar' => $this->desc_ar,
+                'en' => $this->desc_en,
+            ],
+
+            'small_desc' => [
+                'ar' => $this->small_desc_ar,
+                'en' => $this->small_desc_en,
+            ],
+
+            'category_id' => $this->category_id,
+            'brand_id' => $this->brand_id,
+            'sku' => $this->sku,
+            'available_for' => $this->available_for,
+            'has_variants' => $this->has_variants,
+            'manage_stock' => $this->has_variants == 0 ? null : $this->manage_stock,
+            'price' => $this->has_variants == 1 ? null : $this->price,
+            'quantity' => $this->manage_stock == 0 ? null : $this->quantity,
+            'discount' => $this->has_discount == 0 ? null : $this->discount,
+            'start_discount' => $this->has_discount == 0 ? null : $this->start_discount,
+            'end_discount' => $this->has_discount == 0 ? null : $this->end_discount,
+        ];
+
+        // store Variants
+        $productVariants = [];
+        if ($this->has_variants) {
+            foreach ($this->prices as $index => $price) {
+                $productVariants[] = [
+                    'product_id' => $this->product->id,
+                    'price' => $price,
+                    'stock' => $this->quantities[$index] ?? 0,
+                    'attribute_value_ids' => $this->variantAttributes[$index] ?? [],
+                ];
+            }
+        }
+
+        $productUpdated = $this->productService->UpdateProductWithDetails($this->product, $productData, $productVariants, $this->newImages);
+        if (!$productUpdated) {
+            $this->errorMessage = __('dashboard.error_msg');
+            $this->currentStep = 1;
+        }
+
+        Session::flash('success', __('dashboard.success_msg'));;
+        return redirect()->route('dashboard.products.index');
     }
 
     public function render()

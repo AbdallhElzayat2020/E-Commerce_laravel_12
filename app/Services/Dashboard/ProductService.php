@@ -112,6 +112,54 @@ class ProductService
         }
     }
 
+
+    public function UpdateProductWithDetails($product, $productData, $productVariants, $images)
+    {
+
+        try {
+            DB::beginTransaction();
+
+            // update simple product
+            $productStatus = $this->productRepository->updateProduct($product, $productData);
+            if (!$productStatus) {
+                return false;
+            }
+
+            // delete old variants
+            $this->productRepository->deleteProductVariants($product->id);
+
+            // update product new variants
+            foreach ($productVariants as $variant) {
+                // create product variant
+
+                $createdVariant = $this->productRepository->createProductVariant($variant);
+                if (!$createdVariant) {
+                    return false;
+                }
+
+                // create product variant attribute
+                foreach ($variant['attribute_value_ids'] as $attribute_value_id) {
+                    $variant_attributes = $this->productRepository->createProductVariantAttribute([
+                        'product_variant_id' => $createdVariant->id,
+                        'attribute_value_id' => $attribute_value_id,
+                    ]);
+                    if (!$variant_attributes) {
+                        return false;
+                    }
+                }
+            }
+
+            // create product images
+            $this->imageManager->uploadImages($images, $product, 'products');
+
+            DB::commit();
+            return true;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+    }
+
     public function changeStatus($request)
     {
         try {
@@ -140,5 +188,15 @@ class ProductService
             Log::error('Delete Product Error: ' . $e->getMessage());
             return false;
         }
+    }
+
+
+    public function deleteProductImage($imageId, $file_name)
+    {
+        // delete image from local
+        $this->imageManager->deleteImageLocal('uploads/products/' . $file_name);
+        // delete image from database
+
+        return $this->productRepository->deleteProductImage($imageId);
     }
 }
