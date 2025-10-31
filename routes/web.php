@@ -1,13 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 Route::group(
     [
@@ -20,9 +16,7 @@ Route::group(
             return view('dashboard.auth.login');
         });
 
-        Route::get('/', function () {
-            return view('welcome');
-        });
+        Route::get('/', [HomeController::class, 'index'])->name('home');;
     }
 );
 
