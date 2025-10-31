@@ -6,7 +6,7 @@
         <div class="card w-100 p-3">
             <!-- Card Header -->
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="card-title">{{ __('dashboard.governorates') }}</h4>
+                <h4 class="card-title">{{ __('dashboard.contacts') }}</h4>
             </div>
 
             <!-- Card Body -->
