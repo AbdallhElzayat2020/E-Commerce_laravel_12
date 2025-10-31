@@ -197,8 +197,6 @@
                 </li>
             @endcan
 
-
-
             @can('users')
                 <li class=" nav-item">
                     <a href="#"><i class="la la-users"></i>
@@ -214,6 +212,27 @@
                     </ul>
                 </li>
             @endcan
+
+            @can('contacts')
+                <li class=" nav-item">
+                    <a href="#"><i class="la la-question-circle"></i>
+                        <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.contacts') }}</span>
+                        @if (isset($contacts_count))
+                            <span class="badge badge badge-info badge-pill float-right mr-2">{{ $contacts_count }}</span>
+                        @endif
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.contacts.index') }}"
+                               data-i18n="nav.templates.vert.overlay_menu">
+                                {{ __('dashboard.contacts') }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+
+
         </ul>
     </div>
 </div>

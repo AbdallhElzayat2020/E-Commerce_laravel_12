@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Coupon;
+use App\Models\Faq;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -28,26 +30,37 @@ class ViewServicesProvider extends ServiceProvider
                     return Category::count();
                 });
             }
+
             if (!Cache::has('brands_count')) {
                 Cache::remember('brands_count', 60 * 60 * 24, function () {
                     return Brand::count();
                 });
             }
+
             if (!Cache::has('coupons_count')) {
                 Cache::remember('coupons_count', 60 * 60 * 24, function () {
                     return Coupon::count();
                 });
             }
+
             if (!Cache::has('admins_count')) {
                 Cache::remember('admins_count', 60 * 60 * 24, function () {
                     return Admin::count();
                 });
             }
-            if (!Cache::has('coupons_count')) {
-                Cache::remember('coupons_count', 60 * 60 * 24, function () {
-                    return Admin::count();
+
+            if (!Cache::has('faqs_count')) {
+                Cache::remember('faqs_count', 60 * 60 * 24, function () {
+                    return Faq::count();
                 });
             }
+
+            if (!Cache::has('contacts_count')) {
+                Cache::remember('contacts_count', 60 * 60 * 24, function () {
+                    return Contact::where('is_read', 0)->count();
+                });
+            }
+
         });
 
         view()->share([
@@ -56,6 +69,7 @@ class ViewServicesProvider extends ServiceProvider
             'coupons_count' => Cache::get('coupons_count'),
             'admins_count' => Cache::get('admins_count'),
             'faqs_count' => Cache::get('faqs_count'),
+            'contacts_count' => Cache::get('contacts_count'),
         ]);
 
         // settings

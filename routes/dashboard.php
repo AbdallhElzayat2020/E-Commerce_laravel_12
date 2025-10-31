@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\ContactController;
 use Livewire\Livewire;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -177,6 +178,17 @@ Route::group(
                     ->name('users.all');
             });
             ####################### Users Route #########################
+
+            ####################### Contacts Route #########################
+            Route::group(['middleware' => 'can:contacts'], function () {
+
+                Route::get('contacts', [ContactController::class, 'index'])
+                    ->name('contacts.index');
+
+//                Route::get('users-all', [ContactController::class, 'getAll'])
+//                    ->name('users.all');
+            });
+            ####################### Contacts Route #########################
 
             // livewire Localized Routes
             Livewire::setUpdateRoute(function ($handle) {
