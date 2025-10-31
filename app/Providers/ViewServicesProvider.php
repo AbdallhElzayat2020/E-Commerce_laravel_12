@@ -82,6 +82,7 @@ class ViewServicesProvider extends ServiceProvider
 
 
     // create setting
+
     public function firstOrCreateSetting()
     {
         $getSetting = Setting::firstOr(function () {

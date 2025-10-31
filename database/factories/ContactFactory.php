@@ -23,7 +23,7 @@ class ContactFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
-            'subject' => fake()->sentence(5),
+            'subject' => fake()->sentence(3),
             'message' => fake()->paragraph(3),
             'is_read' => random_int(0, 1),
         ];

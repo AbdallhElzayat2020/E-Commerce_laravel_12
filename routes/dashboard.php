@@ -185,8 +185,7 @@ Route::group(
                 Route::get('contacts', [ContactController::class, 'index'])
                     ->name('contacts.index');
 
-//                Route::get('users-all', [ContactController::class, 'getAll'])
-//                    ->name('users.all');
+                Route::get('contacts/replay/{contact_id}', [ContactController::class, 'replayContact'])->name('contacts.replay');
             });
             ####################### Contacts Route #########################
 

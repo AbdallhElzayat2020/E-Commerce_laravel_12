@@ -39,7 +39,7 @@
 
 @push('js')
     <script>
-        // sweet alert after contact deleted
+        // sweet alert after contact deleted for livewire
         document.addEventListener('livewire:init', () => {
             Livewire.on('msg-deleted', (event) => {
                 Swal.fire({
@@ -51,18 +51,19 @@
                 });
             });
         });
+
         // sweet alert after contact replay
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('replay-contact-success', (event) => {
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: 'event',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            });
-        });
+        // document.addEventListener('livewire:init', () => {
+        //     Livewire.on('replay-contact-success', (event) => {
+        //         Swal.fire({
+        //             position: "top-center",
+        //             icon: "success",
+        //             title: 'event',
+        //             showConfirmButton: false,
+        //             timer: 1500
+        //         });
+        //     });
+        // });
 
     </script>
 @endpush
