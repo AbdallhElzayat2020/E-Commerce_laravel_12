@@ -20,8 +20,8 @@
         <div class="container">
             <div class="header-center">
                 <div class="logo">
-                    <a href="index-2.html">
-                        <img src="{{asset('assets/frontend')}}/images/logos/logo.webp" alt="logo">
+                    <a href="{{ route('home') }}">
+                        <img style="width: 100px" src="{{asset($settings->logo)}}" alt="logo-{{$settings->site_name}}">
                     </a>
                 </div>
                 <div class="header-cart-items">

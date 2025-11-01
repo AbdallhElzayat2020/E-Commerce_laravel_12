@@ -73,7 +73,7 @@ class ViewServicesProvider extends ServiceProvider
         ]);
 
         // settings
-        $settings = $this->firstOrCreateSetting();
+        $settings = self::firstOrCreateSetting();
         view()->share([
             'settings' => $settings,
         ]);
