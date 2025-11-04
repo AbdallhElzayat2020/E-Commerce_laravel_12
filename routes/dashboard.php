@@ -198,9 +198,9 @@ Route::group(
             ####################### Contacts Route #########################
 
             // livewire Localized Routes
-            Livewire::setUpdateRoute(function ($handle) {
-                return Route::post('/livewire/update', $handle);
-            });
+//            Livewire::setUpdateRoute(function ($handle) {
+//                return Route::post('/livewire/update', $handle);
+//            });
         });
     }
 );

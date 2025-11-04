@@ -35,6 +35,12 @@ return Application::configure(basePath: dirname(__DIR__))
             }
             return route('login');
         });
+        $middleware->redirectGuestsTo(function () {
+            if (request()->is('*/dashboard/*')) {
+                return route('dashboard.login');
+            }
+            return route('login');
+        });
 
         /*
          * redirect Admins
@@ -45,6 +51,14 @@ return Application::configure(basePath: dirname(__DIR__))
             }
             return redirect()->to('/');
         });
+
+        $middleware->redirectUsersTo(function () {
+            if (Auth::guard('web')->check()) {
+                return route('website.profile.index');
+            }
+            return redirect()->to('/');
+        });
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

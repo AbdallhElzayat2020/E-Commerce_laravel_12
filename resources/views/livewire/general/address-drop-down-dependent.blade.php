@@ -2,9 +2,12 @@
     <div class="form-group">
         <label for="country_id">Country</label>
         <select name="country_id" wire:model.live="countryId" class="form-control" id="country_id">
-            <option value="" selected>Select Country</option>
+            <option value="" {{ old('country_id', $countryId ?? '') == '' ? 'selected' : '' }}>Select Country</option>
             @foreach ($countries as $country)
-                <option value="{{ $country->id }}">{{ $country->getTranslation('name', app()->getLocale()) }}</option>
+                <option value="{{ $country->id }}"
+                    {{ old('country_id', $countryId ?? '') == $country->id ? 'selected' : '' }}>
+                    {{ $country->getTranslation('name', app()->getLocale()) }}
+                </option>
             @endforeach
         </select>
         @error('country_id')
@@ -15,9 +18,11 @@
     <div class="form-group">
         <label for="governorate_id">Governorate</label>
         <select name="governorate_id" wire:model.live="governorateId" class="form-control" id="governorate_id">
-            <option value="" selected>Select Governorate</option>
+            <option value="" {{ old('governorate_id', $governorateId ?? '') == '' ? 'selected' : '' }}>Select Governorate</option>
             @foreach ($governorates as $governorate)
-                <option value="{{ $governorate->id }}">{{ $governorate->getTranslation('name', app()->getLocale()) }}
+                <option value="{{ $governorate->id }}"
+                    {{ old('governorate_id', $governorateId ?? '') == $governorate->id ? 'selected' : '' }}>
+                    {{ $governorate->getTranslation('name', app()->getLocale()) }}
                 </option>
             @endforeach
         </select>
@@ -29,9 +34,12 @@
     <div class="form-group">
         <label for="city_id">City</label>
         <select name="city_id" wire:model="cityId" class="form-control" id="city_id">
-            <option value="" selected>Select City</option>
+            <option value="" {{ old('city_id', $cityId ?? '') == '' ? 'selected' : '' }}>Select City</option>
             @foreach ($cities as $city)
-                <option value="{{ $city->id }}">{{ $city->getTranslation('name', app()->getLocale()) }}</option>
+                <option value="{{ $city->id }}"
+                    {{ old('city_id', $cityId ?? '') == $city->id ? 'selected' : '' }}>
+                    {{ $city->getTranslation('name', app()->getLocale()) }}
+                </option>
             @endforeach
         </select>
         @error('city_id')

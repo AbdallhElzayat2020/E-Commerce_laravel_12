@@ -35,14 +35,16 @@
 
                         <div class="review-form-name checkbox">
                             <div class="checkbox-item d-flex align-items-center">
-                                <input type="checkbox" name="terms" required id="terms">
-                                <label for="terms">{{ __('dashboard.agree_all_termes') }} {{ $settings->site_name }}</label>
+                                <input type="checkbox" name="remember" id="terms">
+                                <label for="terms">{{ __('auth.remember_me') }}
+                                    {{ $settings->site_name }}</label>
                             </div>
                         </div>
 
                         <div class="login-btn text-center">
                             <button type="submit" class="shop-btn">{{ __('dashboard.login') }}</button>
-                            <span class="shop-account">{{ __('dashboard.have_account') }} ? <a href="{{ route('register') }}">{{ __('auth.login') }}</a>
+                            <span class="shop-account">{{ __('dashboard.have_account') }} ? <a
+                                    href="{{ route('register') }}">{{ __('website.register') }}</a>
                             </span>
                         </div>
 

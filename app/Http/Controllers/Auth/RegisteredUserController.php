@@ -31,20 +31,28 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'password' => ['required', Rules\Password::defaults()],
+            'country_id' => ['required', 'exists:countries,id'],
+            'governorate_id' => ['required', 'exists:governorates,id'],
+            'city_id' => ['required', 'exists:cities,id'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'country_id' => $request->country_id,
+            'governorate_id' => $request->governorate_id,
+            'city_id' => $request->city_id,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('website.profile.index', absolute: false));
     }
 }

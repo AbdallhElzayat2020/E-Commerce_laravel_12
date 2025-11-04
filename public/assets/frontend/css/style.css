@@ -1475,18 +1475,18 @@ button {
 }
 
 .hero-slider-one {
-    background: url("../images/homepage-one/hero-slider-one.webp") no-repeat center/cover;
-
+    background: url("../images/homepage-one/hero-slider-one.webp") no-repeat
+        center/cover;
 }
 
 .hero-slider-two {
-    background: url("../images/homepage-one/hero-slider-two.webp")
-        no-repeat center/cover;
+    background: url("../images/homepage-one/hero-slider-two.webp") no-repeat
+        center/cover;
 }
 
 .hero-slider-three {
-    background: url("../images/homepage-one/hero-slider-three.webp")
-        no-repeat center/cover;
+    background: url("../images/homepage-one/hero-slider-three.webp") no-repeat
+        center/cover;
 }
 
 @media (max-width: 767px) {
@@ -2099,8 +2099,8 @@ button {
 }
 
 .weekly-sale .style-section .wrapper-one {
-    background: url("../images/homepage-one/style-bg-three.webp")
-        no-repeat center/cover;
+    background: url("../images/homepage-one/style-bg-three.webp") no-repeat
+        center/cover;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -2109,8 +2109,8 @@ button {
 }
 
 .weekly-sale .style-section .wrapper-two {
-    background: url("../images/homepage-one/style-bg-four.webp")
-        no-repeat center/cover;
+    background: url("../images/homepage-one/style-bg-four.webp") no-repeat
+        center/cover;
 }
 
 @media (max-width: 767px) {
@@ -2916,8 +2916,8 @@ hr {
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    background: url("../images/homepage-one/product-deal-.webp")
-        no-repeat center/cover;
+    background: url("../images/homepage-one/product-deal-.webp") no-repeat
+        center/cover;
 }
 
 .product-deal-section .wrapper-heading {
@@ -3800,7 +3800,7 @@ table .ticket-row:hover {
 
 .login-section .review-form .comment-title {
     text-align: center;
-    margin-top: 5rem;
+    /*margin-top: 5rem;*/
 }
 
 .login-section .review-form .review-inner-form {
@@ -3870,7 +3870,7 @@ table .ticket-row:hover {
 
 .account-section .review-form {
     width: 57.2rem;
-    height: 79.1rem;
+    height: 83rem;
 }
 
 .account-section .account-inner-form {
@@ -4010,8 +4010,8 @@ table .ticket-row:hover {
 }
 
 .seller-wrapper {
-    background: url("../images/homepage-one/sallers-cover.png")
-        no-repeat center/cover;
+    background: url("../images/homepage-one/sallers-cover.png") no-repeat
+        center/cover;
     min-height: 32.8rem;
     padding: 2.5rem;
     border-radius: 0.5rem;

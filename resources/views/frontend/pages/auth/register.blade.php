@@ -22,29 +22,34 @@
                         <div class=" account-inner-form">
                             <div class="review-form-name">
                                 <label for="fname" class="form-label">{{ __('dashboard.name') }}*</label>
-                                <input name="name" type="text" id="fname" class="form-control"
-                                       placeholder="{{ __('dashboard.name') }}">
+                                <input name="name" type="text" id="fname" value="{{ old('name') }}"
+                                    class="form-control" placeholder="{{ __('dashboard.name') }}">
                             </div>
                         </div>
 
                         <div class="account-inner-form">
                             <div class="review-form-name">
                                 <label for="email" class="form-label">{{ __('dashboard.email') }}*</label>
-                                <input name="email" type="email" id="email" class="form-control"
-                                       placeholder="user@gmail.com">
+                                <input name="email" type="email" id="email" value="{{ old('email') }}"
+                                    class="form-control" placeholder="user@gmail.com">
                             </div>
+                        </div>
+
+                        <div class="review-form-name">
+                            @livewire('general.address-drop-down-dependent')
                         </div>
 
                         <div class="review-form-name address-form">
                             <label for="address" class="form-label">{{ __('dashboard.password') }}*</label>
                             <input name="password" type="password" id="address" class="form-control"
-                                   placeholder="{{ __('dashboard.password') }}">
+                                placeholder="{{ __('dashboard.password') }}">
                         </div>
 
                         <div class="review-form-name checkbox">
                             <div class="checkbox-item d-flex align-items-center">
                                 <input type="checkbox" name="terms" required id="terms">
-                                <label for="terms">{{ __('dashboard.agree_all_termes') }} {{ $settings->site_name }}</label>
+                                <label for="terms">{{ __('dashboard.agree_all_termes') }}
+                                    {{ $settings->site_name }}</label>
                             </div>
                         </div>
 
