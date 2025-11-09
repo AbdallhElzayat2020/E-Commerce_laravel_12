@@ -17,6 +17,7 @@
                                 <th>#</th>
                                 <th>{{ __('dashboard.name') }}</th>
                                 <th>{{ __('dashboard.products_count') }}</th>
+                                <th>Icon</th>
                                 <th>{{ __('dashboard.status') }}</th>
                                 <th>{{ __('dashboard.created_at') }}</th>
                                 <th>{{ __('dashboard.actions') }}</th>
@@ -85,6 +86,10 @@
                     {
                         data: 'products_count',
                         name: 'products_count',
+                    },
+                    {
+                        data: 'icon',
+                        name: 'icon',
                     },
                     {
                         data: 'status',

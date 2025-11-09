@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +13,17 @@ use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
 {
-    use HasTranslations, HasFactory;
+    use HasTranslations, HasFactory, Sluggable;
+
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     protected $table = 'products';
 

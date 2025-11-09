@@ -1,54 +1,27 @@
 @extends('frontend.layouts.master')
-@section('title','Home Page')
+@section('title',__('website.home'))
+
 @section('content')
     <section id="hero" class="hero">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper hero-wrapper">
-                <div class="swiper-slide hero-slider-one">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section" data-aos="fade-up">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span> OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="product-sidebar.html" class="shop-btn">Shop Now</a>
+
+                @foreach ($sliders as $item)
+                    <div class="swiper-slide hero-slider-one" style="background:url({{ asset($item->file_name) }}) no-repeat center center; background-size: cover;">
+                        <div class="container">
+                            <div class="col-lg-6">
+                                <div class="wrapper-section" data-aos="fade-up">
+                                    <div class="wrapper-info">
+                                        <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span> OFF
+                                        </h5>
+                                        <h1 class="wrapper-details">{{ $item->getTranslation('note',app()->getLocale()) }}</h1>
+                                        <a href="#" class="shop-btn">Shop Now</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="swiper-slide hero-slider-two">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span> OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="#" class="shop-btn">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide hero-slider-three">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span> OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="#" class="shop-btn">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -66,7 +39,7 @@
                                 <h4 class="wrapper-details">Get 65% Offer
                                     <span class="wrapper-inner-title">& Make New</span> Fusion.
                                 </h4>
-                                <a href="product-sidebar.html" class="shop-btn">Shop Now
+                                <a href="#" class="shop-btn">Shop Now
                                     <span>
                                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +62,7 @@
                                     <span class="wrapper-inner-title">Styles with Our</span>
                                     Products
                                 </h4>
-                                <a href="product-sidebar.html" class="shop-btn">Shop Now
+                                <a href="#" class="shop-btn">Shop Now
                                     <span>
                                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -113,7 +86,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>Our Categories</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <a href="#" class="view">View All</a>
             </div>
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
@@ -121,7 +94,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/dresses.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Dresses</a>
+                        <a href="#" class="wrapper-details">Dresses</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
@@ -129,7 +102,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/bags.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Leather Bags</a>
+                        <a href="#" class="wrapper-details">Leather Bags</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
@@ -137,7 +110,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/sweaters.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Sweaters</a>
+                        <a href="#" class="wrapper-details">Sweaters</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="400">
@@ -145,7 +118,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/shoes.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Boots</a>
+                        <a href="#" class="wrapper-details">Boots</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="500">
@@ -153,7 +126,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/gift.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Gift for Him</a>
+                        <a href="#" class="wrapper-details">Gift for Him</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="600">
@@ -161,7 +134,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/sneakers.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Sneakers</a>
+                        <a href="#" class="wrapper-details">Sneakers</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
@@ -169,7 +142,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/watch.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Watch</a>
+                        <a href="#" class="wrapper-details">Watch</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
@@ -177,7 +150,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/ring.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Gold Rings</a>
+                        <a href="#" class="wrapper-details">Gold Rings</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
@@ -185,7 +158,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/cap.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Cap</a>
+                        <a href="#" class="wrapper-details">Cap</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="400">
@@ -193,7 +166,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/glass.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Sunglass</a>
+                        <a href="#" class="wrapper-details">Sunglass</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="500">
@@ -201,7 +174,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/baby.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Baby Shop</a>
+                        <a href="#" class="wrapper-details">Baby Shop</a>
                     </div>
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
@@ -209,7 +182,7 @@
                         <img src="{{asset('assets/frontend')}}/images/homepage-one/category-img/bags.webp" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Leather Bags</a>
+                        <a href="#" class="wrapper-details">Leather Bags</a>
                     </div>
                 </div>
             </div>
@@ -221,89 +194,89 @@
         <div class="container">
             <div class="section-title">
                 <h5>Brand of Prodcuts</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <a href="#" class="view">View All</a>
             </div>
             <div class="brand-section">
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-1.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-2.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-3.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-4.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-5.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-6.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-7.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-8.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-9.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-10.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-11.webp" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
-                        <a href="product-sidebar.html">
+                        <a href="#">
                             <img src="{{asset('assets/frontend')}}/images/homepage-one/brand-img-12.webp" alt="img">
                         </a>
                     </div>
@@ -317,7 +290,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>NEW ARRIVALS</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <a href="#" class="view">View All</a>
             </div>
             <div class="arrival-section">
                 <div class="row g-5">
@@ -1647,7 +1620,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>Top Selling Prodcuts</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <a href="#" class="view">View All</a>
             </div>
             <div class="top-selling-section">
                 <div class="row g-5">
@@ -2419,7 +2392,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>Best Sell in this Week</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <a href="#" class="view">View All</a>
             </div>
             <div class="weekly-sale-section">
                 <div class="row g-5">
@@ -2862,7 +2835,7 @@
                                 <h4 class="wrapper-details">Get 65% Offer
                                     <span class="wrapper-inner-title">& Make New</span> Fusion.
                                 </h4>
-                                <a href="product-sidebar.html" class="shop-btn">Shop Now
+                                <a href="#" class="shop-btn">Shop Now
                                     <span>
                                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -2885,7 +2858,7 @@
                                     <span class="wrapper-inner-title">Styles with Our</span>
                                     Products
                                 </h4>
-                                <a href="product-sidebar.html" class="shop-btn">Shop Now
+                                <a href="#" class="shop-btn">Shop Now
                                     <span>
                                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">

@@ -40,7 +40,7 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        $data = $request->only(['name', 'parent_id', 'status']);
+        $data = $request->only(['name', 'parent_id', 'status', 'icon']);
         if (!$this->categoryService->store($data)) {
             return redirect()->back()->with('error', __('dashboard.error_msg'));
         }
@@ -61,7 +61,7 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request)
     {
-        $data = $request->only(['name', 'parent_id', 'status', 'id']);
+        $data = $request->only(['name', 'parent_id', 'status', 'id', 'icon']);
 
         $data['status'] = $request->status == 'active' ? 'active' : 'inactive';
 

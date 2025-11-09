@@ -35,13 +35,6 @@ return Application::configure(basePath: dirname(__DIR__))
             }
             return route('login');
         });
-        $middleware->redirectGuestsTo(function () {
-            if (request()->is('*/dashboard/*')) {
-                return route('dashboard.login');
-            }
-            return route('login');
-        });
-
         /*
          * redirect Admins
          */

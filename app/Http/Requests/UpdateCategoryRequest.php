@@ -19,7 +19,7 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'status' => ['required', 'in:active,inactive'],
             'parent_id' => ['nullable', 'integer', 'exists:categories,id'],
-            'icon' => ['nullable'],
+            'icon' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'description' => ['nullable', 'max:1000'],
             'name' => ['required', 'array'],
             'name.*' => ['required', 'string', 'max:255', UniqueTranslationRule::for('categories', 'name')->ignore($categoryId)],

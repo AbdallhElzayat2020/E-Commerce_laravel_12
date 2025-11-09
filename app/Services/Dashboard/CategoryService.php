@@ -3,17 +3,19 @@
 namespace App\Services\Dashboard;
 
 use App\Repositories\Dashboard\CategoryRepository;
+use App\Utils\ImageManager;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoryService
 
 {
 
-    protected CategoryRepository $categoryRepository;
+    protected $categoryRepository, $imageManager;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, ImageManager $imageManager)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->imageManager = $imageManager;
     }
 
     public function getAllCategories()
@@ -34,6 +36,9 @@ class CategoryService
             ->addColumn('products_count', function ($category) {
                 return $category->products()->count() == 0 ? __('dashboard.not_found') : $category->products()->count();
             })
+            ->addColumn('icon', function ($category) {
+                return view('dashboard.pages.categories.datatables.icon', compact('category'))->render();
+            })
             ->addColumn('created_at', function ($category) {
                 // returned by accessor on a Category model
                 return $category->created_at;
@@ -44,7 +49,7 @@ class CategoryService
             ->addColumn('status', function ($category) {
                 return view('dashboard.pages.categories.datatables.status', compact('category'))->render();
             })
-            ->rawColumns(['status', 'actions'])
+            ->rawColumns(['status', 'actions', 'icon'])
             ->make(true);
     }
 
@@ -63,15 +68,30 @@ class CategoryService
 
     public function store($data)
     {
+        if (array_key_exists('icon', $data) && $data['icon'] != null) {
+            $file_name = $this->imageManager->uploadSingleFile('/', $data['icon'], 'categories');
+            $data['icon'] = $file_name;
+        }
         return $this->categoryRepository->store($data);
     }
 
     public function update($data)
     {
         $category = $this->categoryRepository->getById($data['id']);
+
         if (!$category) {
             return false;
         }
+
+        if (array_key_exists('icon', $data) && $data['icon'] != null) {
+
+            $this->imageManager->deleteImageLocal($category->icon);
+
+            $file_name = $this->imageManager->uploadSingleFile('/', $data['icon'], 'categories');
+            $data['icon'] = $file_name;
+        }
+
+
         return $this->categoryRepository->update($category, $data);
     }
 

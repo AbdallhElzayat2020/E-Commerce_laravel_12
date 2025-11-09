@@ -55,6 +55,14 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'categories' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/categories'),
+            'url' => env('APP_URL'),
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
 
         'settings' => [
             'driver' => 'local',
@@ -77,6 +85,15 @@ return [
             'driver' => 'local',
             'root' => public_path('/uploads/users'),
             'url' => env('APP_URL'),
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'sliders' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/sliders'),
+            'url' => env('APP_URL').'/uploads/sliders',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

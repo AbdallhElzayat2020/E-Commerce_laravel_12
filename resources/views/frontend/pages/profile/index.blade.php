@@ -1739,3 +1739,25 @@
         </div>
     </section>
 @endsection
+
+
+
+
+
+
+{{--
+
+o.qahtani@alssadsteel.com
+Alssad@2023!
+
+
+home
+about      daynamic
+products   daynamic
+quality    الجودة
+hireing    daynamic
+blog       daynamic
+contact   daynamic
+
+ar - en
+--}}

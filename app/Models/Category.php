@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Category extends Model
 {
-    use Sluggable, HasTranslations;
+    use Sluggable, HasTranslations, Sluggable;
 
     public function sluggable(): array
     {
@@ -36,6 +36,7 @@ class Category extends Model
         'description',
         'icon',
         'parent_id',
+        'icon',
         'status',
     ];
 
@@ -73,5 +74,10 @@ class Category extends Model
     public function getCreatedAtAttribute(): string
     {
         return date('d/m/y H:i', strtotime($this->attributes['created_at']));
+    }
+
+    public function getIconAttribute($icon): string
+    {
+        return asset('uploads/categories/' . $icon);
     }
 }

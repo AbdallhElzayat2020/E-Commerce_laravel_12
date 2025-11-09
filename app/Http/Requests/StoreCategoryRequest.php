@@ -12,7 +12,7 @@ class StoreCategoryRequest extends FormRequest
         return [
             'status' => ['required', 'in:active,inactive'],
             'parent_id' => ['nullable', 'integer'],
-            'icon' => ['nullable'],
+            'icon' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'description' => ['nullable', 'max:2000'],
             'slug' => ['nullable'],
             'name' => ['required', 'array'],

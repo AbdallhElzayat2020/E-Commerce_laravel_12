@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('small_desc')->nullable();
-            //            $table->string('slug')->unique();
+            $table->string('slug')->unique();
             $table->longText('desc');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('sku');

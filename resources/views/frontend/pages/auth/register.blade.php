@@ -23,7 +23,7 @@
                             <div class="review-form-name">
                                 <label for="fname" class="form-label">{{ __('dashboard.name') }}*</label>
                                 <input name="name" type="text" id="fname" value="{{ old('name') }}"
-                                    class="form-control" placeholder="{{ __('dashboard.name') }}">
+                                       class="form-control" placeholder="{{ __('dashboard.name') }}">
                             </div>
                         </div>
 
@@ -31,10 +31,11 @@
                             <div class="review-form-name">
                                 <label for="email" class="form-label">{{ __('dashboard.email') }}*</label>
                                 <input name="email" type="email" id="email" value="{{ old('email') }}"
-                                    class="form-control" placeholder="user@gmail.com">
+                                       class="form-control" placeholder="user@gmail.com">
                             </div>
                         </div>
 
+                        {{--  livewire componemt  --}}
                         <div class="review-form-name">
                             @livewire('general.address-drop-down-dependent')
                         </div>
@@ -42,7 +43,7 @@
                         <div class="review-form-name address-form">
                             <label for="address" class="form-label">{{ __('dashboard.password') }}*</label>
                             <input name="password" type="password" id="address" class="form-control"
-                                placeholder="{{ __('dashboard.password') }}">
+                                   placeholder="{{ __('dashboard.password') }}">
                         </div>
 
                         <div class="review-form-name checkbox">

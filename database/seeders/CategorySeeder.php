@@ -25,25 +25,25 @@ class CategorySeeder extends Seeder
                 'name' => ['ar' => 'الكترونيات', 'en' => 'Electronics'],
                 'status' => 'active',
                 'description' => 'الكترونيات',
-                'icon' => asset('assets/dashboard/images/avatar.jpg'),
+                'icon' => 'avatar.webp',
             ],
             [
                 'name' => ['ar' => 'الملابس', 'en' => 'Clothes'],
                 'status' => 'active',
                 'description' => 'الملابس',
-                'icon' => asset('assets/dashboard/images/avatar.jpg'),
+                'icon' => 'avatar.webp',
             ],
             [
                 'name' => ['ar' => 'الأثاث', 'en' => 'Furniture'],
                 'status' => 'active',
                 'description' => 'الأثاث',
-                'icon' => asset('assets/dashboard/images/avatar.jpg'),
+                'icon' => 'avatar.webp',
             ],
             [
                 'name' => ['ar' => 'الأدوات المنزلية', 'en' => 'Home Appliances'],
                 'status' => 'active',
                 'description' => 'الأدوات المنزلية',
-                'icon' => asset('assets/dashboard/images/avatar.jpg'),
+                'icon' => 'avatar.webp',
             ],
         ];
 

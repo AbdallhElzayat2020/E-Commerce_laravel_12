@@ -6,20 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 
-use  App\Http\Controllers\Dashboard\{
-    FaqController,
-    HomeController,
-    RoleController,
-    UserController,
-    AdminController,
-    BrandController,
-    WorldController,
-    CouponController,
-    ProductController,
-    SettingController,
-    CategoryController,
-    AttributeController
-};
+use App\Http\Controllers\Dashboard\{FaqController, HomeController, RoleController, SliderController, UserController, AdminController, BrandController, WorldController, CouponController, ProductController, SettingController, CategoryController, AttributeController};
 
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -197,10 +184,22 @@ Route::group(
             });
             ####################### Contacts Route #########################
 
+
+            ####################### Sliders Route #########################
+            Route::group(['middleware' => 'can:sliders'], function () {
+
+                Route::get('sliders', [SliderController::class, 'index'])->name('sliders.index');
+                Route::post('slider', [SliderController::class, 'store'])->name('sliders.store');
+                Route::get('slider-all', [SliderController::class, 'getAll'])->name('sliders.all');
+                Route::get('slider/{id}/edit', [SliderController::class, 'edit'])->name('sliders.edit');
+                Route::put('slider/{id}', [SliderController::class, 'update'])->name('sliders.update');
+                Route::get('remove/{id}', [SliderController::class, 'destroy'])->name('sliders.delete');
+            });
+            ####################### Sliders Route #########################
             // livewire Localized Routes
-//            Livewire::setUpdateRoute(function ($handle) {
-//                return Route::post('/livewire/update', $handle);
-//            });
+            //            Livewire::setUpdateRoute(function ($handle) {
+            //                return Route::post('/livewire/update', $handle);
+            //            });
         });
     }
 );

@@ -40,19 +40,19 @@
                             @include('dashboard.includes.validations-errors')
 
                             <form class="form" action="{{ route('dashboard.categories.store') }}" method="POST"
-                                enctype="multipart/form-data">
+                                  enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-body">
                                     <div class="form-group">
                                         <label for="eventRegInput1">{{ __('dashboard.name_en') }}</label>
                                         <input type="text" value="{{ old('name.en') }}" class="form-control"
-                                            placeholder="{{ __('dashboard.name_en') }}" name="name[en]">
+                                               placeholder="{{ __('dashboard.name_en') }}" name="name[en]">
                                     </div>
                                     <div class="form-group">
                                         <label for="eventRegInput1">{{ __('dashboard.name_ar') }}</label>
                                         <input type="text" value="{{ old('name.ar') }}" class="form-control"
-                                            placeholder="{{ __('dashboard.name_ar') }}" name="name[ar]">
+                                               placeholder="{{ __('dashboard.name_ar') }}" name="name[ar]">
                                     </div>
                                     <div class="form-group">
                                         <label for="eventRegInput1">{{ __('dashboard.select_Parent') }}</label>
@@ -66,27 +66,27 @@
                                         </select>
                                     </div>
 
-                                    {{-- <div class="form-group">
-                                                <label for="image">{{ __('dashboard.icon') }}</label>
-                                                <input type="file" name="icon" class="form-control"
-                                                    id="single-image-edit" placeholder="{{ __('dashboard.icon') }}">
-                                            </div> --}}
+                                    <div class="form-group">
+                                        <label for="image">{{ __('dashboard.icon') }}</label>
+                                        <input type="file" name="icon" class="form-control" id="single-image"
+                                               placeholder="icon">
+                                    </div>
 
                                     <div class="form-group">
                                         <label>{{ __('dashboard.status') }}</label>
                                         <div class="input-group">
                                             <div class="d-inline-block custom-control custom-radio mr-1">
                                                 <input type="radio" value="active" @checked(old('status', 'active') === 'active')
-                                                    name="status" class="custom-control-input" id="yes1">
+                                                name="status" class="custom-control-input" id="yes1">
                                                 <label class="custom-control-label" for="yes1">
                                                     {{ __('dashboard.active') }}
                                                 </label>
                                             </div>
                                             <div class="d-inline-block custom-control custom-radio">
                                                 <input type="radio" value="inactive" @checked(old('status') === 'inactive')
-                                                    name="status" class="custom-control-input" id="no1">
+                                                name="status" class="custom-control-input" id="no1">
                                                 <label class="custom-control-label"
-                                                    for="no1">{{ __('dashboard.inactive') }}</label>
+                                                       for="no1">{{ __('dashboard.inactive') }}</label>
                                             </div>
                                         </div>
                                     </div>

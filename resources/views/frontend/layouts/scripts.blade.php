@@ -9,3 +9,5 @@
 <script src="{{asset('assets/frontend/js/swiper10-bundle.min.js')}}"></script>
 
 <script src="{{asset('assets/frontend/js/shopus.js')}}"></script>
+
+@stack('js')
