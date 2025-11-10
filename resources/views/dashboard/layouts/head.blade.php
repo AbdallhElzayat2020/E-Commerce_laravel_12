@@ -54,7 +54,6 @@
         <!-- BEGIN Custom CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard') }}/assets/css/style-rtl.css">
         <!-- END Custom CSS-->
-        
     @else
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard') }}/css/vendors.css">
 
@@ -106,5 +105,8 @@
 
     {{-- file input --}}
 
-    @stack('dashboard_css')
+    {{-- summernote Plugine --}}
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}"> --}}
+
+    @stack('css')
 </head>

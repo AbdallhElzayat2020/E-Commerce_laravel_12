@@ -23,7 +23,7 @@ class PageService
 
     public function getPagesForDataTables()
     {
-        $pages = self::getPages();
+        $pages = $this->getPages();
 
         return DataTables::of($pages)
             ->addIndexColumn()
@@ -31,16 +31,15 @@ class PageService
                 return $page->getTranslation('title', app()->getLocale());
             })
             ->addColumn('content', function ($page) {
-//                return view('dashboard.pages.pages.dataTables.content', compact('page'))->render();
-                return $page->getTranslation('content', app()->getLocale());
+                return view('dashboard.pages.pages.dataTables.content', compact('page'))->render();
             })
             ->addColumn('image', function ($page) {
                 return $page->image != null ? view('dashboard.pages.pages.dataTables.image', compact('page'))->render() : __('dashboard.no_image');
             })
-            ->addColumn('actions', function ($page) {
+            ->addColumn('action', function ($page) {
                 return view('dashboard.pages.pages.dataTables.actions', compact('page'))->render();
             })
-            ->rawColumns(['actions', 'content'])
+            ->rawColumns(['action', 'image', 'content'])
             ->make(true);
     }
 
@@ -62,7 +61,7 @@ class PageService
 
     public function updatePage($data, $id)
     {
-        $page = self::getPage($id);
+        $page = $this->getPage($id);
         if (array_key_exists('image', $data) && $data['image'] != null) {
             $this->imageManager->deleteImageLocal('uploads/pages/' . $page->image);
             $image_name = $this->imageManager->uploadSingleFile('/', $data['image'], 'pages');
@@ -70,7 +69,7 @@ class PageService
         }
         return $this->pageRepository->updatePage($page, $data);
     }
-
+ 
     public function deletePage($id)
     {
         if (!$page = $this->getPage($id)) {

@@ -9,8 +9,10 @@
             <div class="row breadcrumbs-top d-inline-block">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a
-                                href="{{ route('dashboard.home') }}">{{ __('dashboard.dashboard') }}</a>
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('dashboard.home') }}">
+                                {{ __('dashboard.dashboard') }}
+                            </a>
                         </li>
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.pages.index') }}">
                                 {{ __('dashboard.pages') }}</a>
@@ -20,6 +22,7 @@
             </div>
         </div>
     </div>
+
     <div class="row" style="display: flex; justify-content: center;">
         <div class="col-md-11">
             <div class="content-body">

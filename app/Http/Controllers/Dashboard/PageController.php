@@ -64,7 +64,7 @@ class PageController extends Controller
     public function update(PageRequest $request, string $id)
     {
         $data = $request->only(['title', 'content', 'image']);
-        $page = $this->pageService->updatePage($id, $data);
+        $page = $this->pageService->updatePage($data, $id);
 
         if (!$page) {
             return redirect()->back()->with('error', __('dashboard.error_msg'));

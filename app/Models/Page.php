@@ -21,7 +21,7 @@ class Page extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'title'
             ]
         ];
     }
