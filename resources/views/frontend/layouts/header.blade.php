@@ -20,7 +20,7 @@
         <div class="container">
             <div class="header-center">
                 <div class="logo">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('website.home') }}">
                         <img style="width: 100px" src="{{ asset($settings->logo) }}"
                             alt="logo-{{ $settings->getTranslation('site_name', app()->getLocale()) }}">
                     </a>
@@ -1054,7 +1054,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="about.html">
+                            <a href="{{ route('website.about-us') }}">
                                 <span class="list-text">About</span>
                             </a>
                         </li>

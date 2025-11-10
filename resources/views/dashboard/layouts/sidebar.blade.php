@@ -222,6 +222,22 @@
                 </li>
             @endcan
 
+            @can('users')
+                <li class=" nav-item">
+                    <a href="#"><i class="la la-users"></i>
+                        <span class="menu-title" data-i18n="nav.templates.main">{{ __('dashboard.pages') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.pages.index') }}"
+                               data-i18n="nav.templates.vert.overlay_menu">
+                                {{ __('dashboard.pages') }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+
             @can('contacts')
                 <li class=" nav-item">
                     <a href="#"><i class="la la-question-circle"></i>

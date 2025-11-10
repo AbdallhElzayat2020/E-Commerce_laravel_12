@@ -72,6 +72,14 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        
+        'pages' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/pages'),
+            'url' => env('APP_URL'),
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         'products' => [
             'driver' => 'local',
@@ -93,7 +101,7 @@ return [
         'sliders' => [
             'driver' => 'local',
             'root' => public_path('/uploads/sliders'),
-            'url' => env('APP_URL').'/uploads/sliders',
+            'url' => env('APP_URL') . '/uploads/sliders',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

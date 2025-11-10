@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 
-use App\Http\Controllers\Dashboard\{FaqController, HomeController, RoleController, SliderController, UserController, AdminController, BrandController, WorldController, CouponController, ProductController, SettingController, CategoryController, AttributeController};
+use App\Http\Controllers\Dashboard\{FaqController, HomeController, PageController, RoleController, SliderController, UserController, AdminController, BrandController, WorldController, CouponController, ProductController, SettingController, CategoryController, AttributeController};
 
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -179,8 +179,6 @@ Route::group(
 
                 Route::get('contacts', [ContactController::class, 'index'])
                     ->name('contacts.index');
-
-                Route::get('contacts/replay/{contact_id}', [ContactController::class, 'replayContact'])->name('contacts.replay');
             });
             ####################### Contacts Route #########################
 
@@ -195,7 +193,19 @@ Route::group(
                 Route::put('slider/{id}', [SliderController::class, 'update'])->name('sliders.update');
                 Route::get('remove/{id}', [SliderController::class, 'destroy'])->name('sliders.delete');
             });
+
             ####################### Sliders Route #########################
+
+            ####################### Pages Route #########################
+            Route::group(['middleware' => 'can:pages'], function () {
+
+                Route::resource('pages', PageController::class);
+
+                Route::get('pages-all', [PageController::class, 'getAll'])
+                    ->name('pages.all');
+            });
+            ####################### Pages Route #########################
+
             // livewire Localized Routes
             //            Livewire::setUpdateRoute(function ($handle) {
             //                return Route::post('/livewire/update', $handle);

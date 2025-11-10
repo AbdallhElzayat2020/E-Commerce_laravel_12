@@ -17,7 +17,7 @@ class SliderSeeder extends Seeder
 
         for ($i = 1; $i <= 4; $i++) {
             Slider::create([
-                'file_name' => 'slider' . $i . '.jpg',
+                'file_name' => 'slider' . $i . '.',
                 'note' => [
                     'ar' => 'عنوان عربي لملاحظة السلايدر',
                     'en' => 'Title Arabic here for Slider Note'
