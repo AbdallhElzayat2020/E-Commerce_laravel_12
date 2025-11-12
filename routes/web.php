@@ -31,8 +31,6 @@ Route::group(
 
             Route::get('/', [HomeController::class, 'index'])->name('home');
 
-            Route::get('about-us', [AboutUsController::class, 'showAboutUsPage'])->name('about-us');
-
             Route::get('contact-us', [ContactUsController::class, 'showContactUsPage'])->name('contact-us');
 
             Route::get('{slug}', [DynamicPageController::class, 'showDynamicPage'])->name('dynamic-page');
