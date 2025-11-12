@@ -4,6 +4,7 @@ namespace App\Services\Dashboard;
 
 use App\Repositories\Dashboard\PageRepository;
 use App\Utils\ImageManager;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class PageService
@@ -56,6 +57,7 @@ class PageService
             $data['image'] = $image_name;
         }
 
+        $data['slug'] = Str::slug($data['title']['en']);
         return $this->pageRepository->createPage($data);
     }
 
@@ -67,9 +69,10 @@ class PageService
             $image_name = $this->imageManager->uploadSingleFile('/', $data['image'], 'pages');
             $data['image'] = $image_name;
         }
+        $data['slug'] = Str::slug($data['title']['en']);
         return $this->pageRepository->updatePage($page, $data);
     }
- 
+
     public function deletePage($id)
     {
         if (!$page = $this->getPage($id)) {

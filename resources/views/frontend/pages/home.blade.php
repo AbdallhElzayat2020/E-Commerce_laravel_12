@@ -5,15 +5,13 @@
     <section id="hero" class="hero">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper hero-wrapper">
-
                 @foreach ($sliders as $item)
                     <div class="swiper-slide hero-slider-one" style="background:url({{ asset($item->file_name) }}) no-repeat center center; background-size: cover;">
                         <div class="container">
                             <div class="col-lg-6">
                                 <div class="wrapper-section" data-aos="fade-up">
                                     <div class="wrapper-info">
-                                        <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span> OFF
-                                        </h5>
+                                        <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>OFF</h5>
                                         <h1 class="wrapper-details">{{ $item->getTranslation('note',app()->getLocale()) }}</h1>
                                         <a href="#" class="shop-btn">Shop Now</a>
                                     </div>
@@ -3358,4 +3356,5 @@
             </div>
         </div>
     </section>
+
 @endsection

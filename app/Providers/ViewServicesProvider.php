@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Coupon;
 use App\Models\Faq;
+use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -24,6 +25,7 @@ class ViewServicesProvider extends ServiceProvider
     public function boot(): void
     {
 
+        /* =============== Share files for dashboard Admin ===============  */
         View::composer('dashboard.*', function ($view) {
             if (!Cache::has('categories_count')) {
                 Cache::remember('categories_count', 60 * 60 * 24, function () {
@@ -60,9 +62,19 @@ class ViewServicesProvider extends ServiceProvider
                     return Contact::where('is_read', 0)->count();
                 });
             }
-
         });
 
+        /* =============== Share files for website ===============  */
+        View::composer('website.*', function () {
+            $pages = Page::select('slug', 'id', 'title')->get();
+            // website pages
+            view()->share([
+                'pages' => $pages,
+            ]);
+        });
+        /* =============== Share files for website ===============  */
+
+        /* =============== Share files for dashboard ===============  */
         view()->share([
             'categories_count' => Cache::get('categories_count'),
             'brands_count' => Cache::get('brands_count'),
@@ -77,7 +89,6 @@ class ViewServicesProvider extends ServiceProvider
         view()->share([
             'settings' => $settings,
         ]);
-
     }
 
 

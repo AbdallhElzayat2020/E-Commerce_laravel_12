@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Website\AboutUsController;
 use App\Http\Controllers\Website\ContactUsController;
+use App\Http\Controllers\Website\DynamicPageController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +16,6 @@ Route::group(
     function () {
 
 
-
-
         /* ========================== Protected Routes ========================== */
         Route::middleware(['auth'])->prefix('website')->as('website.')->group(function () {
 
@@ -28,13 +27,15 @@ Route::group(
 
         /* ========================== Public Routes ========================== */
 
-        Route::prefix('website')->middleware(['guest'])->as('website.')->group(function () {
+        Route::prefix('/')->middleware(['guest'])->as('website.')->group(function () {
 
             Route::get('/', [HomeController::class, 'index'])->name('home');
 
             Route::get('about-us', [AboutUsController::class, 'showAboutUsPage'])->name('about-us');
 
             Route::get('contact-us', [ContactUsController::class, 'showContactUsPage'])->name('contact-us');
+
+            Route::get('{slug}', [DynamicPageController::class, 'showDynamicPage'])->name('dynamic-page');
 
         });
 
