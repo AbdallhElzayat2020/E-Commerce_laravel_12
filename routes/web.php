@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Website\AboutUsController;
+use App\Http\Controllers\Website\FaqController;
 use App\Http\Controllers\Website\ContactUsController;
 use App\Http\Controllers\Website\DynamicPageController;
 use App\Http\Controllers\Website\HomeController;
@@ -33,7 +33,10 @@ Route::group(
 
             Route::get('contact-us', [ContactUsController::class, 'showContactUsPage'])->name('contact-us');
 
-            Route::get('{slug}', [DynamicPageController::class, 'showDynamicPage'])->name('dynamic-page');
+            Route::get('faqs', [FaqController::class, 'showFaqPage'])->name('faqs.index');
+
+            // dynamic Page Route
+            Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])->name('dynamic-page');
 
         });
 

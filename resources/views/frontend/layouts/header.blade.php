@@ -1053,6 +1053,11 @@
                                         </li>
                                     @endforeach
                                 @endif
+                                <li>
+                                    <a href="{{ route('website.faqs.index') }}">
+                                        {{__('website.faq')}}
+                                    </a>
+                                </li>
                             </ul>
                             {{-- dropdown pages --}}
 
