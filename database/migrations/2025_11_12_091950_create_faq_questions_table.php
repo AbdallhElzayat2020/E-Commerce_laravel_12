@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question_faqs', function (Blueprint $table) {
+        Schema::create('faq_questions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('phone');
-            $table->text('message');
+            $table->string('subject');
+            $table->longText('message');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('question_faqs');
+        Schema::dropIfExists('faq_questions');
     }
 };
