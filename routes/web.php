@@ -1,10 +1,15 @@
 <?php
 
-use App\Http\Controllers\Website\FaqController;
-use App\Http\Controllers\Website\ContactUsController;
-use App\Http\Controllers\Website\DynamicPageController;
-use App\Http\Controllers\Website\HomeController;
-use App\Http\Controllers\Website\ProfileController;
+use App\Http\Controllers\Website\{
+    FaqController,
+    ContactUsController,
+    DynamicPageController,
+    HomeController,
+    ProfileController,
+    CategoryController,
+    BrandController,
+};
+
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -19,7 +24,8 @@ Route::group(
         /* ========================== Protected Routes  ========================== */
         Route::middleware(['auth'])->prefix('website')->as('website.')->group(function () {
 
-            Route::get('user-profile', [ProfileController::class, 'index'])->name('profile.index');
+            Route::get('user-profile', [ProfileController::class, 'index'])
+                ->name('profile.index');
 
 
         });
@@ -29,14 +35,29 @@ Route::group(
 
         Route::prefix('/')->middleware(['guest'])->as('website.')->group(function () {
 
-            Route::get('/', [HomeController::class, 'index'])->name('home');
+            // Home
+            Route::get('/', [HomeController::class, 'index'])
+                ->name('home');
 
-            Route::get('contact-us', [ContactUsController::class, 'showContactUsPage'])->name('contact-us');
+            // contact us
+            Route::get('contact-us', [ContactUsController::class, 'showContactUsPage'])
+                ->name('contact-us');
 
-            Route::get('faqs', [FaqController::class, 'showFaqPage'])->name('faqs.index');
+            // faqs
+            Route::get('faqs', [FaqController::class, 'showFaqPage'])
+                ->name('faqs.index');
+
+            // categories
+            Route::get('categories', [CategoryController::class, 'showCategoryPage'])
+                ->name('categories.index');
+
+            // brands
+            Route::get('brands', [BrandController::class, 'showBrandPage'])
+                ->name('brands.index');
 
             // dynamic Pages Route
-            Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])->name('dynamic-page');
+            Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])
+                ->name('dynamic-page');
 
         });
 
