@@ -10,7 +10,7 @@ class FaqQuestion extends Component
 
     public $name, $email, $subject, $message;
 
-    protected $faqService;
+    protected FaqService $faqService;
 
     public function boot(FaqService $faqService)
     {
@@ -23,7 +23,7 @@ class FaqQuestion extends Component
             'name' => 'required|min:2|max:200',
             'email' => 'required|email|max:200',
             'subject' => 'required|min:2|max:200',
-            'message' => 'required|min:3|max:2000',
+            'message' => 'required|min:3|max:5000',
         ];
     }
 
@@ -35,6 +35,18 @@ class FaqQuestion extends Component
     public function submit()
     {
         $this->validate();
+        $data = [
+            'name' => $this->name,
+            'email' => $this->email,
+            'subject' => $this->subject,
+            'message' => $this->message,
+        ];
+        $faq = $this->faqService->createFaqQuestion($data);
+        if (!$faq) {
+            $this->dispatch('faq-question-failed', 'Something went wrong');
+        }
+        $this->reset();
+        $this->dispatch('faq-question-created', 'Your message has been sent successfully');
     }
 
     public function render()

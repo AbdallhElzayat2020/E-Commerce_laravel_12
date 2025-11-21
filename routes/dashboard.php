@@ -1,20 +1,12 @@
 <?php
 
+use App\Http\Controllers\Dashboard\{AdminController, AttributeController, BrandController, CategoryController, CouponController, FaqController, HomeController, PageController, ProductController, RoleController, SettingController, SliderController, UserController, WorldController};
+use App\Http\Controllers\Dashboard\Auth\{ForgetPasswordController, LoginController, ResetPasswordController,};
 use App\Http\Controllers\Dashboard\ContactController;
-use Livewire\Livewire;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dashboard\FaqQuestionController;
 use Illuminate\Support\Facades\Route;
-
-
-use App\Http\Controllers\Dashboard\{FaqController, HomeController, PageController, RoleController, SliderController, UserController, AdminController, BrandController, WorldController, CouponController, ProductController, SettingController, CategoryController, AttributeController};
-
-
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use App\Http\Controllers\Dashboard\Auth\{
-    LoginController,
-    ResetPasswordController,
-    ForgetPasswordController,
-};
+
 
 Route::group(
     [
@@ -35,19 +27,31 @@ Route::group(
             Route::prefix('password')->name('password.')->group(function () {
                 /* Forget Password */
                 Route::controller(ForgetPasswordController::class)->group(function () {
-                    Route::get('/forgot-password', 'forgotPassword')->name('forgot-password');
-                    Route::post('/forgot-password', 'sendResetLinkEmail')->name('send-reset-link');
+                    Route::get('/forgot-password', 'forgotPassword')
+                        ->name('forgot-password');
+
+                    Route::post('/forgot-password', 'sendResetLinkEmail')
+                        ->name('send-reset-link');
 
                     /* OTP Verification */
-                    Route::get('show-otp-form/{email}/{token}', 'showOtpForm')->name('show-otp-form');
-                    Route::post('verify-otp-form', 'verifyOtp')->name('verify-otp-form');
-                    Route::post('resend-otp', 'resendOtp')->name('resend-otp');
+                    Route::get('show-otp-form/{email}/{token}', 'showOtpForm')
+                        ->name('show-otp-form');
+
+                    Route::post('verify-otp-form', 'verifyOtp')
+                        ->name('verify-otp-form');
+
+                    Route::post('resend-otp', 'resendOtp')
+                        ->name('resend-otp');
                 });
 
                 /* Reset Password */
                 Route::controller(ResetPasswordController::class)->group(function () {
-                    Route::get('/reset-password/{email}/{token}', 'showResetPasswordForm')->name('show-reset-password-form');
-                    Route::post('/reset-password', 'ResetPassword')->name('reset-password');
+                    Route::get('/reset-password/{email}/{token}', 'showResetPasswordForm')
+                        ->name('show-reset-password-form');
+
+                    Route::post('/reset-password', 'ResetPassword')
+                        ->name('reset-password');
+
                 });
             });
             ####################### End Reset Password Routes #########################
@@ -68,7 +72,9 @@ Route::group(
             ####################### Roles Route #########################
             Route::middleware(['can:roles'])->group(function () {
                 Route::resource('roles', RoleController::class);
-                Route::post('roles/update-status', [RoleController::class, 'updateStatus'])->name('roles.update-status');;
+
+                Route::post('roles/update-status', [RoleController::class, 'updateStatus'])
+                    ->name('roles.update-status');;
             });
             ####################### End Roles Route #########################
 
@@ -76,7 +82,8 @@ Route::group(
             ####################### Admins Route #########################
             Route::middleware(['can:admins'])->group(function () {
                 Route::resource('admins', AdminController::class);
-                Route::post('admins/update-status', [AdminController::class, 'updateStatus'])->name('admins.update-status');;
+                Route::post('admins/update-status', [AdminController::class, 'updateStatus'])
+                    ->name('admins.update-status');;
             });
             ####################### End Admins  #########################
 
@@ -86,13 +93,20 @@ Route::group(
 
                     Route::prefix('countries')->name('countries.')->group(function () {
                         Route::get('/', 'getAllCountries')->name('index');
-                        Route::get('/{country_id}/governorates', 'getGovsByCountry')->name('governorates.index');
-                        Route::get('/change-status/{country_id}', 'changeStatus')->name('status');
+
+                        Route::get('/{country_id}/governorates', 'getGovsByCountry')
+                            ->name('governorates.index');
+
+                        Route::get('/change-status/{country_id}', 'changeStatus')
+                            ->name('status');
                     });
 
                     Route::prefix('governorates')->name('governorates.')->group(function () {
-                        Route::get('/change-status/{gov_id}', 'changeGovStatus')->name('status');
-                        Route::put('/shipping-price', 'changeShippingPrice')->name('shipping-price');
+                        Route::get('/change-status/{gov_id}', 'changeGovStatus')
+                            ->name('status');
+
+                        Route::put('/shipping-price', 'changeShippingPrice')
+                            ->name('shipping-price');
                     });
                 });
             });
@@ -100,7 +114,8 @@ Route::group(
 
             ####################### Categories Route #########################
             Route::group(['middleware' => 'can:categories'], function () {
-                Route::resource('categories', CategoryController::class)->except('show');
+                Route::resource('categories', CategoryController::class)
+                    ->except('show');
 
                 Route::get('categories-all', [CategoryController::class, 'getAllCategories'])
                     ->name('categories.all');
@@ -131,19 +146,36 @@ Route::group(
 
             ####################### Faqs Route #########################
             Route::group(['middleware' => 'can:faqs'], function () {
-                Route::resource('faqs', FaqController::class)->except(['show']);
+                Route::resource('faqs', FaqController::class)
+                    ->except(['show']);
             });
             ####################### Faqs Route #########################
 
+            ####################### Faq Question Route #########################
+            Route::group(['middleware' => 'can:faqs'], function () {
+
+                Route::get('faqs-questions', [FaqQuestionController::class, 'index'])
+                    ->name('faqs.questions.index');
+
+                Route::delete('faqs-questions/{id}', [FaqQuestionController::class, 'destroy'])
+                    ->name('faqs.questions.destroy');
+
+                Route::get('faqs-question-all', [FaqQuestionController::class, 'getAll'])
+                    ->name('faqs.questions.all');
+            });
+            ####################### Faq Question Route #########################
+
             ####################### Settings Route #########################
             Route::group(['middleware' => 'can:settings'], function () {
-                Route::resource('settings', SettingController::class)->except(['show']);
+                Route::resource('settings', SettingController::class)
+                    ->except(['show']);
             });
             ####################### Settings Route #########################
 
             ####################### Attributes Route #########################
             Route::group(['middleware' => 'can:attributes'], function () {
-                Route::resource('attributes', AttributeController::class)->except(['show']);
+                Route::resource('attributes', AttributeController::class)
+                    ->except(['show']);
 
                 Route::get('attributes-all', [AttributeController::class, 'getAll'])
                     ->name('attributes.all');
@@ -154,12 +186,14 @@ Route::group(
             Route::group(['middleware' => 'can:products'], function () {
 
                 Route::resource('products', ProductController::class);
-                Route::post('products/update-status', [ProductController::class, 'updateStatus'])->name('products.update-status');
+                Route::post('products/update-status', [ProductController::class, 'updateStatus'])
+                    ->name('products.update-status');
 
                 Route::get('products-all', [ProductController::class, 'getAll'])
                     ->name('products.all');
 
-                Route::post('product/variants/{variant}', [ProductController::class, 'deleteVariant'])->name('products.variants.delete');
+                Route::post('product/variants/{variant}', [ProductController::class, 'deleteVariant'])
+                    ->name('products.variants.delete');
             });
             ####################### Products Route #########################
 
@@ -167,7 +201,8 @@ Route::group(
             Route::group(['middleware' => 'can:users'], function () {
 
                 Route::resource('users', UserController::class);
-                Route::post('users/update-status', [UserController::class, 'updateStatus'])->name('users.update-status');
+                Route::post('users/update-status', [UserController::class, 'updateStatus'])
+                    ->name('users.update-status');
 
                 Route::get('users-all', [UserController::class, 'getAll'])
                     ->name('users.all');
@@ -186,12 +221,24 @@ Route::group(
             ####################### Sliders Route #########################
             Route::group(['middleware' => 'can:sliders'], function () {
 
-                Route::get('sliders', [SliderController::class, 'index'])->name('sliders.index');
-                Route::post('slider', [SliderController::class, 'store'])->name('sliders.store');
-                Route::get('slider-all', [SliderController::class, 'getAll'])->name('sliders.all');
-                Route::get('slider/{id}/edit', [SliderController::class, 'edit'])->name('sliders.edit');
-                Route::put('slider/{id}', [SliderController::class, 'update'])->name('sliders.update');
-                Route::get('remove/{id}', [SliderController::class, 'destroy'])->name('sliders.delete');
+                Route::get('sliders', [SliderController::class, 'index'])
+                    ->name('sliders.index');
+
+                Route::post('slider', [SliderController::class, 'store'])
+                    ->name('sliders.store');
+
+                Route::get('slider-all', [SliderController::class, 'getAll'])
+                    ->name('sliders.all');
+
+                Route::get('slider/{id}/edit', [SliderController::class, 'edit'])
+                    ->name('sliders.edit');
+
+                Route::put('slider/{id}', [SliderController::class, 'update'])
+                    ->name('sliders.update');
+
+                Route::get('remove/{id}', [SliderController::class, 'destroy'])
+                    ->name('sliders.delete');
+
             });
 
             ####################### Sliders Route #########################

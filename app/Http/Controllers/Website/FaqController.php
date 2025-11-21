@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use App\Services\Website\FaqService;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,13 @@ class FaqController extends Controller
 
     public function __construct(FaqService $faqService)
     {
-        return $this->faqService = $faqService;
+        $this->faqService = $faqService;
     }
 
     public function showFaqPage()
     {
         $faqs = $this->faqService->getFaqs();
+        Faq::paginate(15);
         if (!$faqs) {
             abort(404);
         }

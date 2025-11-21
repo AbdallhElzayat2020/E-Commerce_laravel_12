@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class FaqQuestion extends Model
 {
 
+    protected $fillable = [
+        'message',
+        'subject',
+        'email',
+        'name',
+    ];
 
     public function fetCreatedAtAttribute($value)
     {

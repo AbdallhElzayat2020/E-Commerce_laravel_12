@@ -135,6 +135,12 @@
                                 {{ __('dashboard.faqs') }}
                             </a>
                         </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('dashboard.faqs.questions.index') }}"
+                               data-i18n="nav.templates.vert.overlay_menu">
+                                {{ __('dashboard.faq_questions') }}
+                            </a>
+                        </li>
                     </ul>
                 </li>
             @endcan

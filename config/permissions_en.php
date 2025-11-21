@@ -3,6 +3,15 @@
 return [
 
     'admins' => 'Manage Admins',
+
+
+
+    'create_admin' => 'create Admin',
+    'delete_admin' => 'Delete Admin',
+
+
+
+
     'categories' => 'Manage Categories',
     'brands' => 'Manage Brands',
     'coupons' => 'Manage Coupons',

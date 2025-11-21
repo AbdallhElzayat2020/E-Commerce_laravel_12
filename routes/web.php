@@ -16,7 +16,7 @@ Route::group(
     function () {
 
 
-        /* ========================== Protected Routes ========================== */
+        /* ========================== Protected Routes  ========================== */
         Route::middleware(['auth'])->prefix('website')->as('website.')->group(function () {
 
             Route::get('user-profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -35,7 +35,7 @@ Route::group(
 
             Route::get('faqs', [FaqController::class, 'showFaqPage'])->name('faqs.index');
 
-            // dynamic Page Route
+            // dynamic Pages Route
             Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])->name('dynamic-page');
 
         });
