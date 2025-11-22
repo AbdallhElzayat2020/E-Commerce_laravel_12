@@ -192,12 +192,13 @@ class EditProduct extends Component
             'sku' => $this->sku,
             'available_for' => $this->available_for,
             'has_variants' => $this->has_variants,
-            'manage_stock' => $this->has_variants == 0 ? null : $this->manage_stock,
+            'manage_stock' => $this->manage_stock ?? 0,
             'price' => $this->has_variants == 1 ? null : $this->price,
-            'quantity' => $this->manage_stock == 0 ? null : $this->quantity,
-            'discount' => $this->has_discount == 0 ? null : $this->discount,
-            'start_discount' => $this->has_discount == 0 ? null : $this->start_discount,
-            'end_discount' => $this->has_discount == 0 ? null : $this->end_discount,
+            'quantity' => ($this->has_variants == 0 && $this->manage_stock == 1) ? $this->quantity : null,
+            'has_discount' => $this->has_discount,
+            'discount' => $this->has_discount == 1 ? $this->discount : null,
+            'start_discount' => $this->has_discount == 1 ? $this->start_discount : null,
+            'end_discount' => $this->has_discount == 1 ? $this->end_discount : null,
         ];
 
         // store Variants

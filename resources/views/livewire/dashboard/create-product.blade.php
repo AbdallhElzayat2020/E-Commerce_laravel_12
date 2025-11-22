@@ -12,19 +12,19 @@
 
     {{-- list of step --}}
     <ul class="wizard-timeline center-align">
-        <li class="{{ $currentStep > 1 ? 'completed' : '' }}">
+        <li class="{{ $currentStep == 1 ? 'active' : '' }} {{ $currentStep > 1 ? 'completed' : '' }}">
             <span class="step-num">1</span>
             <label>{{ __('dashboard.basic_information') }}</label>
         </li>
-        <li class="{{ $currentStep > 2 ? 'completed' : '' }}">
+        <li class="{{ $currentStep == 2 ? 'active' : '' }} {{ $currentStep > 2 ? 'completed' : '' }}">
             <span class="step-num">2</span>
             <label>{{ __('dashboard.product_variants') }}</label>
         </li>
-        <li class="active {{ $currentStep > 3 ? 'completed' : '' }}">
+        <li class="{{ $currentStep == 3 ? 'active' : '' }} {{ $currentStep > 3 ? 'completed' : '' }}">
             <span class="step-num">3</span>
             <label>{{ __('dashboard.product_images') }}</label>
         </li>
-        <li class="{{ $currentStep == 4 ? 'completed' : '' }}">
+        <li class="{{ $currentStep == 4 ? 'active' : '' }} {{ $currentStep == 4 ? 'completed' : '' }}">
             <span class="step-num">4</span>
             <label>{{ __('dashboard.confirmation') }}</label>
         </li>

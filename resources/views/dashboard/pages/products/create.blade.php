@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title', __('dashboard.products'))
+@section('title', __('dashboard.product_create'))
 @section('content')
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-9 mb-2 breadcrumb-new">
@@ -30,7 +30,6 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    {{--                                    <h4 class="card-title">{{ __('dashboard.create_product') }}</h4>--}}
                                     <a class="heading-elements-toggle">
                                         <i class="la la-ellipsis-h font-medium-3"></i>
                                     </a>
@@ -49,7 +48,7 @@
     </div>
 @endsection
 
-@push('dashboard_css')
+@push('css')
     <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/vendors/css/forms/tags/tagging.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/custom/product.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet">

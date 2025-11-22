@@ -40,7 +40,7 @@ return [
     'frequently_asked_questions' => 'Frequently Asked Questions',
     'all_brands' => 'All Brands',
     'all_categories' => 'All Categories',
-    'has_variants' => 'Has Variants',
+    'has_variants' => 'Has Variants for Price',
     'showing' => 'Showing',
     'of' => 'Of',
     'results' => 'Results',

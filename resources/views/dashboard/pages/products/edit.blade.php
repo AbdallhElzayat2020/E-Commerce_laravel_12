@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('title')
-    {{ __('dashboard.edit_product') }}
+    {{ __('dashboard.product_edit') }}
 @endsection
 
 @section('content')
@@ -53,7 +53,7 @@
     </div>
 @endsection
 
-@push('dashboard_css')
+@push('css')
     <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/vendors/css/forms/tags/tagging.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/custom/product.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet">

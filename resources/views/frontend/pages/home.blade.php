@@ -94,7 +94,7 @@
                             <img src="{{asset($category->icon)}}" alt="{{$category->name}}">
                         </div>
                         <div class="wrapper-info">
-                            <a href="#" class="wrapper-details">{{$category->name}}</a>
+                            <a href="{{ route('website.category.products',$category->slug) }}" class="wrapper-details">{{$category->name}}</a>
                         </div>
                     </div>
                 @empty
@@ -115,7 +115,7 @@
                 @forelse($brands as $index=>$brand)
                     <div class="product-wrapper">
                         <div class="wrapper-img">
-                            <a href="#">
+                            <a href="{{ route('website.brand.products',$brand->slug) }}">
                                 <img src="{{asset($brand->logo)}}" alt="{{$brand->name}}">
                             </a>
                         </div>

@@ -12,6 +12,7 @@ use App\Http\Controllers\Website\{
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Livewire\Livewire;
 
 Route::group(
     [
@@ -26,8 +27,6 @@ Route::group(
 
             Route::get('user-profile', [ProfileController::class, 'index'])
                 ->name('profile.index');
-
-
         });
         /* ========================== Protected Routes ========================== */
 
@@ -50,15 +49,20 @@ Route::group(
             // categories
             Route::get('categories', [CategoryController::class, 'showCategoryPage'])
                 ->name('categories.index');
+            // products by category
+            Route::get('category/{slug}', [CategoryController::class, 'getProductsByCategory'])
+                ->name('category.products');
 
             // brands
             Route::get('brands', [BrandController::class, 'showBrandPage'])
                 ->name('brands.index');
+            // products by brand
+            Route::get('brand/{slug}', [BrandController::class, 'getProductsByBrand'])
+                ->name('brand.products');
 
             // dynamic Pages Route
             Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])
                 ->name('dynamic-page');
-
         });
 
 
@@ -71,7 +75,6 @@ Route::group(
         Livewire::setUpdateRoute(function ($handle) {
             return Route::post('/livewire/update', $handle);
         });
-
     }
 );
 

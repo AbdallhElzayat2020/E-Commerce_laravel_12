@@ -116,6 +116,14 @@ class Product extends Model
         return $this->status == 'active' ? 'Active' : 'Inactive';
     }
 
+    public function getPriceAfterDiscount()
+    {
+        if ($this->has_discount) {
+            return $this->price - $this->discount;
+        }
+        return $this->price;
+    }
+
     public function priceAttribute()
     {
         return $this->has_variants == 0 ? number_format($this->price, 2) : __("dashboard.has_variants");
@@ -129,11 +137,11 @@ class Product extends Model
     /** ================== Scopes ================== */
     public function scopeActive($query)
     {
-        return $query->where('status', 1);
+        return $query->where('status', 'active');
     }
 
     public function scopeInactive($query)
     {
-        return $query->where('status', 0);
+        return $query->where('status', 'inactive');
     }
 }

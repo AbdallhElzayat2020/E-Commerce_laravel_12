@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="wrapper-info">
-                            <a href=""
+                            <a href="{{ route('website.category.products',$item->slug) }}"
                                class="wrapper-details">{{ $item->name }}</a>
                         </div>
                     </div>

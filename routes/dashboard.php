@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Dashboard\{AdminController, AttributeController, BrandController, CategoryController, CouponController, FaqController, HomeController, PageController, ProductController, RoleController, SettingController, SliderController, UserController, WorldController};
-use App\Http\Controllers\Dashboard\Auth\{ForgetPasswordController, LoginController, ResetPasswordController,};
+use Livewire\Livewire;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\FaqQuestionController;
-use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Dashboard\Auth\{ForgetPasswordController, LoginController, ResetPasswordController,};
+use App\Http\Controllers\Dashboard\{AdminController, AttributeController, BrandController, CategoryController, CouponController, FaqController, HomeController, PageController, ProductController, RoleController, SettingController, SliderController, UserController, WorldController};
 
 
 Route::group(
@@ -51,7 +52,6 @@ Route::group(
 
                     Route::post('/reset-password', 'ResetPassword')
                         ->name('reset-password');
-
                 });
             });
             ####################### End Reset Password Routes #########################
@@ -238,7 +238,6 @@ Route::group(
 
                 Route::get('remove/{id}', [SliderController::class, 'destroy'])
                     ->name('sliders.delete');
-
             });
 
             ####################### Sliders Route #########################
@@ -254,9 +253,9 @@ Route::group(
             ####################### Pages Route #########################
 
             // livewire Localized Routes
-            //            Livewire::setUpdateRoute(function ($handle) {
-            //                return Route::post('/livewire/update', $handle);
-            //            });
+            Livewire::setUpdateRoute(function ($handle) {
+                return Route::post('/livewire/update', $handle);
+            });
         });
     }
 );

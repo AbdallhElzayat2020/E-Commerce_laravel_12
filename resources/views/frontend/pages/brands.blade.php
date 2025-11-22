@@ -24,8 +24,12 @@
                 @forelse ($brands as $item)
                     <div style="margin: 6px" class="product-wrapper">
                         <div class="wrapper-img">
-                            <a href="">
+                            <a href="{{ route('website.brand.products', $item->slug) }}">
                                 <img src="{{ asset($item->logo) }}" alt="{{ $item->name }}">
+                                <div
+                                    class="position-absolute top-0 start-0 bg-danger text-white py-1 px-2 m-2 rounded">
+                                    {{ $item->brand->name }}
+                                </div>
                             </a>
                         </div>
                     </div>

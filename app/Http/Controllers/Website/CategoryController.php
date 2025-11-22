@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Services\Website\HomeService;
 use Illuminate\Http\Request;
 
@@ -19,5 +20,11 @@ class CategoryController extends Controller
     {
         $categories = $this->homeService->getCategories();
         return view('frontend.pages.categories', compact('categories'));
+    }
+
+    public function getProductsByCategory($slug)
+    {
+        $products = $this->homeService->getProductsByCategory($slug);
+        return view('frontend.pages.products', compact('products'));
     }
 }

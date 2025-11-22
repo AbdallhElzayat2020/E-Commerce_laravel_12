@@ -114,7 +114,7 @@ class CreateProduct extends Component
         if ($this->has_variants == 0) {
             $data['price'] = ['required', 'numeric', 'min:1', 'max:10000000'];
         }
-        if ($this->manage_stock == 1) {
+        if ($this->manage_stock == 1 && $this->has_variants == 0) {
             $data['quantity'] = ['required', 'numeric', 'min:1', 'max:10000000'];
         }
         if ($this->has_discount == 1) {
@@ -149,29 +149,46 @@ class CreateProduct extends Component
     {
         try {
             $product = [
-                'name' => [
-                    'ar' => $this->name_ar,
-                    'en' => $this->name_en,
-                ],
+                // 'name' => [
+                //     'ar' => $this->name_ar,
+                //     'en' => $this->name_en,
+                // ],
 
-                'desc' => [
-                    'ar' => $this->desc_ar,
-                    'en' => $this->desc_en,
-                ],
+                // 'desc' => [
+                //     'ar' => $this->desc_ar,
+                //     'en' => $this->desc_en,
+                // ],
 
-                'small_desc' => [
-                    'ar' => $this->small_desc_ar,
-                    'en' => $this->small_desc_en,
-                ],
+                // 'small_desc' => [
+                //     'ar' => $this->small_desc_ar,
+                //     'en' => $this->small_desc_en,
+                // ],
 
+                // 'category_id' => $this->category_id,
+                // 'brand_id' => $this->brand_id,
+                // 'sku' => $this->sku,
+                // 'available_for' => $this->available_for,
+                // 'has_variants' => $this->has_variants,
+                // 'manage_stock' => $this->manage_stock,
+                // 'price' => $this->has_variants == 1 ? null : $this->price,
+                // 'quantity' => ($this->has_variants == 0 && $this->manage_stock == 1) ? $this->quantity : null,
+                // 'has_discount' => $this->has_discount,
+                // 'discount' => $this->has_discount == 1 ? $this->discount : null,
+                // 'start_discount' => $this->has_discount == 1 ? $this->start_discount : null,
+                // 'end_discount' => $this->has_discount == 1 ? $this->end_discount : null,
+
+                'name' => ['ar' => $this->name_ar, 'en' => $this->name_en],
+                'desc' => ['ar' => $this->desc_ar, 'en' => $this->desc_en],
+                'small_desc' =>  ['ar' => $this->small_desc_ar, 'en' => $this->small_desc_en],
                 'category_id' => $this->category_id,
                 'brand_id' => $this->brand_id,
                 'sku' => $this->sku,
                 'available_for' => $this->available_for,
                 'has_variants' => $this->has_variants,
-                'manage_stock' => $this->has_variants == 0 ? null : $this->manage_stock,
                 'price' => $this->has_variants == 1 ? null : $this->price,
-                'quantity' => $this->manage_stock == 0 ? null : $this->quantity,
+                'manage_stock' => $this->has_variants == 1 ? 1 : ($this->manage_stock ?? 0),
+                'quantity' => ($this->has_variants == 0 && $this->manage_stock == 1) ? $this->quantity : null,
+                'has_discount' => $this->has_discount,
                 'discount' => $this->has_discount == 0 ? null : $this->discount,
                 'start_discount' => $this->has_discount == 0 ? null : $this->start_discount,
                 'end_discount' => $this->has_discount == 0 ? null : $this->end_discount,
