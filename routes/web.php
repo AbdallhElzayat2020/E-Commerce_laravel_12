@@ -8,6 +8,7 @@ use App\Http\Controllers\Website\{
     ProfileController,
     CategoryController,
     BrandController,
+    ProductController,
 };
 
 use Illuminate\Support\Facades\Route;
@@ -23,11 +24,13 @@ Route::group(
 
 
         /* ========================== Protected Routes  ========================== */
+
         Route::middleware(['auth'])->prefix('website')->as('website.')->group(function () {
 
             Route::get('user-profile', [ProfileController::class, 'index'])
                 ->name('profile.index');
         });
+
         /* ========================== Protected Routes ========================== */
 
         /* ========================== Public Routes ========================== */
@@ -47,18 +50,26 @@ Route::group(
                 ->name('faqs.index');
 
             // categories
-            Route::get('categories', [CategoryController::class, 'showCategoryPage'])
-                ->name('categories.index');
-            // products by category
-            Route::get('category/{slug}', [CategoryController::class, 'getProductsByCategory'])
-                ->name('category.products');
+            Route::controller(CategoryController::class)->group(function () {
+                Route::get('categories', 'showCategoryPage')
+                    ->name('categories.index');
+                // products by category
+                Route::get('category/{slug}', 'getProductsByCategory')
+                    ->name('category.products');
+            });
 
             // brands
-            Route::get('brands', [BrandController::class, 'showBrandPage'])
-                ->name('brands.index');
-            // products by brand
-            Route::get('brand/{slug}', [BrandController::class, 'getProductsByBrand'])
-                ->name('brand.products');
+            Route::controller(BrandController::class)->group(function () {
+                Route::get('brands', 'showBrandPage')
+                    ->name('brands.index');
+                // products by brand
+                Route::get('brand/{slug}', 'getProductsByBrand')
+                    ->name('brand.products');
+            });
+
+            // show product details
+            Route::get('product/{slug}', [ProductController::class, 'showProductDetails'])
+                ->name('product.show.details');
 
             // dynamic Pages Route
             Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])

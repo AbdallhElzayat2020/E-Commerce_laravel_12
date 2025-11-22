@@ -18,7 +18,8 @@
                                             {{ $product->brand->name }}
                                         </div>
                                         <div class="product-cart-items">
-                                            <a href="" class="cart cart-item">
+                                            <a href="{{ route('website.product.show.details', $product->slug) }}"
+                                                class="cart cart-item">
                                                 <span>
                                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +51,7 @@
                                                     </svg>
                                                 </span>
                                             </a>
-                                            <a href="wishlist.html" class="favourite cart-item">
+                                            <a href="#" class="favourite cart-item">
                                                 <span>
                                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +62,7 @@
                                                     </svg>
                                                 </span>
                                             </a>
-                                            <a href="compaire.html" class="compaire cart-item">
+                                            <a href="#" class="compaire cart-item">
                                                 <span>
                                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +86,8 @@
                                     </div>
                                     <div class="product-info">
                                         <div class="product-description">
-                                            <a href="" class="product-details">{{ $product->name }}
+                                            <a href="{{ route('website.product.show.details', $product->slug) }}"
+                                                class="product-details">{{ $product->name }}
                                             </a>
                                             <div class="price">
                                                 @if ($product->has_variants == 0)
@@ -103,7 +105,8 @@
                                         </div>
                                     </div>
                                     <div class="product-cart-btn">
-                                        <a href="#" class="product-btn">{{ $product->category->name }}</a>
+                                        <a href="{{ route('website.product.show.details', $product->slug) }}"
+                                            class="product-btn">{{ $product->category->name }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +117,26 @@
                         <div class="mt-4">
                             {{ $products->links() }}
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @else
+        <section class="blog about-blog footer-padding">
+            <div class="container">
+                <div class="blog-bradcrum">
+                    <span><a href="{{ route('website.home') }}">{{ __('website.home') }}</a></span>
+                    <span class="devider">/</span>
+                    <span><a href="javascript:void(0)" class="active">{{ __('website.products') }}</a></span>
+                </div>
+                <div class="blog-item" data-aos="fade-up">
+                    <div class="cart-img">
+                        <img src="{{ asset('assets/frontend/images/homepage-one/empty-wishlist.webp') }}"
+                            alt="{{ __('website.no_products') }}">
+                    </div>
+                    <div class="cart-content">
+                        <p class="content-title">{{ __('website.no_products') }}</p>
+                        <a href="{{ route('website.home') }}" class="shop-btn">{{ __('website.back_to_shop') }}</a>
                     </div>
                 </div>
             </div>
