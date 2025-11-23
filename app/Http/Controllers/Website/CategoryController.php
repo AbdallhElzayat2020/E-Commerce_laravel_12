@@ -25,6 +25,9 @@ class CategoryController extends Controller
     public function getProductsByCategory($slug)
     {
         $products = $this->homeService->getProductsByCategory($slug);
-        return view('frontend.pages.products', compact('products'));
+        return view('frontend.pages.products', [
+            'products' => $products,
+            'flash_time_products' => false,
+        ]);
     }
 }

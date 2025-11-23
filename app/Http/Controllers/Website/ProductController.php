@@ -14,16 +14,25 @@ class ProductController extends Controller
     public function __construct(ProductService $productService)
     {
         $this->productService = $productService;
-
     }
 
     public function showProductDetails(string $slug)
     {
-        $product = $this->productService->showProductDetails($slug);
+        $product = $this->productService->getProductBySlug($slug);
         if (!$product) {
             abort(404);
         }
-        return view('frontend.pages.show-product', compact('product'));
+        $relatedProducts = $this->productService->getRelatedProductBySlug($slug, 4);
+        return view('frontend.pages.show-product', compact('product', 'relatedProducts'));
+    }
+
+    public function getRelatedProducts($productSlug)
+    {
+        $relatedProducts = $this->productService->getRelatedProductBySlug($productSlug);
+        return view('frontend.pages.products', [
+            'products' => $relatedProducts,
+            'flash_time_products' => false,
+        ]);
     }
 
     public function showProductsByType(string $type)
@@ -45,5 +54,10 @@ class ProductController extends Controller
             'products' => $products,
             'flash_time_products' => $type == 'flash-time-products' ? true : false,
         ]);
+    }
+
+    public function showShopPage()
+    {
+        return view('frontend.pages.shop');
     }
 }

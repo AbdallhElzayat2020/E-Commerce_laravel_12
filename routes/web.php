@@ -49,6 +49,10 @@ Route::group(
             Route::get('faqs', [FaqController::class, 'showFaqPage'])
                 ->name('faqs.index');
 
+            // dynamic Pages Route
+            Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])
+                ->name('dynamic-page');
+
             // categories
             Route::controller(CategoryController::class)->group(function () {
                 Route::get('categories', 'showCategoryPage')
@@ -67,19 +71,28 @@ Route::group(
                     ->name('brand.products');
             });
 
-            // show product details
-            Route::get('product/show/{slug}', [ProductController::class, 'showProductDetails'])
-                ->name('product.show.details');
 
-            // dynamic Pages Route
-            Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])
-                ->name('dynamic-page');
+            /* Products Routes */
 
-            // all products per type  // all {new arrival, featured, top-selling, flash-sale}
-            Route::get('products/{type}', [ProductController::class, 'showProductsByType'])
-                ->name('products.type');
+            Route::controller(ProductController::class)
+                ->prefix('products')->group(function () {
+
+                    // all products per type  // all {new arrival, featured, top-selling, flash-sale}
+                    Route::get('/{type}', 'showProductsByType')
+                        ->name('products.type');
+
+                    // show product details
+                    Route::get('/show/{slug}', 'showProductDetails')
+                        ->name('product.show.details');
+
+                    Route::get('/{slug}/related-products', 'getRelatedProducts')->name('related.products');
+                });
+
+
+            // shop Route
+            Route::get('/shop', [ProductController::class, 'showShopPage'])->name('shop');
+
         });
-
 
         /* ========================== Public Routes ========================== */
 

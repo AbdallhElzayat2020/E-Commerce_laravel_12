@@ -3,7 +3,6 @@
 
 @section('content')
     @if ($products->count() > 0)
-
         <section class="product arrival   @if($flash_time_products) flash-sale @endif">
             <div class="container">
                 @if($flash_time_products)
