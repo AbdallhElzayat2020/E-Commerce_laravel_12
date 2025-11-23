@@ -59,18 +59,12 @@ class HomeService
             ->paginate(16);
     }
 
-    public function newArrivalProducts($limit = null)
+    public function getHomePageProducts($limit = null): array
     {
-        return $this->productService->newArrivalProducts($limit);
-    }
-
-    public function getFlashProducts($limit = null)
-    {
-        return $this->productService->getFlashProducts($limit);
-    }
-
-    public function getFlashProductsWithTimer($limit)
-    {
-        return $this->productService->getFlashProductsWithTimer($limit);
+        return [
+            'newArrivalProducts' => $this->productService->newArrivalProducts($limit),
+            'flashProducts' => $this->productService->getFlashProducts($limit),
+            'flashProductsWithTimer' => $this->productService->getFlashProductsWithTimer($limit),
+        ];
     }
 }

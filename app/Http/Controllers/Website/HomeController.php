@@ -24,19 +24,14 @@ class HomeController extends Controller
         $some_categories = $this->homeService->getCategories(12);
         $some_brands = $this->homeService->getBrands(12);
 
-        $newArrivalProducts = $this->homeService->newArrivalProducts(8);
-        $flashProducts = $this->homeService->getFlashProducts(8);
-        $flashProductsWithTimer = $this->homeService->getFlashProductsWithTimer(8);
+        $homePageProducts = $this->homeService->getHomePageProducts(12);
 
 
         return view('frontend.pages.home', [
             'sliders' => $sliders,
             'categories' => $some_categories,
             'brands' => $some_brands,
-
-            'newArrivalProducts' => $newArrivalProducts,
-            'flashProducts' => $flashProducts,
-            'flashProductsWithTimer' => $flashProductsWithTimer,
+            'homePageProducts' => $homePageProducts,
         ]);
     }
 }

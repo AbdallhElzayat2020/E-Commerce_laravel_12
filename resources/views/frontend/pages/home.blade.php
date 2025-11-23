@@ -131,7 +131,7 @@
     {{--  brands section   --}}
 
     {{--newArrivalProducts section--}}
-    @if($newArrivalProducts->count() > 0)
+    @if($homePageProducts['newArrivalProducts']->count() > 0)
         <section class="product arrival">
             <div class="container">
                 <div class="section-title">
@@ -141,12 +141,16 @@
                 <div class="arrival-section">
                     <div class="row g-5">
 
-                        @foreach($newArrivalProducts as $product)
+                        @foreach($homePageProducts['newArrivalProducts'] as $product)
                             <div class="col-lg-3 col-sm-6">
                                 <div class="product-wrapper" data-aos="fade-up">
                                     <div class="product-img">
                                         <img src="{{ asset('uploads/products/' . $product->images->first()->file_name) }}"
                                              alt="{{ $product->name }}">
+                                        <div
+                                            class="position-absolute top-0 start-0 bg-danger text-white py-1 px-2 m-2 rounded">
+                                            {{ $product->brand->name }}
+                                        </div>
                                         <div class="product-cart-items">
                                             <a href="{{ route('website.product.show.details', $product->slug) }}"
                                                class="cart cart-item">
@@ -234,7 +238,7 @@
                                         </div>
                                     </div>
                                     <div class="product-cart-btn">
-                                        <a href="" class="product-btn">{{__('website.add_to_cart')}}</a>
+                                        <a href="" class="product-btn">{{$product->category->name}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +251,7 @@
     {{--newArrivalProducts section--}}
 
     {{-- flash products with timer --}}
-    @if($flashProductsWithTimer->count() > 0)
+    @if($homePageProducts['flashProductsWithTimer']->count() > 0)
         <section class="product flash-sale">
             <div class="container">
                 <div class="section-title">
@@ -275,13 +279,16 @@
                 <div class="flash-sale-section">
                     <div class="row g-5">
 
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
-                                <div class="product-img">
-                                    <img src="{{ asset('uploads/products/' . $product->images->first()->file_name) }}" alt="{{ $product->name }}">
-
-                                    <div class="product-cart-items">
-                                        <a href="#" class="cart cart-item">
+                        @foreach($homePageProducts['flashProductsWithTimer'] as $product)
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
+                                    <div class="product-img">
+                                        <img src="{{ asset('uploads/products/' . $product->images->first()->file_name) }}" alt="{{ $product->name }}">
+                                        <div class="position-absolute top-0 start-0 bg-danger text-white py-1 px-2 m-2 rounded">
+                                            {{ $product->brand->name }}
+                                        </div>
+                                        <div class="product-cart-items">
+                                            <a href="#" class="cart cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -312,8 +319,8 @@
                                                     fill="black" fill-opacity="0.2"/>
                                             </svg>
                                         </span>
-                                        </a>
-                                        <a href="#" class="favourite cart-item">
+                                            </a>
+                                            <a href="#" class="favourite cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -323,8 +330,8 @@
                                                     fill="#000"/>
                                             </svg>
                                         </span>
-                                        </a>
-                                        <a href="#" class="compaire cart-item">
+                                            </a>
+                                            <a href="#" class="compaire cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -343,35 +350,36 @@
                                                     fill="black" fill-opacity="0.2"/>
                                             </svg>
                                         </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-description">
-                                        <a href="{{ route('website.product.show.details', $product->slug) }}"
-                                           class="product-details">{{ $product->name }}
-                                        </a>
-                                        <div class="price">
-                                            @if ($product->has_variants == 0)
-                                                @if ($product->has_discount == 0)
-                                                    <span class="new-price">{{ $product->price }} EGP</span>
-                                                @else
-                                                    <span class="price-cut">{{ $product->price }} EGP</span>
-                                                    <span class="new-price">{{ $product->getPriceAfterDiscount() }}EGP</span>
-                                                @endif
-                                            @else
-                                                <span class="new-price">{{ __('website.has_variants') }}</span>
-                                            @endif
+                                            </a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="product-cart-btn">
-                                    <a href="{{ route('website.product.show.details',$product->slug) }}" class="product-btn">
-                                        {{$product->category->name}}
-                                    </a>
+                                    <div class="product-info">
+                                        <div class="product-description">
+                                            <a href="{{ route('website.product.show.details', $product->slug) }}"
+                                               class="product-details">{{ $product->name }}
+                                            </a>
+                                            <div class="price">
+                                                @if ($product->has_variants == 0)
+                                                    @if ($product->has_discount == 0)
+                                                        <span class="new-price">{{ $product->price }} EGP</span>
+                                                    @else
+                                                        <span class="price-cut">{{ $product->price }} EGP</span>
+                                                        <span class="new-price">{{ $product->getPriceAfterDiscount() }}EGP</span>
+                                                    @endif
+                                                @else
+                                                    <span class="new-price">{{ __('website.has_variants') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-cart-btn">
+                                        <a href="{{ route('website.product.show.details',$product->slug) }}" class="product-btn">
+                                            {{$product->category->name}}
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -1642,7 +1650,7 @@
     </section>
 
     {{-- flash products section  --}}
-    @if($flashProducts->count() > 0)
+    @if($homePageProducts['flashProducts']->count() > 0)
         <section class="product best-product">
             <div class="container">
                 <div class="section-title">
@@ -1651,7 +1659,7 @@
                 </div>
                 <div class="best-product-section">
                     <div class="row g-4">
-                        @foreach($flashProducts as $product)
+                        @foreach($homePageProducts['flashProducts'] as $product)
                             <div class="col-xl-3 col-md-4">
                                 <div class="product-wrapper" data-aos="fade-up">
                                     <div class="product-img">
@@ -1699,3 +1707,8 @@
     {{-- flash products section  --}}
 
 @endsection
+
+
+@push('js')
+    <script src="{{asset('assets/frontend/js/flash-timer-products.js')}}"></script>
+@endpush
