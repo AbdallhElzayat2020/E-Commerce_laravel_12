@@ -68,12 +68,16 @@ Route::group(
             });
 
             // show product details
-            Route::get('product/{slug}', [ProductController::class, 'showProductDetails'])
+            Route::get('product/show/{slug}', [ProductController::class, 'showProductDetails'])
                 ->name('product.show.details');
 
             // dynamic Pages Route
             Route::get('page/{slug}', [DynamicPageController::class, 'showDynamicPage'])
                 ->name('dynamic-page');
+
+            // all products per type  // all {new arrival, featured, top-selling, flash-sale}
+            Route::get('products/{type}', [ProductController::class, 'showProductsByType'])
+                ->name('products.type');
         });
 
 

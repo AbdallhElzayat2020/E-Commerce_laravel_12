@@ -25,4 +25,25 @@ class ProductController extends Controller
         }
         return view('frontend.pages.show-product', compact('product'));
     }
+
+    public function showProductsByType(string $type)
+    {
+        if ($type == 'new-arrival-products') {
+            $products = $this->productService->newArrivalProducts();
+
+        } elseif ($type == 'flash-time-products') {
+            $products = $this->productService->getFlashProductsWithTimer();
+
+        } elseif ($type == 'flash-products') {
+            $products = $this->productService->getFlashProducts();
+
+        } else {
+            abort(404);
+        }
+
+        return view('frontend.pages.products', [
+            'products' => $products,
+            'flash_time_products' => $type == 'flash-time-products' ? true : false,
+        ]);
+    }
 }

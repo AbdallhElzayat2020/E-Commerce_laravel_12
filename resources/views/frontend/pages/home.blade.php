@@ -136,7 +136,7 @@
             <div class="container">
                 <div class="section-title">
                     <h5>{{__('website.new_arraivals')}}</h5>
-                    <a href="#" class="view">{{__('website.view_all')}}</a>
+                    <a href="{{ route('website.products.type','new-arrival-products') }}" class="view">{{__('website.view_all')}}</a>
                 </div>
                 <div class="arrival-section">
                     <div class="row g-5">
@@ -274,7 +274,7 @@
                             <span class="text">seconds</span>
                         </div>
                     </div>
-                    <a href="#" class="view">{{__('website.view_all')}}</a>
+                    <a href="{{ route('website.products.type','flash-time-products') }}" class="view">{{__('website.view_all')}}</a>
                 </div>
                 <div class="flash-sale-section">
                     <div class="row g-5">
@@ -1655,7 +1655,7 @@
             <div class="container">
                 <div class="section-title">
                     <h5>{{__('website.flash_sale')}}</h5>
-                    <a href="#" class="view">{{__('website.view_all')}}</a>
+                    <a href="{{ route('website.products.type','flash-products') }}" class="view">{{__('website.view_all')}}</a>
                 </div>
                 <div class="best-product-section">
                     <div class="row g-4">

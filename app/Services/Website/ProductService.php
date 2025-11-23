@@ -19,32 +19,48 @@ class ProductService
     public function newArrivalProducts($limit = null)
     {
 
-        return Product::with(['images', 'brand', 'category'])
+        $products = Product::query()
+            ->with(['images', 'brand', 'category'])
             ->active()
             ->latest()
-            ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id')
-            ->paginate($limit);
+            ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id');
+
+        if ($limit) {
+            return $products->paginate($limit);
+        }
+        return $products->paginate(20);
+
     }
 
     public function getFlashProducts($limit = null)
     {
-        return Product::with(['images', 'brand', 'category'])
+        $products = Product::query()
+            ->with(['images', 'brand', 'category'])
             ->active()
             ->where('has_discount', 1)
             ->latest()
-            ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id')
-            ->paginate($limit);
+            ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id');
+
+        if ($limit) {
+            return $products->paginate($limit);
+        }
+        return $products->paginate(20);
     }
 
-    public function getFlashProductsWithTimer($limit = 8)
+    public function getFlashProductsWithTimer($limit = null)
     {
-        return Product::with(['images', 'brand', 'category'])
+        $products = Product::query()
+            ->with(['images', 'brand', 'category'])
             ->active()
             ->where('available_for', date('Y-m-d'))
             ->whereNotNull('available_for')
             ->where('has_discount', 1)
             ->latest()
-            ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id')
-            ->paginate($limit);
+            ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id');
+
+             if ($limit) {
+                 return $products->paginate($limit);
+             }
+        return $products->paginate(20);
     }
 }
