@@ -9,6 +9,7 @@ use App\Http\Controllers\Website\{
     CategoryController,
     BrandController,
     ProductController,
+    ShopController,
 };
 
 use Illuminate\Support\Facades\Route;
@@ -90,7 +91,7 @@ Route::group(
 
 
             // shop Route
-            Route::get('/shop', [ProductController::class, 'showShopPage'])->name('shop');
+            Route::get('/shop', [ShopController::class, 'showShopPage'])->name('shop');
 
         });
 
