@@ -22,7 +22,9 @@ class ProductController extends Controller
         if (!$product) {
             abort(404);
         }
-        $relatedProducts = $this->productService->getRelatedProductBySlug($slug, 4);
+
+        $relatedProducts = $this->productService->getRelatedProductBySlug($product->slug, 4);
+
         return view('frontend.pages.show-product', compact('product', 'relatedProducts'));
     }
 

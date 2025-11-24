@@ -251,7 +251,6 @@
             </div>
         </div>
     </section>
-    {{--  product Info  --}}
 
     {{--  product description  --}}
     <section class="product product-description">
@@ -358,7 +357,6 @@
             </div>
         </div>
     </section>
-    {{--  product description  --}}
 
     {{-- realted products --}}
     <section class="product weekly-sale product-weekly footer-padding">
@@ -480,6 +478,5 @@
             </div>
         </div>
     </section>
-    {{-- realted products --}}
 
 @endsection

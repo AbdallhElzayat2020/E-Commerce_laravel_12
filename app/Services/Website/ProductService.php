@@ -25,7 +25,7 @@ class ProductService
 
         $categoryId = Product::whereSlug($slug)->first()->category_id;
 
-        $products = Product::with(['images', 'brand', 'category'])
+        $products = Product::with(['images'])
             ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id')
             ->where('slug', '!=', $slug)
             ->active()

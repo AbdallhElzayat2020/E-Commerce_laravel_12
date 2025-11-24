@@ -77,7 +77,7 @@ Route::group(
             Route::controller(ProductController::class)
                 ->prefix('products')->group(function () {
 
-                    // all products per type  // all {new arrival, featured, top-selling, flash-sale}
+                    // all products per type {new arrival, featured, top-selling, flash-sale}
                     Route::get('/{type}', 'showProductsByType')
                         ->name('products.type');
 
