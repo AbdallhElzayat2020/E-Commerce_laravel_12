@@ -14,7 +14,7 @@ class AdminService
     {
         $this->adminRepository = $adminRepository;
     }
-
+    
     public function getAdmins()
     {
         return $this->adminRepository->getAdmins();

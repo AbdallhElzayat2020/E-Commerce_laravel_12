@@ -23,10 +23,8 @@ class ProductDetails extends Component
     public function changeVariant($variantId)
     {
         $variant = $this->product->variants->find($variantId);
-        if (!$variantId) {
-            return response()->json([
-                'message' => 'inValid Variant'
-            ], 404);
+        if (!$variant) {
+            return;
         }
         $this->changePropertiesValues($variant);
     }

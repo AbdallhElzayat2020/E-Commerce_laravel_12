@@ -54,6 +54,8 @@ return [
     'availabillity' => 'Availabillity',
     'variants' => 'Variants',
     'select_variant' => 'Select Your Variant',
+    'product_removed_from_wishlist' => 'Product Removed From Wishlist',
+    'product_added_to_wishlist' => 'Product Added To Wishlist',
     'add_to_cart' => 'Add To Cart',
     'share_this' => 'Share This',
     'available' => 'Available',

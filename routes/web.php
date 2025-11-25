@@ -26,17 +26,21 @@ Route::group(
 
         /* ========================== Protected Routes  ========================== */
 
-        Route::middleware(['auth'])->prefix('website')->as('website.')->group(function () {
+        Route::middleware(['auth:web'])->prefix('website')->as('website.')->group(function () {
 
             Route::get('user-profile', [ProfileController::class, 'index'])
                 ->name('profile.index');
+
+            // Wishlist Route
+            Route::get('wishlist', [ShopController::class, 'showWishlistPage'])
+                ->name('wishlist.index');
         });
 
         /* ========================== Protected Routes ========================== */
 
         /* ========================== Public Routes ========================== */
 
-        Route::prefix('/')->middleware(['guest'])->as('website.')->group(function () {
+        Route::prefix('/')->as('website.')->group(function () {
 
             // Home
             Route::get('/', [HomeController::class, 'index'])
@@ -92,7 +96,6 @@ Route::group(
 
             // shop Route
             Route::get('/shop', [ShopController::class, 'showShopPage'])->name('shop');
-
         });
 
         /* ========================== Public Routes ========================== */
@@ -102,7 +105,8 @@ Route::group(
         require __DIR__ . '/auth.php';
 
         Livewire::setUpdateRoute(function ($handle) {
-            return Route::post('/livewire/update', $handle);
+            return Route::post('/livewire/update', $handle)
+                ->middleware(config('livewire.middleware_group', 'web'));
         });
     }
 );

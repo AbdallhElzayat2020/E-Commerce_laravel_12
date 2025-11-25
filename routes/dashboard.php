@@ -254,7 +254,8 @@ Route::group(
 
             // livewire Localized Routes
             Livewire::setUpdateRoute(function ($handle) {
-                return Route::post('/livewire/update', $handle);
+                return Route::post('/livewire/update', $handle)
+                    ->middleware(config('livewire.middleware_group', 'web'));
             });
         });
     }

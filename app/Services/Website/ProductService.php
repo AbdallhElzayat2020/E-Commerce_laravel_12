@@ -10,8 +10,28 @@ class ProductService
 
     public function getProductBySlug($slug)
     {
-        return Product::with(['images', 'brand', 'category', 'productPreviews'])
-            ->select(['id', 'name', 'desc', 'small_desc', 'slug', 'price', 'has_discount', 'has_discount', 'discount', 'category_id', 'brand_id'])
+        return Product::with([
+            'images',
+            'brand',
+            'category',
+            'productPreviews',
+            'variants.VariantAttribute.attributeValue.attribute',
+        ])
+            ->select([
+                'id',
+                'name',
+                'desc',
+                'small_desc',
+                'slug',
+                'price',
+                'has_variants',
+                'quantity',
+                'manage_stock',
+                'has_discount',
+                'discount',
+                'category_id',
+                'brand_id'
+            ])
             ->active()
             ->whereSlug($slug)
             ->first();
@@ -20,8 +40,8 @@ class ProductService
     public function getRelatedProductBySlug($slug, $limit = null)
     {
 
-//        $product = Product::whereSlug($slug)->first();
-//        $product->category->products()->where('id', '!=', $product->id);
+        //        $product = Product::whereSlug($slug)->first();
+        //        $product->category->products()->where('id', '!=', $product->id);
 
         $categoryId = Product::whereSlug($slug)->first()->category_id;
 
@@ -36,7 +56,6 @@ class ProductService
             return $products->paginate($limit);
         }
         return $products->paginate(20);
-
     }
 
     public function newArrivalProducts($limit = null)
@@ -52,7 +71,6 @@ class ProductService
             return $products->paginate($limit);
         }
         return $products->paginate(20);
-
     }
 
     public function getFlashProducts($limit = null)
