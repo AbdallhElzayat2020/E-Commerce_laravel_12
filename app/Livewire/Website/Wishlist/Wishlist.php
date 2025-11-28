@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Website;
+namespace App\Livewire\Website\Wishlist;
 
-use Livewire\Component;
 use App\Models\Wishlist as ModelsWishlist;
+use Livewire\Component;
 
 
-class WishList extends Component
+class Wishlist extends Component
 {
     public $product;
     public $inWishlist = false;
@@ -61,6 +61,6 @@ class WishList extends Component
 
     public function render()
     {
-        return view('livewire.website.wish-list');
+        return view('livewire.website.wishlist.wish-list');
     }
 }

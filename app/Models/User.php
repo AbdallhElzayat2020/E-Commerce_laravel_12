@@ -61,17 +61,25 @@ class User extends Authenticatable
     {
         return $this->belongsTo(City::class, 'city_id');
     }
+
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
+
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
+
     public function governorate(): BelongsTo
     {
         return $this->belongsTo(Governorate::class, 'governorate_id');
+    }
+
+    public function wishlists(): HasMany
+    {
+        return $this->hasMany(Wishlist::class, 'user_id');
     }
 
     /**

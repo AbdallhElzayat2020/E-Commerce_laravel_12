@@ -1,16 +1,6 @@
 <?php
 
-use App\Http\Controllers\Website\{
-    FaqController,
-    ContactUsController,
-    DynamicPageController,
-    HomeController,
-    ProfileController,
-    CategoryController,
-    BrandController,
-    ProductController,
-    ShopController,
-};
+use App\Http\Controllers\Website\{FaqController, ContactUsController, DynamicPageController, HomeController, ProfileController, CategoryController, BrandController, ProductController, ShopController, WishlistController};
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -22,21 +12,6 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-
-
-        /* ========================== Protected Routes  ========================== */
-
-        Route::middleware(['auth:web'])->prefix('website')->as('website.')->group(function () {
-
-            Route::get('user-profile', [ProfileController::class, 'index'])
-                ->name('profile.index');
-
-            // Wishlist Route
-            Route::get('wishlist', [ShopController::class, 'showWishlistPage'])
-                ->name('wishlist.index');
-        });
-
-        /* ========================== Protected Routes ========================== */
 
         /* ========================== Public Routes ========================== */
 
@@ -78,7 +53,6 @@ Route::group(
 
 
             /* Products Routes */
-
             Route::controller(ProductController::class)
                 ->prefix('products')->group(function () {
 
@@ -99,6 +73,18 @@ Route::group(
         });
 
         /* ========================== Public Routes ========================== */
+
+
+        /* ========================== Protected Routes  ========================== */
+        Route::middleware(['auth:web'])->prefix('website')->as('website.')->group(function () {
+
+            Route::get('/user-profile', [ProfileController::class, 'index'])
+                ->name('profile.index');
+
+            // Wishlist Route
+            Route::get('/wishlist', WishlistController::class)->name('wishlist');
+        });
+        /* ========================== Protected Routes ========================== */
 
 
         // Auth Routes from Breeze
