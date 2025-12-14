@@ -33,6 +33,7 @@ class Wishlist extends Component
             'product_id' => $productId,
             'user_id' => auth('web')->user()->id,
         ]);
+
         $this->inWishlist = true;
 
         $this->dispatch('addToWishlist', __('website.product_added_to_wishlist'));

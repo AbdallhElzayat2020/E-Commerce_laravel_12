@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Website\{FaqController, ContactUsController, DynamicPageController, HomeController, ProfileController, CategoryController, BrandController, ProductController, ShopController, WishlistController};
+use App\Http\Controllers\Website\{CartController, FaqController, ContactUsController, DynamicPageController, HomeController, ProfileController, CategoryController, BrandController, ProductController, ShopController, WishlistController};
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -52,7 +52,7 @@ Route::group(
             });
 
 
-            /* Products Routes */
+            /* =============================== Products Routes =============================== */
             Route::controller(ProductController::class)
                 ->prefix('products')->group(function () {
 
@@ -64,7 +64,9 @@ Route::group(
                     Route::get('/show/{slug}', 'showProductDetails')
                         ->name('product.show.details');
 
-                    Route::get('/{slug}/related-products', 'getRelatedProducts')->name('related.products');
+                    //related products
+                    Route::get('/{slug}/related-products', 'getRelatedProducts')
+                        ->name('related.products');
                 });
 
 
@@ -83,6 +85,11 @@ Route::group(
 
             // Wishlist Route
             Route::get('/wishlist', WishlistController::class)->name('wishlist');
+
+            // cart Route
+            Route::get('/cart', [CartController::class, 'index'])
+                ->name('cart');
+
         });
         /* ========================== Protected Routes ========================== */
 

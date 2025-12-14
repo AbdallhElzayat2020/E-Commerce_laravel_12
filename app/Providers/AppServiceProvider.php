@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Admin;
 use App\Models\Page;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
@@ -32,7 +33,12 @@ class AppServiceProvider extends ServiceProvider
 
         foreach (config('permissions_en') as $config_permission => $value) {
             Gate::define($config_permission, function ($auth) use ($config_permission) {
-                return $auth->hasAccess($config_permission);
+                // Only Admin users have the hasAccess method
+                if ($auth instanceof Admin) {
+                    return $auth->hasAccess($config_permission);
+                }
+                // Regular users don't have admin permissions
+                return false;
             });
         }
     }
