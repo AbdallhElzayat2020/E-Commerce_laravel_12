@@ -2444,6 +2444,12 @@ button {
     padding: 1.3rem 2.3rem;
     cursor: pointer;
     font-size: 1.3rem;
+    transition: all 0.3s ease;
+}
+
+.product-info-content .product-size .size-section.active {
+    background-color: rgba(174, 28, 154, 0.08);
+    border-color: #ae1c9a;
 }
 
 .product-info-content .product-size .size-section .chevron {

@@ -43,6 +43,7 @@ class ProductDetails extends Component
             return;
         }
         $this->changePropertiesValues($variant);
+        $this->showVariants = false; // Close dropdown after selection
     }
 
     public function changePropertiesValues($variant)
@@ -108,6 +109,7 @@ class ProductDetails extends Component
             if ($cartItem) {
                 $cartItem->increment('quantity', $this->cartQuantity);
             } else {
+                $this->cartAttributesArray = [];
                 foreach ($variant->VariantAttribute as $attribute) {
                     $this->cartAttributesArray[$attribute->attributeValue->attribute->name] = $attribute->attributeValue->value;
                 }
@@ -117,10 +119,9 @@ class ProductDetails extends Component
                     'product_variant_id' => $this->variantId,
                     'price' => $variant->price,
                     'quantity' => $this->cartQuantity,
-                    'attributes' => json_decode($this->cartAttributesArray,JSON_UNESCAPED_UNICODE)
+                    'attributes' => $this->cartAttributesArray // Laravel casts will handle JSON conversion automatically
                 ]);
             }
-
         }
 
         $this->dispatch('successMessage', __('website.product_add_to_cart'));
