@@ -3926,7 +3926,7 @@ table .ticket-row:hover {
 .faq-accordion .faq-item {
     margin-top: 3rem;
     border: none;
-    --bs-accordion-border-color: $ theme-color;
+    --bs-accordion-border-color:  theme-color;
 }
 
 .faq-accordion .faq-item .faq-button {

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Website\{CartController, FaqController, ContactUsController, DynamicPageController, HomeController, ProfileController, CategoryController, BrandController, ProductController, ShopController, WishlistController};
+use App\Http\Controllers\Website\{CartController, CheckoutController, FaqController, ContactUsController, DynamicPageController, HomeController, ProfileController, CategoryController, BrandController, ProductController, ShopController, WishlistController};
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -91,6 +91,9 @@ Route::group(
             // cart Route
             Route::get('/cart', [CartController::class, 'index'])
                 ->name('cart');
+            // checkout Route
+            Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])
+                ->name('checkout.index');
 
         });
         /* ========================== Protected Routes ========================== */
