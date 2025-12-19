@@ -71,7 +71,8 @@ Route::group(
 
 
             // shop Route
-            Route::get('/shop', [ShopController::class, 'showShopPage'])->name('shop');
+            Route::get('/shop', [ShopController::class, 'showShopPage'])
+                ->name('shop');
         });
 
         /* ========================== Public Routes ========================== */
@@ -84,7 +85,8 @@ Route::group(
                 ->name('profile.index');
 
             // Wishlist Route
-            Route::get('/wishlist', WishlistController::class)->name('wishlist');
+            Route::get('/wishlist', WishlistController::class)
+                ->name('wishlist');
 
             // cart Route
             Route::get('/cart', [CartController::class, 'index'])

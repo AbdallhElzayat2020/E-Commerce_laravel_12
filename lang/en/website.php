@@ -87,5 +87,6 @@ return [
     'try_again_latter' => 'Try Again Latter!',
     'write_a_review' => 'Write A Review',
 
+    'product_add_to_cart'=>'Product Added To Cart'
 
 ];

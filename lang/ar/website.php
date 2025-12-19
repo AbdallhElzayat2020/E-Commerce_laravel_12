@@ -84,4 +84,7 @@ return [
     'contact_stored_successfully' => 'تم حفظ التواصل بنجاح',
     'try_again_latter' => 'حاول مرة أخرى لاحقًا!',
     'write_a_review' => 'اكتب تقييمًا',
+
+
+    'product_add_to_cart'=>'Product Added To Cart'
 ];

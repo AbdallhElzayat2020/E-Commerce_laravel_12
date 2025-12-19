@@ -84,7 +84,7 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    /* ================== Methods ==================*/
+    /* ================== Methods & functions ==================*/
     public function isSimple(): bool
     {
         return !$this->has_variants;
@@ -132,6 +132,16 @@ class Product extends Model
     public function quantityAttribute()
     {
         return $this->has_variants == 0 ? $this->quantity : __("dashboard.has_variants");
+    }
+
+    public function discountPercentage()
+    {
+        if ($this->variants()->exists() || !$this->discount || $this->price == 0) {
+            return '🔥';
+        }
+
+        // calculate percentage
+        return round(($this->discount / $this->price) * 100, 2) . '%';
     }
 
     /** ================== Scopes ================== */
