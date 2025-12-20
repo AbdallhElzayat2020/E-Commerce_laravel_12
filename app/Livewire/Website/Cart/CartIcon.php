@@ -27,10 +27,22 @@ class CartIcon extends Component
     public function render()
     {
         $authBoolean = auth('web')->check();
-        $cart = $authBoolean ? auth('web')->user()->cart : null;
+
+        if (!$authBoolean) {
+            return view('livewire.website.cart.cart-icon', [
+                'cartItems' => collect([]),
+                'cartItemsCount' => 0
+            ]);
+        }
+
+        $cart = auth('web')->user()->cart;
+
+        if ($cart) {
+            $cart->loadMissing('cartItems.product.images');
+        }
+
         $cartItemsCount = $cart ? $cart->cartItems->count() : 0;
         $cartItems = $cart ? $cart->cartItems : collect([]);
-
 
         return view('livewire.website.cart.cart-icon', [
             'cartItems' => $cartItems,

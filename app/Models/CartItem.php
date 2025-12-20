@@ -42,8 +42,8 @@ class CartItem extends Model
 
     /* ------------------ Attribute Variants ----------------- */
 
-    // public function getAttributesAttribute($attributes)
-    // {
-    //     return json_decode($attributes, true);
-    // }
+    public function getAttributesAttribute($attributes)
+    {
+        return json_decode($attributes, true);
+    }
 }
