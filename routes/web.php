@@ -81,6 +81,7 @@ Route::group(
         /* ========================== Protected Routes  ========================== */
         Route::middleware(['auth:web'])->prefix('website')->as('website.')->group(function () {
 
+            // profile Route
             Route::get('/user-profile', [ProfileController::class, 'index'])
                 ->name('profile.index');
 
@@ -91,9 +92,14 @@ Route::group(
             // cart Route
             Route::get('/cart', [CartController::class, 'index'])
                 ->name('cart');
+
             // checkout Route
             Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])
                 ->name('checkout.index');
+
+            Route::post('/checkout', [CheckoutController::class, 'checkout'])
+                ->name('checkout.post');
+
 
         });
         /* ========================== Protected Routes ========================== */

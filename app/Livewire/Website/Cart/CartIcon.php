@@ -18,6 +18,7 @@ class CartIcon extends Component
                     $cartItem->delete();
                     $this->dispatch('refreshCartIcon');
                     $this->dispatch('updateCart');
+                    $this->dispatch('orderSummaryRefresh');
                 }
             }
         }

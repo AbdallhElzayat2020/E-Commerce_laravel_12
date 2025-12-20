@@ -22,5 +22,7 @@ class Order extends Model
         'postal_code',
         'city',
         'street',
+        'coupon',
+        'coupon_discount',
     ];
 }

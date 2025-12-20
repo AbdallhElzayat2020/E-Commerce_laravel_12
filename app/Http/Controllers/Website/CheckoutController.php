@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Website\OrderShipping\OrderShippingRequest;
 use App\Services\Website\CheckoutService;
 use Illuminate\Http\Request;
 
@@ -19,5 +20,10 @@ class CheckoutController extends Controller
     public function showCheckoutPage()
     {
         return view('frontend.pages.checkout');
+    }
+
+    public function checkout(OrderShippingRequest $request)
+    {
+
     }
 }

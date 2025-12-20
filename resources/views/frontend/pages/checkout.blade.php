@@ -31,7 +31,7 @@
                     <div class="col-lg-6">
                         @livewire('website.checkout.order-summary')
 
-                        {{-- coupons --}}
+                        {{-- coupon --}}
                         <div class="review-form">
                             @livewire('website.checkout.coupons')
                         </div>

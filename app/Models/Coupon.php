@@ -43,8 +43,9 @@ class Coupon extends Model
     protected function Valid(Builder $query): Builder
     {
         return $query->where('status', 'active')
-            ->where('time_used', '<', 'limit')
-            ->where('end_date', '>', now());
+            ->whereColumn('time_used', '<', 'limit')
+            ->where('end_date', '>', now())
+            ->where('start_date', '<=', now());
     }
 
     #[Scope]
@@ -57,7 +58,12 @@ class Coupon extends Model
 
     public function couponIsValid()
     {
-        return $this->status == 'active' && $this->time_used < $this->limit && $this->end_date > now();
+        return $this->status == 'active' && $this->time_used < $this->limit && $this->end_date > now() && $this->start_date <= now();
+    }
+
+    public function status()
+    {
+        return $this->status == 'active' ? 'Active' : 'inActive';
     }
 
 
