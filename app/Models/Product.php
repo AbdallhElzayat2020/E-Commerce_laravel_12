@@ -118,10 +118,18 @@ class Product extends Model
 
     public function getPriceAfterDiscount()
     {
-        if ($this->has_discount) {
+        if ($this->has_discount && $this->discount > 0) {
             return $this->price - $this->discount;
         }
         return $this->price;
+    }
+
+    public function getVariantPriceAfterDiscount($variantPrice)
+    {
+        if ($this->has_discount && $this->discount > 0) {
+            return $variantPrice - $this->discount;
+        }
+        return $variantPrice;
     }
 
     public function priceAttribute()

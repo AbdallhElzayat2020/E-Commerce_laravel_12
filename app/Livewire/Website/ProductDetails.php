@@ -49,7 +49,7 @@ class ProductDetails extends Component
     public function changePropertiesValues($variant)
     {
         $this->variantId = $variant->id;
-        $this->price = $variant->price;
+        $this->price = $this->product->getVariantPriceAfterDiscount($variant->price);
         $this->quantity = $variant->stock;
     }
 
@@ -83,13 +83,12 @@ class ProductDetails extends Component
                 ->first();
 
             if ($cartItem) {
-
                 $cartItem->increment('quantity', $this->cartQuantity);
             } else {
                 $cart->cartItems()->create([
                     'product_id' => $product->id,
                     'product_variant_id' => null,
-                    'price' => $this->price,
+                    'price' => $product->has_discount ? $product->getPriceAfterDiscount() : $product->price,
                     'quantity' => $this->cartQuantity,
                 ]);
             }
@@ -117,7 +116,7 @@ class ProductDetails extends Component
                 $item = $cart->cartItems()->create([
                     'product_id' => $product->id,
                     'product_variant_id' => $this->variantId,
-                    'price' => $variant->price,
+                    'price' => $product->has_discount ? $product->getVariantPriceAfterDiscount($variant->price) : $variant->price,
                     'quantity' => $this->cartQuantity,
                     'attributes' => $this->cartAttributesArray // Laravel casts will handle JSON conversion automatically
                 ]);

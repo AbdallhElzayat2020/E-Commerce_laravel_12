@@ -24,6 +24,14 @@ class CheckoutController extends Controller
 
     public function checkout(OrderShippingRequest $request)
     {
+        $shipping = $request->validated();
+        $createOrder = $this->checkoutService->createOrder($shipping);
+
+        if (!$createOrder) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+
+        return redirect()->back()->with('success', 'Order created successfully');
 
     }
 }
