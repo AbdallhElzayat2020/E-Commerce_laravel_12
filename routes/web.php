@@ -4,6 +4,7 @@ use App\Http\Controllers\Website\{CartController, CheckoutController, FaqControl
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 
 Route::group(
@@ -101,6 +102,29 @@ Route::group(
                 ->name('checkout.post');
 
 
+            Route::get('/test', function () {
+                $response = Http::withHeaders(['Authorization' => 'Bearer SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx'])
+                    ->timeout(30)
+                    ->withoutVerifying()
+                    ->acceptJson()
+                    ->send('POST', 'https://apitest.myfatoorah.com/v2/SendPayment', [
+                        'json' => [
+                            'InvoiceValue' => 1000,
+                            'CustomerName' => 'fname lname',
+                            'NotificationOption' => 'LNK', //'SMS', 'EML', or 'ALL'
+                            'DisplayCurrencyIso' => 'EGP',
+                            'MobileCountryCode' => '+20',
+                            'CustomerMobile' => '0123433455',
+                            'CustomerEmail' => 'email@gmail.com',
+                            'CallBackUrl' => 'http://localhost:8000/test/callback',
+                            'ErrorUrl' => 'http://localhost:8000/test/error',
+                        ],
+                    ]);
+                // create order  && create transaction  user_id , order_id , invoice_id
+
+
+                return redirect($response['Data']['InvoiceURL']);
+            });
         });
         /* ========================== Protected Routes ========================== */
 
@@ -115,10 +139,59 @@ Route::group(
     }
 );
 
+Route::get('test/callback', function () {
+    $response = Http::withHeaders(['Authorization' => 'Bearer SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx'])
+        ->timeout(30)
+        ->withoutVerifying()
+        ->send('POST', 'https://apitest.myfatoorah.com/v2/GetPaymentStatus', [
+            'json' => [
+                'Key' => request()->paymentId,
+                'KeyType' => 'PaymentId'
+            ],
+        ]);
+
+    // change order status to paid
+    // clear cart and send notification
+    return $response;
+});
+
+Route::get('test/error', function () {
+    return response()->json(request()->all());
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})
+    ->middleware(['auth', 'verified'])->name('dashboard');
+
+
+/*
+  * endpoint :https://apitest.myfatoorah.com/v2/SendPayment
+  * method   : POST
+  * headers  : Authorization => Bearer SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx
+  *
+  *
+  //Fill required data
+ 'InvoiceValue'       => $invoiceValue,
+ 'CustomerName'       => 'fname lname',
+ 'NotificationOption' => 'LNK', //'SMS', 'EML', or 'ALL'
+     //Fill optional data
+     //'DisplayCurrencyIso' => $displayCurrencyIso,
+     //'MobileCountryCode'  => $phone[0],
+     //'CustomerMobile'     => $phone[1],
+     //'CustomerEmail'      => 'email@example.com',
+     //'CallBackUrl'        => 'https://example.com/callback.php',
+     //'ErrorUrl'           => 'https://example.com/callback.php', //or 'https://example.com/error.php'
+     //'Language'           => 'en', //or 'ar'
+     //'CustomerReference'  => 'orderId',
+     //'CustomerCivilId'    => 'CivilId',
+     //'UserDefinedField'   => 'This could be string, number, or array',
+     //'ExpiryDate'         => '', //The Invoice expires after 3 days by default. Use 'Y-m-d\TH:i:s' format in the 'Asia/Kuwait' time zone.
+     //'CustomerAddress'    => $customerAddress,
+     //'InvoiceItems'       => $invoiceItems,
+     //'Suppliers'          => $suppliers,
+  */
+
 
 //Route::middleware('auth')->group(function () {
 //    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
