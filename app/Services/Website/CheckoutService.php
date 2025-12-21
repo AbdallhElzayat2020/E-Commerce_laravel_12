@@ -30,7 +30,6 @@ class CheckoutService
         $subTotal = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
         $shippingPrice = $this->getShippingPrice($data['governorate_id']);
 
-        $totalPrice = $subTotal + $shippingPrice;
 
         // check if user has a coupon
         $coupon = null;
@@ -40,9 +39,10 @@ class CheckoutService
             $coupon = Coupon::valid()->where('code', trim($cart->coupon, ' '))->first();
 
             if ($coupon) {
-                $totalPrice = $totalPrice - ($totalPrice * $coupon->discount_percentage / 100);
+                $subTotal = $subTotal - ($subTotal * $coupon->discount_percentage / 100);
             }
         }
+        $totalPrice = $subTotal + $shippingPrice;
 
         // store order
         $order = Order::create([
@@ -62,6 +62,7 @@ class CheckoutService
             'coupon_discount' => $coupon_exists && $coupon ? $coupon->discount_percentage : 0,
         ]);
 
+        // store orderItems
         $this->storeOrderItemsForCart($order, $cart);
         // $this->clearUserCart($cart);
 
