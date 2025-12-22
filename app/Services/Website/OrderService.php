@@ -9,6 +9,8 @@ use App\Models\Country;
 use App\Models\Coupon;
 use App\Models\Governorate;
 use App\Models\ShippingGovernorate;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutService
 {
@@ -29,7 +31,6 @@ class CheckoutService
 
         $subTotal = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
         $shippingPrice = $this->getShippingPrice($data['governorate_id']);
-
 
         // check if user has a coupon
         $coupon = null;
@@ -74,7 +75,7 @@ class CheckoutService
         return $modelClass::find($id)?->name;
     }
 
-    public function getUserCart()
+    public function getUserCart(): ?Cart
     {
         return Cart::with(['cartItems.product'])->where('user_id', auth('web')->id())->first();
     }
@@ -98,9 +99,45 @@ class CheckoutService
             ]);
         }
     }
-    public function clearUserCart($cart)
+
+    public function clearUserCart($cart): void
     {
         $cart->cartItems()->delete();
         $cart->update(['coupon' => null]);
+    }
+
+    public function getInvoiceValue($address)
+    {
+        $governorate = $this->getLocationName(Governorate::class, $address['governorate_id']);
+        $cart = $this->getUserCart();
+        if (!$cart || $cart->cartItems->isEmpty()) {
+            return null;
+        }
+
+        $subTotal = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $shippingPrice = $this->getShippingPrice($address['governorate_id']);
+
+        // check if user has a coupon
+        $coupon = null;
+        $coupon_exists = $cart->coupon != null;
+
+        if ($coupon_exists) {
+            $coupon = Coupon::valid()->where('code', trim($cart->coupon, ' '))->first();
+
+            if ($coupon) {
+                $subTotal = $subTotal - ($subTotal * $coupon->discount_percentage / 100);
+            }
+        }
+        return $subTotal + $shippingPrice;
+    }
+
+    public function createTransaction($data, $orderId)
+    {
+        return Transaction::create([
+            'user_id' => Auth::guard('web')->user()->id,
+            'order_id' => $orderId,
+            'transaction_id' => $data['Data']['InvoiceId'],
+            'payment_method' => 'VISA',
+        ]);
     }
 }
