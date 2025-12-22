@@ -14,19 +14,35 @@ class Coupons extends Component
     public $cartItemsCount = 0;
     public $couponInfo = null;
 
-    #[On('orderSummaryRefresh')]
     public function mount(): void
     {
-        $this->cart = Cart::where('user_id', auth('web')->user()->id)->first();
-        $this->cartItemsCount = $this->cart->cartItems->count() ?? 0;
+        $this->loadCartData();
+    }
 
-        if ($this->cart->coupon != null) {
-            $couponObj = CouponModel::valid()->where('code', $this->cart->coupon)->first();
-            if ($couponObj) {
-                $this->couponInfo = 'Coupon Applied with Discount' . $couponObj->discount_percentage . '%';
-            }
+    #[On('orderSummaryRefresh')]
+    public function loadCartData(): void
+    {
+        if (!auth('web')->check()) {
+            $this->cart = null;
+            $this->cartItemsCount = 0;
+            $this->couponInfo = null;
+            return;
         }
 
+        $this->cart = Cart::with('cartItems')
+            ->where('user_id', auth('web')->id())
+            ->first();
+
+        $this->cartItemsCount = $this->cart?->cartItems->count() ?? 0;
+
+        if ($this->cart?->coupon) {
+            $couponObj = CouponModel::valid()->where('code', $this->cart->coupon)->first();
+            if ($couponObj) {
+                $this->couponInfo = 'Coupon Applied with Discount ' . $couponObj->discount_percentage . '%';
+            }
+        } else {
+            $this->couponInfo = null;
+        }
     }
 
     // check coupon if is valid
@@ -51,10 +67,13 @@ class Coupons extends Component
             return;
         }
 
-        $cart = Cart::where('user_id', auth('web')->user()->id)->first();
-        $cart->update([
-            'coupon' => $this->code,
-        ]);
+        $cart = Cart::where('user_id', auth('web')->id())->first();
+        if (!$cart) {
+            $this->dispatch('couponNotValid', 'Cart not found');
+            return;
+        }
+
+        $cart->update(['coupon' => $this->code]);
 
         // decrease coupon count
         $couponObj = CouponModel::where('code', $this->code)->first();
@@ -65,7 +84,6 @@ class Coupons extends Component
 
         $this->couponInfo = 'Coupon Applied with Discount' . $couponObj->discount_percentage . '%';
         $this->dispatch('couponApplied', $this->couponInfo);
-
     }
 
     public function render()

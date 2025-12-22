@@ -86,5 +86,6 @@ return [
     'write_a_review' => 'اكتب تقييمًا',
 
 
-    'product_add_to_cart'=>'Product Added To Cart'
+    'product_add_to_cart' => 'تم إضافة المنتج إلى السلة',
+    'please_login_to_add_to_cart' => 'يرجى تسجيل الدخول لإضافة المنتجات إلى السلة'
 ];

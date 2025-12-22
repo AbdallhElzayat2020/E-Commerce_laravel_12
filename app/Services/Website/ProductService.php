@@ -45,7 +45,7 @@ class ProductService
 
         $categoryId = Product::whereSlug($slug)->first()->category_id;
 
-        $products = Product::with(['images'])
+        $products = Product::with(['images', 'category', 'brand'])
             ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id')
             ->where('slug', '!=', $slug)
             ->active()
@@ -60,7 +60,6 @@ class ProductService
 
     public function newArrivalProducts($limit = null)
     {
-
         $products = Product::query()
             ->with(['images', 'brand', 'category'])
             ->active()
@@ -68,7 +67,7 @@ class ProductService
             ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id');
 
         if ($limit) {
-            return $products->paginate($limit);
+            return $products->limit($limit)->get();
         }
         return $products->paginate(20);
     }
@@ -83,7 +82,7 @@ class ProductService
             ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id');
 
         if ($limit) {
-            return $products->paginate($limit);
+            return $products->limit($limit)->get();
         }
         return $products->paginate(20);
     }
@@ -100,7 +99,7 @@ class ProductService
             ->select('id', 'name', 'slug', 'price', 'has_variants', 'has_discount', 'brand_id', 'category_id');
 
         if ($limit) {
-            return $products->paginate($limit);
+            return $products->limit($limit)->get();
         }
         return $products->paginate(20);
     }

@@ -5,20 +5,57 @@ namespace App\Services\Website;
 use App\Models\Cart;
 use App\Models\City;
 use App\Models\Order;
-use App\Models\Country;
 use App\Models\Coupon;
+use App\Models\Country;
 use App\Models\Governorate;
-use App\Models\ShippingGovernorate;
 use App\Models\Transaction;
+use App\Models\ShippingGovernorate;
 use Illuminate\Support\Facades\Auth;
 
-class CheckoutService
+class OrderService
 {
-    public function createOrder($data)
+    public function getInvoiceValue($address)
     {
-        $countryName = $this->getLocationName(Country::class, $data['country_id']);
-        $governorateName = $this->getLocationName(Governorate::class, $data['governorate_id']);
-        $cityName = $this->getLocationName(City::class, $data['city_id']);
+        $governorateName = $this->getLocationName(Governorate::class, $address['governorate_id']);
+
+        $cart = $this->getUserCart();
+        if (!$cart || $cart->cartItems->isEmpty()) {
+            return null;
+        }
+
+        $subTotal = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $shippingPrice = $this->getShippingPrice($address['governorate_id']);
+
+        // check if user has coupon
+        $coupon_exists = $cart->coupon != null;
+        $coupon = null;
+        if ($coupon_exists) {
+            $coupon = Coupon::valid()->where('code', trim($cart->coupon, ' '))->first();
+            if ($coupon) {
+                $subTotal = $subTotal - ($subTotal * $coupon->discount_precentage / 100);
+            }
+        }
+        $totalPrice = $subTotal + $shippingPrice;
+
+        return $totalPrice;
+    }
+
+    public function createTransaction($data, $orderId)
+    {
+        $transaction = Transaction::create([
+            'user_id' => Auth::guard('web')->user()->id,
+            'order_id' => $orderId,
+            'transaction_id' => $data['Data']['InvoiceId'],
+            'payment_method' => 'Payment',
+        ]);
+        return $transaction;
+    }
+
+    public function createOrder(array $address): ?Order
+    {
+        $countryName = $this->getLocationName(Country::class, $address['country_id']);
+        $governorateName = $this->getLocationName(Governorate::class, $address['governorate_id']);
+        $cityName = $this->getLocationName(City::class, $address['city_id']);
 
         if (!$countryName || !$governorateName || !$cityName) {
             return null;
@@ -29,18 +66,17 @@ class CheckoutService
             return null;
         }
 
+
         $subTotal = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
-        $shippingPrice = $this->getShippingPrice($data['governorate_id']);
+        $shippingPrice = $this->getShippingPrice($address['governorate_id']);
 
-        // check if user has a coupon
-        $coupon = null;
+        // check if user has coupon
         $coupon_exists = $cart->coupon != null;
-
+        $coupon = null;
         if ($coupon_exists) {
             $coupon = Coupon::valid()->where('code', trim($cart->coupon, ' '))->first();
-
             if ($coupon) {
-                $subTotal = $subTotal - ($subTotal * $coupon->discount_percentage / 100);
+                $subTotal = $subTotal - ($subTotal * $coupon->discount_precentage / 100);
             }
         }
         $totalPrice = $subTotal + $shippingPrice;
@@ -48,96 +84,61 @@ class CheckoutService
         // store order
         $order = Order::create([
             'user_id' => auth('web')->user()->id,
-            'user_name' => $data['first_name'] . ' ' . $data['last_name'],
-            'user_email' => $data['user_email'],
-            'user_phone' => $data['user_phone'],
+            'user_name' => $address['first_name'] . ' ' . $address['last_name'],
+            'user_phone' => $address['user_phone'],
+            'user_email' => $address['user_email'],
             'country' => $countryName,
             'governorate' => $governorateName,
             'city' => $cityName,
-            'street' => $data['street'],
-            'notes' => $data['notes'] ?? null,
+            'street' => $address['street'],
+            'notes' => $address['notes'],
             'price' => $subTotal,
+            // correct column name is `shipping_price` in orders table
             'shipping_price' => $shippingPrice,
             'total_price' => $totalPrice,
-            'coupon' => $coupon_exists && $coupon ? $coupon->code : '',
-            'coupon_discount' => $coupon_exists && $coupon ? $coupon->discount_percentage : 0,
+            // coupon column is NOT NULL in DB, so send empty string if no coupon
+            'coupon' => $coupon && $coupon_exists ? $coupon->code : '',
+            'coupon_discount' => $coupon && $coupon_exists ? $coupon->discount_precentage : 0,
         ]);
 
-        // store orderItems
-        $this->storeOrderItemsForCart($order, $cart);
-        // $this->clearUserCart($cart);
+        $this->storeOrderItemsFromCart($order, $cart);
 
         return $order;
     }
 
-    public function getLocationName(string $modelClass, int $id): ?string
+    private function getLocationName(string $modelClass, int $id): ?string
     {
         return $modelClass::find($id)?->name;
     }
 
-    public function getUserCart(): ?Cart
+    private function getUserCart(): ?Cart
     {
-        return Cart::with(['cartItems.product'])->where('user_id', auth('web')->id())->first();
+        return Cart::with('cartItems.product')->where('user_id', auth('web')->user()->id)->first();
     }
 
-    public function getShippingPrice($governorate_id)
+    private function getShippingPrice(int $governorateId): float
     {
-        return ShippingGovernorate::where('governorate_id', $governorate_id)->value('price') ?? 0.0;
+        return ShippingGovernorate::where('governorate_id', $governorateId)->value('price') ?? 0.0;
     }
 
-    public function storeOrderItemsForCart($order, $cart)
+    private function storeOrderItemsFromCart(Order $order, Cart $cart): void
     {
         foreach ($cart->cartItems as $item) {
             $order->orderItems()->create([
                 'product_id' => $item->product_id,
                 'product_variant_id' => $item->product_variant_id,
                 'product_name' => optional($item->product)->name ?? 'Unknown Product',
-                'product_description' => optional($item->product)->description ?? 'No Description',
-                'product_price' => $item->price,
+                'product_description' => optional($item->product)->small_desc ?? '',
                 'quantity' => $item->quantity,
+                'product_price' => $item->price,
                 'data' => json_encode($item->attributes),
             ]);
         }
     }
 
-    public function clearUserCart($cart): void
+    public function clearUserCart(Cart $cart): void
     {
-        $cart->cartItems()->delete();
-        $cart->update(['coupon' => null]);
-    }
-
-    public function getInvoiceValue($address)
-    {
-        $governorate = $this->getLocationName(Governorate::class, $address['governorate_id']);
-        $cart = $this->getUserCart();
-        if (!$cart || $cart->cartItems->isEmpty()) {
-            return null;
-        }
-
-        $subTotal = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
-        $shippingPrice = $this->getShippingPrice($address['governorate_id']);
-
-        // check if user has a coupon
-        $coupon = null;
-        $coupon_exists = $cart->coupon != null;
-
-        if ($coupon_exists) {
-            $coupon = Coupon::valid()->where('code', trim($cart->coupon, ' '))->first();
-
-            if ($coupon) {
-                $subTotal = $subTotal - ($subTotal * $coupon->discount_percentage / 100);
-            }
-        }
-        return $subTotal + $shippingPrice;
-    }
-
-    public function createTransaction($data, $orderId)
-    {
-        return Transaction::create([
-            'user_id' => Auth::guard('web')->user()->id,
-            'order_id' => $orderId,
-            'transaction_id' => $data['Data']['InvoiceId'],
-            'payment_method' => 'VISA',
-        ]);
+        $cart->CartItems()->delete();
+        $cart->update(['coupon' => null]); // clear coupon
     }
 }

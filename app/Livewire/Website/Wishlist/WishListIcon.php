@@ -11,7 +11,8 @@ class WishListIcon extends Component
 
     public function render()
     {
-        $count = auth('web')->user() ? auth('web')->user()->wishlists()->get()->count() : 0;
+        $user = auth('web')->user();
+        $count = $user ? $user->wishlists()->count() : 0;
         return view('livewire.website.wishlist.wish-list-icon', [
             'wishlistsCount' => $count
         ]);

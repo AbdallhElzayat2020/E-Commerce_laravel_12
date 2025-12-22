@@ -69,8 +69,10 @@
                 <ul class="size-option">
                     @foreach($variants as $item)
                         <li>
-                            <a wire:click="changeVariant({{$item->id}})" href="javascript:void(0)"
-                                class="option {{ $variantId == $item->id ? 'active' : '' }}">
+                            <button type="button" wire:click.prevent="changeVariant({{$item->id}})"
+                                onclick="event.preventDefault(); event.stopPropagation(); return false;"
+                                class="option {{ $variantId == $item->id ? 'active' : '' }}"
+                                style="background: none; border: none; cursor: pointer; width: 100%; text-align: left;">
                                 @foreach($item->VariantAttribute as $itemAttr)
                                     <span class="option-text">
                                         {{$itemAttr->attributeValue->attribute->name}} :
@@ -80,7 +82,7 @@
                                         @endif
                                     </span>
                                 @endforeach
-                            </a>
+                            </button>
                         </li>
                     @endforeach
                 </ul>
@@ -93,17 +95,23 @@
     <div class="product-quantity">
         <div class="quantity-wrapper">
             <div class="quantity">
-                <a href="" wire:click.prevent="decrementCartQuantity" class="minus">
+                <button type="button" wire:click.prevent="decrementCartQuantity"
+                    onclick="event.preventDefault(); event.stopPropagation(); return false;" class="minus"
+                    style="background: none; border: none; cursor: pointer;">
                     -
-                </a>
+                </button>
                 <span class="number">{{ $cartQuantity }}</span>
-                <a href="" wire:click.prevent="incrementCartQuantity" class="plus">
+                <button type="button" wire:click.prevent="incrementCartQuantity"
+                    onclick="event.preventDefault(); event.stopPropagation(); return false;" class="plus"
+                    style="background: none; border: none; cursor: pointer;">
                     +
-                </a>
+                </button>
             </div>
         </div>
 
-        <a href="#" wire:click.prevent="addToCart" class="shop-btn">
+        <a href="javascript:void(0)" wire:click.prevent="addToCart"
+            onclick="event.preventDefault(); event.stopPropagation(); return false;" class="shop-btn"
+            style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
             <span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

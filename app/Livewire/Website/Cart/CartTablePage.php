@@ -12,9 +12,15 @@ class CartTablePage extends Component
     public function removeItem($itemId)
     {
         $item = CartItem::find($itemId);
+
+        if ($item) {
         $item->delete();
 
+            // Dispatch events to update all components
         $this->dispatch('refreshCartIcon');
+            $this->dispatch('updateCart');
+            $this->dispatch('orderSummaryRefresh');
+        }
     }
 
     public function clearCart()
@@ -29,17 +35,25 @@ class CartTablePage extends Component
     public function decreaseQuantity($itemId)
     {
         $item = CartItem::find($itemId);
-        if ($item->quantity > 1) {
+        if ($item && $item->quantity > 1) {
             $item->quantity -= 1;
             $item->save();
+
+            $this->dispatch('refreshCartIcon');
+            $this->dispatch('orderSummaryRefresh');
         }
     }
 
     public function increaseQuantity($itemId)
     {
         $item = CartItem::find($itemId);
+        if ($item) {
         $item->quantity += 1;
         $item->save();
+
+            $this->dispatch('refreshCartIcon');
+            $this->dispatch('orderSummaryRefresh');
+        }
     }
 
     #[On('updateCart')]

@@ -14,5 +14,6 @@ class OrderItem extends Model
         'quantity',
         'product_price',
         'data',
+        'product_variant_id',
     ];
 }

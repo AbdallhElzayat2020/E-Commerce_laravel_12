@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,8 +12,9 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id');
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('payment_method');
+            $table->string('payment_method')->nullable();
             $table->string('transaction_id');
             $table->timestamps();
         });

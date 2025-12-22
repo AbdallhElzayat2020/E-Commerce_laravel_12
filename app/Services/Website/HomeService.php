@@ -19,23 +19,35 @@ class HomeService
 
     public function getSliders()
     {
-        return Slider::latest()->get();
+        return cache()->remember('sliders', 3600, function () {
+            return Slider::latest()->get();
+        });
     }
 
     public function getCategories($limit = null)
     {
-        if ($limit == null) {
-            return Category::active()->get();
-        }
-        return Category::active()->limit($limit)->get();
+        $cacheKey = $limit ? "categories_limit_{$limit}" : 'categories_all';
+
+        return cache()->remember($cacheKey, 3600, function () use ($limit) {
+            $query = Category::active();
+            if ($limit) {
+                return $query->limit($limit)->get();
+            }
+            return $query->get();
+        });
     }
 
     public function getBrands($limit = null)
     {
-        if ($limit == null) {
-            return Brand::active()->get();
-        }
-        return Brand::active()->limit($limit)->get();
+        $cacheKey = $limit ? "brands_limit_{$limit}" : 'brands_all';
+
+        return cache()->remember($cacheKey, 3600, function () use ($limit) {
+            $query = Brand::active();
+            if ($limit) {
+                return $query->limit($limit)->get();
+            }
+            return $query->get();
+        });
     }
 
     public function getProductsByBrand($slug)

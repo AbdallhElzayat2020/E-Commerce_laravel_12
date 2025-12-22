@@ -69,6 +69,12 @@ class ProductDetails extends Component
 
     public function addToCart()
     {
+        // Check if user is authenticated
+        if (!auth('web')->check()) {
+            $this->dispatch('errorMessage', __('website.please_login_to_add_to_cart'));
+            return;
+        }
+
         $product = $this->product;
         $userId = auth('web')->user()->id;
         $cart = Cart::firstOrCreate(['user_id' => $userId]);

@@ -28,7 +28,9 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         View::composer('frontend.layouts.header', function ($view) {
-            $view->with('pages', Page::latest()->get());
+            $view->with('pages', cache()->remember('header_pages', 3600, function () {
+                return Page::latest()->get();
+            }));
         });
 
         foreach (config('permissions_en') as $config_permission => $value) {

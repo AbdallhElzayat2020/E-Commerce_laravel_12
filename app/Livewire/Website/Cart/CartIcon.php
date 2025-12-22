@@ -16,6 +16,8 @@ class CartIcon extends Component
                 $cartItem = $cart->cartItems()->where('id', $id)->first();
                 if ($cartItem) {
                     $cartItem->delete();
+
+                    // Dispatch events to update all components
                     $this->dispatch('refreshCartIcon');
                     $this->dispatch('updateCart');
                     $this->dispatch('orderSummaryRefresh');
@@ -36,10 +38,12 @@ class CartIcon extends Component
             ]);
         }
 
-        $cart = auth('web')->user()->cart;
+        $user = auth('web')->user();
+        $cart = $user->cart;
 
         if ($cart) {
-            $cart->loadMissing('cartItems.product.images');
+            // Use with() instead of loadMissing() to ensure relationships are loaded in one query
+            $cart->load(['cartItems.product.images']);
         }
 
         $cartItemsCount = $cart ? $cart->cartItems->count() : 0;
