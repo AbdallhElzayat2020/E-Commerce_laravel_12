@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Website;
 use App\Models\Admin;
 use App\Models\Order;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Website\OrderService;
@@ -84,12 +85,16 @@ class CheckoutController extends Controller
         $transaction = Transaction::where('transaction_id', $response['Data']['InvoiceId'])->first();
 
         if ($transaction && $response['Data']['InvoiceStatus'] == 'Paid') {
-            // Use a valid enum value for orders.status (pending, processing, shipped, delivered, cancelled)
+            // Use a valid enum value for orders.status (Pending, Processing, Shipped, Delivered, Cancelled)
             Order::where('id', $transaction->order_id)
                 ->where('user_id', $transaction->user_id)
-                ->update(['status' => 'processing']);
+                ->update(['status' => 'paid']);
 
-            $this->orderService->clearUserCart(auth('web')->user()->cart);
+            // clear user cart safely (callback may not have auth session)
+            $user = User::find($transaction->user_id);
+            if ($user && $user->cart) {
+                $this->orderService->clearUserCart($user->cart);
+            }
 
 
             // send notification to admin

@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->decimal('total_price', 10, 3);
 
             $table->text('notes')->nullable();
-            $table->enum('status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'shipped', 'paid', 'cancelled'])->default('pending');
 
             $table->string('country');
             $table->string('governorate');

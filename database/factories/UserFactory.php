@@ -45,7 +45,7 @@ class UserFactory extends Factory
             'governorate_id' => $governorate->id,
             'city_id' => random_int(1, 4),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('123'),
             'remember_token' => Str::random(10),
         ];
     }
