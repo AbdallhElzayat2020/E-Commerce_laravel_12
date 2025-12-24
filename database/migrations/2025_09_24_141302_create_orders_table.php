@@ -13,11 +13,11 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            // $table->foreignId('coupon_id')->nullable()->constrained('coupons')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('user_name');
             $table->string('user_email');
             $table->string('user_phone');
 
+            // price
             $table->decimal('price', 10, 3);
             $table->decimal('shipping_price', 10, 3);
             $table->decimal('total_price', 10, 3);
@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->text('notes')->nullable();
             $table->enum('status', ['pending', 'shipped', 'paid', 'cancelled'])->default('pending');
 
+            // basic information
             $table->string('country');
             $table->string('governorate');
             $table->string('postal_code')->nullable();
